@@ -1,0 +1,1196 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+body{
+    scroll-behavior: smooth;
+}
+.banner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: table;
+    background-attachment: fixed;
+    overflow: hidden;
+
+}
+
+.video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-height: 100%;
+    min-width: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
+
+
+
+.navigation .myul {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    z-index: 999999;
+    position: fixed; /* Fixed position to stick to top */
+    width: 100%; /* Take full width */
+    transition: top 0.3s; /* Smooth transition when affixed */
+    transform: translateY(0%);
+    top: 0;
+}
+
+.navigation .myul.sticky {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    z-index: 999999;
+    position: fixed; /* Fixed position to stick to top */
+    width: 100%; /* Take full width */
+    transition: top 0.3s; /* Smooth transition when affixed */
+    transform: translateY(0%);
+    top: 0;
+}
+
+.li, .lis {
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    list-style: none;
+    display: inline-block;
+    transition: text-decoration-color, 0.7s;
+    transform: translate(50%);
+    margin: 0 20px;
+}
+
+.lis {
+    margin: 0 20px;
+    transform: translateX(40%);
+}
+
+#a {
+    color: azure;
+    text-decoration: none;
+    transition: all, 0.1s;
+    padding: 10px;
+    height: fit-content;
+    width: fit-content;
+}
+
+#a:hover {
+    border-bottom: 1px solid red;
+    
+}
+
+
+.active{
+    border-bottom:1px solid red;
+    
+
+}
+ .para {
+    color: #c9c4c4;
+    margin-top: 8%;
+}
+
+.input .h {
+    color: rgb(37, 25, 209);
+    display: inline-block;
+    margin: 1%;
+}
+
+
+
+
+.input .forgot-pass {
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.input .parag {
+    color: #fdfdfd;
+    margin-top: 10px;
+}
+
+
+.nav2 .wrapper .searchbar{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    outline: none;
+    overflow: hidden;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12);
+
+    
+    
+}
+
+
+
+
+.nav2 .wrapper .searchbar + .fas.fa-search {
+    position: absolute; 
+    transform: translateX(500%);
+    top: 70%;
+    left: 350px; /* Adjust as needed */
+    cursor: pointer;
+    transform: translateY(-50%);
+    color: #000000;
+}
+
+    
+    
+
+
+#my-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+ #my-box{
+    width: 450px;
+    max-height: 250px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12);
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+
+  
+   
+
+}
+
+
+
+#my-box li{
+    list-style: none;
+    padding:8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+    
+
+}
+
+.my-box li:hover{
+    background: #efefef;
+}
+
+ .s {
+    list-style: none;
+    position: relative;
+    width: 50px;
+    margin: 20px;
+    text-align: center;
+}
+
+.my-a{
+    text-decoration: none;
+    color: white;
+}
+.travel-2 {
+    font-size: 400%;
+    color: #ffffff;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    margin-top: 300px;
+    overflow: hidden; /* Hide overflowing content */
+    white-space: nowrap; /* Ensure text doesn't wrap */
+    position: relative; /* Set position to relative */
+}
+
+
+
+.discover {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+
+
+.button{
+   position: absolute;
+   margin-left: 45%;
+   transform: translateY(50%);
+   width: 10%;
+   height: 50px;
+   border: none;
+   border-radius: 50px;
+   transition: all ease-in-out 0.5s;
+   background-color: rgb(71, 109, 14);
+   color: white;
+   font-size: 20px;
+   cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1cdd5c;
+    box-shadow: 10px 10px 15px 0px rgba(17, 145, 45, 0.5), inset 0px 0px 0px 10px rgba(93, 255, 18, 0.2);
+  }
+
+
+
+ .travel{
+    color: #fff;
+    transform: translateX(-250%);
+    font-size: 30px;
+    
+}
+
+
+
+/*========================================================================================================BOOKING BUTTONS=============================================================*/
+ .book{
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border: none;
+    margin: 20px;
+    display: inline-block;
+    transition: all 0.4s;
+    text-decoration: none;
+    
+}
+
+
+.book:hover{
+    color: green;
+    cursor: pointer;
+}
+
+.details{
+    color: #000000;
+    background-color: white;
+    border: none;
+    margin: 20px;
+    }
+
+    
+
+
+/* END*/
+
+.input .x{
+    position: absolute;
+    top: -41px; /* Adjust as needed */
+    right: -1px; /* Adjust as needed */
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 50px;
+    width: 50px;
+    background-color: #1b1b1b;
+    font-size: 20px;
+    font-style: bold;
+    cursor: pointer;
+    z-index: 10000; /* Ensure it's above other content */
+ }
+
+ .input .x:hover{
+    color: #fff9f9;
+    background-color: #000000;
+ }
+
+
+
+ @media (max-width: 600px) {
+    .banner .travel-2 {
+        transform: translate(2%, 650%);
+       
+        
+    }
+
+    .nav2 .searchbar {
+        width: 350px; /* Adjust width as needed */
+    }
+
+    .nav2 .travel {
+        transform: translate(180%, -250%); /* Adjust transform as needed */
+    }
+
+    .input .h {
+        font-size: 14px; /* Adjust font size as needed */
+    }
+}
+    
+@media (max-width: 1550px) {
+
+
+    .navigation .li{
+        transform: translateX(100%);
+    }
+
+   
+   .signinbutton{
+    border: none;
+   }
+
+    
+
+}
+
+   
+
+
+
+
+
+@media (max-height: 624px) {
+    .banner .travel-2 {
+        transform: translate(40%,250%);
+       
+        
+    }
+    
+}
+
+ 
+
+
+.for{
+    padding: 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+.textdata{
+    text-align: left;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    color: #213869;
+    font-weight: 500;
+
+ 
+}
+
+
+.outer{
+    background-color:#213869 ;
+    width: 50%;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.outer .price{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+   
+}
+
+.see_details{
+    text-decoration: none;
+    color: #000;
+    transition: all 0.2s ease-in-out;
+}
+
+.see_details:hover{
+    color: rgb(27, 131, 228);
+    
+}
+
+
+.sec2 {
+    background-color: rgb(49, 42, 78);
+    position: absolute;
+    height: 200vh;
+    background-size: cover;
+    transform: translateY(-10%);
+    left: 0%;
+    padding: 16px;
+    align-self: center;
+    width: 99%;
+    margin-top: 190px;
+    background-attachment: fixed;
+    display: table;
+}
+
+.box2 {
+    display: inline-block;
+    background-color: rgb(199, 73, 73);
+    height: 400px;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 50px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 80px;
+    margin-left: 50px;
+    margin-top: 100px;
+    transition: 1s;
+    cursor: pointer;
+}
+
+
+
+.container .box {
+    display: block;
+    background-color: rgb(255, 255, 255);
+    height: 250px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: 1s;
+    cursor: pointer;
+    z-index: 999999999999999999999999999;
+}
+
+.container .inner-box {
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    height: 350px; 
+    border-radius: 30px; 
+    margin-right: 40px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.7s ease;
+    cursor: pointer;
+    transform: translate(50%, 5%);
+    margin-top: 40px;
+    box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.5);
+    grid-template-columns: repeat(auto-fill);
+    }
+
+
+.container ul{
+    
+    transform: translate(1%);
+    
+}
+
+.inner-box:hover{
+    box-shadow:solid #111111;
+}
+
+.container .inner-box .box img {
+    display: block;
+    height: 250px;
+    width: 300px;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(0%, 0%);
+    transition: all 0.7s;
+}
+
+.container .inner-box .box:hover img {
+    transform: scale(1.1);
+}
+
+
+.container .inner-box .box h1 {
+    right: 50%;
+    bottom: 50%;
+    height: 500px;
+    transform: translate(-35%, 50%);
+    color: rgb(0, 0, 0);
+    opacity: 0.9;
+    transition: transform, 0.7s;
+}
+
+.container .inner-box .box .h1 {
+    right: 50%;
+    bottom: 50%;
+    transform: translate(-18%, 50%);
+    color: rgb(0, 0, 0);
+    opacity: 0.9;
+    transition: transform, 0.7s;
+}
+
+.container .inner-box .box .h2 {
+    right: 50%;
+    bottom: 50%;
+    transform: translate(-25%, 50%);
+    color: rgb(0, 0, 0);
+    opacity: 0.9;
+    transition: transform, 0.7s;
+}
+
+.container .inner-box .box button {
+    border: none;
+    font-size: large;
+    font-family: Nunito Sans, sans-serif;
+    background: #2760dd;
+    color: aliceblue;
+    border-radius: 50px;
+    width: 200px;
+    height: 50px;
+    margin: 30px;
+    transition: background-color, 1s;
+    transform: translate(-0%, -600%);
+    cursor: pointer;
+}
+
+.container .inner-box .box:hover button {
+    background-color: #06085c;
+}
+
+.container .inner-box .input-wrapper input:focus ~ .input2 {
+    border-bottom: 1px solid #000000;
+}
+
+.container{
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    background-color: rgb(14, 44, 85);
+    background-position: center;
+    overflow: auto;
+    justify-content: center;
+    align-content: center;
+    background-attachment: fixed;
+    display: table;
+    
+    }
+
+.container2 .promos {
+    position: absolute;
+    text-align: center;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+
+.container2 {
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    background-color: rgb(14, 37, 70);
+    background-position: center;
+    overflow: auto;
+    justify-content: center;
+    align-content: center;
+}
+
+.box3{
+    display: inline-block;
+    background-color: #000000;
+    height: 200px;
+    max-height: fit-content; 
+    max-width: fit-content;
+    transform: translate(0%, 150%);
+    cursor: pointer;
+    overflow: hidden;
+    margin: 30px;
+    transition: all 0.4s ease-in-out;
+}
+
+  .box3 img{
+    height: 200px;
+    width: 580px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+ .box3 img:hover{
+    transform: scale(1.1);
+    
+}
+
+ 
+
+
+.container3{
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    overflow: auto;
+    background-color: rgb(35, 71, 122);
+}
+
+
+ .featured_properties{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 550;
+}
+
+
+
+
+
+.container3 .lis {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    margin: 0px 30px;
+    vertical-align: top; /* Align items to the top to ensure consistent spacing */
+    transform: translate(315%,250%);
+    
+    
+}
+
+.container3 .listt {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    margin: 0px 20px;
+    vertical-align: top; /* Align items to the top to ensure consistent spacing */
+    transform: translate(265%,250%);
+
+    
+    
+}
+
+.container3 .liss{
+    display: inline-block;
+    text-decoration: none;
+    color: #3af30b;
+    margin: 0px 20px;
+    vertical-align: top; /* Align items to the top to ensure consistent spacing */
+    transform: translate(215%,250%);
+
+    
+    
+}
+
+
+.container3 a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.container3 a:hover{
+    color: #3af30b;
+}
+
+.container3 .hotels{
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 30px;
+    border-radius: 30px;
+    position: relative;
+    transform: translate(50%, 20%);
+    overflow: hidden;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
+}
+
+
+.container3 .hotels .in{
+    background-color: #8adeec;
+    height: 190px;
+    overflow: hidden;
+
+
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
+
+.flights{
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    overflow: auto;
+    background-color: rgb(14, 37, 70);
+}
+
+
+ .outer-flights{
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 30px;
+    border-radius: 30px;
+    position: relative;
+    transform: translate(15%, 20%);
+    overflow: hidden;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
+}
+
+
+.inner-flight{
+    display: inline-block;
+    background-color: #000000;
+    height: 200px;
+    max-height: fit-content; 
+    max-width: fit-content;
+    transform: translate(-12%,-18%);
+    cursor: pointer;
+    overflow: hidden;
+    margin: 30px;
+    transition: all 0.4s ease-in-out;
+}
+
+.flights a{
+    text-decoration: none;
+    color: white;
+    
+}
+
+.inner-flight img{
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+
+ .inner-flight img:hover{
+    transform: scale(1.1);
+    
+}
+.flights h1{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
+
+.container3 .hotels .in img{
+    height: 100%;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+.container3 .hotels .in img:hover{
+    transform: scale(1.1);
+    overflow: hidden;
+
+}
+
+.container3 .hotels h1{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 550;
+    font-size: 15px;
+    color: #213869;
+}
+
+i{
+    color: #FFB402;
+    transform: translate(780%, -105%);
+}
+
+#icon{
+    color: #FFB402;
+    transform: translate(480%, -105%);
+}
+
+#con{
+    color: #FFB402;
+    transform: translate(680%, -105%);
+}
+
+#cons{
+    color: #FFB402;
+    transform: translate(680%, -105%);
+}
+
+.divko{
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 20px; 
+    width: 300px; 
+    margin: 300px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+.divko.visible {
+    display: block;
+  }
+  
+  .divko.hidden {
+    display: none;
+  }
+
+ .hotels .h1{
+    transform: translate(40%, 250%);
+  }
+
+  .hotels .h2{
+    transform: translate(40%, 350%);
+  }
+
+  .hotels .h3{
+    transform: translate(40%, 345%);
+  }
+  .reviews{
+    background-color: #213869;
+    color: #f7f4f4;
+    width: 55px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 30px;
+    font-size: 100%;
+    overflow: hidden;
+
+  }
+
+  .reviews p{
+    font-size: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    
+  }
+
+
+  .contacts{
+    border-top:1px solid #504c4c;
+    border-bottom: 1px solid #4d4a4a;
+    text-align: left;
+    transform: translate(50%, -100%);
+    margin-top: 500px;
+    width: 50%;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .contacts .h1{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: inline-block;
+    transform: translateX(0%);
+    font-size: 15px;
+    color: #213869;
+    margin:30px;
+  }
+
+  .contacts .h2{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: inline-block;
+    transform: translateX(590%);
+    font-size: 15px;
+    color: #213869;
+    margin:30px;
+  }
+
+ 
+
+  .contacts .h4{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: inline-block;
+    transform: translateX(390%);
+    font-size: 15px;
+    color: #213869;
+    margin:30px;
+  }
+
+  footer{
+    text-align: center;
+    transform: translateY(1%);
+   
+  }
+
+
+  .contacts .cl{
+    list-style: none;
+    transform: translate(1%,-100%);
+    
+  }
+
+  .contacts a{
+    color: #091641;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
+
+  }
+
+  .contacts a:hover{
+    text-decoration: underline;
+    color: blue;
+  }
+
+  .contacts .cll{
+    list-style: none;
+    transform: translate(42%, -600%);
+  }
+
+  .contacts img{
+    height: 40px;
+    display: inline-block;
+    margin-left: 800px;
+    transform: translateY(-550%);
+    cursor: pointer;
+  }
+
+.container_for-inputs{
+    background-color: #ffffff;
+    max-width: 490px;
+    height: 100px;
+    position: relative;
+    transform: translate(145%,280%);
+    
+}
+
+
+ 
+/*==================================================================================================DESTINATION PAGE================================================================================*/
+
+
+
+
+
+
+/*=================================================================================================END===============================================================================================*/
+
+.body{
+    background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
+    url(pic.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+
+
+.container1{
+    background-color: rgba(0, 0, 0, 0.12);
+    height: 500px;
+    width: 400px;
+    transform: translate(190%, 50%);
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.container1 input{
+    outline: none;
+    border: none;
+    font-size: 18px;
+    height: 7%;
+    width: 350px;
+    transform: translate(-7%, 10%);
+    color: #000000;
+    transition: 0.5s;
+    display: block;
+    margin: 50px;
+    border-radius: 20px;
+
+    
+}
+
+
+.container1 #file{
+    background-color: none;
+}
+.container1 #submit{
+    width: 350px;
+    border: none;
+    height: 7%;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    
+}
+
+.container1 #submit:hover{
+    background-color: #000000;
+    color: #fdfdfd;
+}
+
+
+
+
+.container1 h1{
+    text-align: center;
+    font-size: 25px;
+    color: white;
+    margin-top: 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+
+.container1 a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+/*==================================================================================================FLIGHTS PAGE===============================================================================*/
+
+/*dito ka  mag start*/
+
+
+
+
+
+
+/*=================================================================================================END===============================================================================================*/
+
+
+
+
+
+
+/*======================================================================================================LOGIN PAGE==============================================================================*/
+.login{
+    position: relative;
+    background: url(pic.jpg);
+    background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
+        url(pic.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+
+
+.eye {
+    position: fixed;
+    height: 120px;
+    color: white;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 9999999;
+}
+
+.input {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    transform: translate(-50%, 50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: border 0.7s;
+    box-shadow: 0px 0px 10px #1f1d1d ;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    
+}
+
+.input input {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    position: relative;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #d3bdbd;
+    transition: all 0.6s ease;
+    margin-top: 40px;
+}
+.h{
+    color: white;
+    text-decoration: none;
+}
+
+.email{
+    position: absolute;
+    font-size: 16px;
+    top: 110px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.password{
+    position: absolute;
+    font-size: 16px;
+    top: 190px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input .email2:focus~.email,
+.input .email2:valid~.email {
+            top: 90px;
+            right: 291px;
+            color: #fbfffd;
+            font-size: 12px;
+        }
+
+.input .passko:focus~.password,
+.input .passko:valid~.password {
+            top: 170px;
+            right: 269px;
+            color: #fcfffe;
+            font-size: 12px;
+        }
+
+
+.input .Submit {
+    background-color: #333;
+    border: none;
+    text-emphasis: none;
+    font-size: large;
+    position: static;
+    transition: color, 0.7s;
+    cursor: pointer;
+    margin-top: 40px;
+    border-radius: 50px;
+}
+.forgot-pass{
+    color: #c9c4c4;
+}
+
+.input .Submit:hover {
+    color: aliceblue;
+    background-color: #161616;
+}
