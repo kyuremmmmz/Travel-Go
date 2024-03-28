@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+      <!-- Link Swiper's CSS -->
+      <link rel="stylesheet" href="swiper-bundle.min.css">
+
+
+
+        <!--  CSS -->
     <link rel="stylesheet" href="style.css">
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -25,9 +30,11 @@
     
    <form action="index.php" method="post">
     <section class="banner" id="banner">
+        <div class="background"></div>
         <video autoplay loop class="video" muted plays-inline>
             <source src="WelcomeBacktothePhilippines!.mp4" type="video/mp4">
         </video>
+        
         
     <header>
    
@@ -38,7 +45,7 @@
                 
                 <li class="li"><a href="#banner" class="active" id="a">Home</a> </li>
               
-                <li class="li"><a href="#container3"  class="" id="a">Hotels</a></li>
+                <li class="li"><a href="#container2"  class="" id="a">About</a></li>
             
                 <li class="lis"><a href="#container"class="" id="a">Attractions</a></li>
 
@@ -71,7 +78,7 @@
 
 </header>
 <h1 class="travel-2">YOUR TRAVEL STARTS HERE</h1>
-<p class="discover">Welcome to TravelGo Philippines, your ultimate companion for unforgettable journeys across the stunning landscapes and vibrant cultures of the archipelago. We are your one-stop destination for seamless travel experiences, offering a range of services designed to make exploring the Philippines as convenient and enjoyable as possible.</p>
+<p class="discover">Welcome to TravelGo Philippines, your ultimate companion for unforgettable journeys across the stunning landscapes and vibrant cultures of the archipelago. <br> We are your one-stop destination for seamless travel experiences, offering a range of services designed to make exploring the Philippines as convenient and enjoyable as possible.</p>
     <button class="button" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
                 
                 
@@ -89,76 +96,207 @@
 
 
   <!--====================================================================================== NUMBER 2 CONTAINER================================================================================ -->
-  <div class="container2" id="container2">
-    <h1 class="promos">Promos</h1>
+ <section class="sec2 swiper mySwiper">
+  <div class="container2 swiper-wrapper" id="container2">
 
-    <div class="box3">
-        <img src="/Book your Hotels Stay now with a Discount of up to 30% with Savings24x7.jpg">
-    </div>
-    
-    <div class="box3">
-        <img src="/AirAsia B1G Sale drums up 2023 travel with Php 1 fare Promo.jpg">
-    </div>
-</div>
+
+
+  <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
 
     
+        <img src="plane.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>What We Offer: </h2>
+            <br>
+            <h2>1. Flight Booking</h2>
+            <br>
+            <span class="text"> Planning your next adventure? With TravelGo, booking flights is a breeze. Our user-friendly interface allows you to effortlessly compare prices, select preferred airlines, and secure your seats with just a few clicks. Whether you're flying solo, with family, or on a group trip, we're here to ensure you reach your destination comfortably and affordably.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+    </div>
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="plane.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>What We Offer: </h2>
+            <br>
+            <h2>2. Hotel Accommodations</h2>
+            <br>
+            <span class="text">Finding the perfect place to stay is essential for a memorable trip. That's why TravelGo brings you an extensive selection of hotels worldwide, ranging from cozy boutique stays to luxurious resorts. Whether you're craving a beachfront retreat, a city-center oasis, or a quaint countryside escape, our platform has something to suit every taste and budget.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+        
+    </div>
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>What We Offer: </h2>
+            <br>
+            <h2>3. Destination Exploration</h2>
+            <br>
+            <span class="text"> Finding the perfect place to stay is essential for a memorable trip. That's why TravelGo brings you an extensive selection of hotels worldwide, ranging from cozy boutique stays to luxurious resorts. Whether you're craving a beachfront retreat, a city-center oasis, or a quaint countryside escape, our platform has something to suit every taste and budget.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+    </div>
+
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>Why Choose Travel Go Ph: </h2>
+            <br>
+            <h2>Convenience</h2>
+            <br>
+            <span class="text"> Say goodbye to endless hours of searching multiple websites. With TravelGo, everything you need for your trip is right at your fingertips.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+    </div>
+
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>Why Choose Travel Go Ph: </h2>
+            <br>
+            <h2>Competitive Prices</h2>
+            <br>
+            <span class="text"> We understand the value of your hard-earned money. That's why we strive to offer the best deals and discounts to make your travel budget stretch further.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+        
+    </div>
+
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>Why Choose Travel Go PH: </h2>
+            <br>
+            <h2>Reliability</h2>
+            <br>
+            <span class="text"> Trust is the cornerstone of our service. Rest assured, when you book with TravelGo, you're in good hands. Our secure payment gateway and 24/7 customer support ensure a worry-free booking experience.</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+        
+    </div>
+
+    <div class="box3 swiper-slide">
+    <h1 class="promos">About Us</h1>
+
+    
+        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <div class="image-date">
+            <h2>Let's Go and Travel and Go! in The Philippines </h2>
+            <br>
+            <span class="text">At TravelGoPH, we're passionate about turning your travel dreams into reality. Whether you're planning a spontaneous getaway or a meticulously planned vacation, let us be your trusted companion every step of the way. Start your journey with TravelGo today and let the adventures begin!</span>
+            <button class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in">Get Started</button><?php
+                
+                
+                if (isset($_POST["button"])) {
+                    header("Location: login_page.php");
+                }
+                
+                
+                ?>
+        </div>
+        
+    </div>
+  </div>
+    
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-pagination"></div>
+
+
+
+</section>
+<script src="swiper-bundle.min.js"></script>
+
+     <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     <div class="container" id="container">
 
-
-                
-        <h1 class="for">Popular Attractions</h1>
+    <h1 class="for">Contacts</h1>
         
 
-        <?php
-    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // SQL query to retrieve image data
-    $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
-    $result = $conn->query($sql);
-
-    
-    if ($result->num_rows > 0) {
-        // Output data of each row
-        while($row = $result->fetch_assoc()) {
-             if (isset($_POST['book'])) {
-                
-          
-           
-        }
-         // Display the image
-            $imageData = base64_encode($row['image']);
-            $price = $row['price'];
-            $textData = $row['place'];
-            
-            echo '<div class="inner-box">
-            <div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>
-            <h2 class="textdata">'.$textData.'</h2>
-            <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
-  
-            <hr class="solidblack"></hr>
-            <a href="/hotel_booking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
-            
-            <a href="#" class="see_details">See Details</a>
-        </div>';
-             
-        }
-        } else {
-        echo "0 results";
-        }
-       
-
-       
         
-
-           
-          
-?>
         
         
         
@@ -312,11 +450,14 @@ echo "0 results";
         
        
     
-</section>
+
 
  
 
-<script src="script.js"></script>
+
+ 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('#a');
@@ -390,6 +531,7 @@ $(document).ready(function(){
     
 
 </script>
+
 
     
 </body>
