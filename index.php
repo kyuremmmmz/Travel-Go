@@ -5,7 +5,7 @@
       <!-- Link Swiper's CSS -->
       <link rel="stylesheet" href="swiper-bundle.min.css">
 
-
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
         <!--  CSS -->
     <link rel="stylesheet" href="style.css">
@@ -244,7 +244,7 @@
     <h1 class="promos">About Us</h1>
 
     
-        <img src="https://cdn.wallpapersafari.com/68/2/MShsNr.jpg" alt="" class="image">
+        <img src="https://wallpapertag.com/wallpaper/full/8/7/e/221119-travel-background-1920x1080-laptop.jpg" alt="" class="image">
         <div class="image-date">
             <h2>Let's Go and Travel and Go! in The Philippines </h2>
             <br>
@@ -291,16 +291,85 @@
 
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
-    <div class="container" id="container">
+<div class="container" id="container">
 
     <h1 class="for">Contacts</h1>
-        
+    <p class="cont">Got a question? We'd love to hear it from you. Send us a message <br> and we'll respond as soon as possible</p>
+    <div class="center-container">
+    <div class="card bg-dark">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Contact Us</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="name" class="text-white">Your Name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="text-white">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="text-white">Message</label>
+                    <textarea class="form-control" name="message" id="message" rows="3" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
 
         
         
         
         
  </div>
+ <?php
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
+require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
+require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
+
+if (isset($_POST["submit"])) {
+    $fullname = $_POST["name"];
+    $email = $_POST["email"];
+    $message = $_POST["message"]; // Corrected to use message input
+    // SMTP Configuration
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kurosawataki84@gmail.com'; // Indicate My Gmail email address
+        $mail->Password = 'fwbmdkvlhkxivqet'; // Indicate my Gmail password here
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption here
+        $mail->Port = 587; // TCP port to connect to 
+
+        //Recipients
+        $mail->setFrom('kurosawataki84@gmail.com', $fullname);
+        $mail->addAddress($email, $fullname); // Add recipient email address
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = 'From TravelGo Philippines';
+        $mail->Body = "Dear $fullname, $email<br><br>Thank you for contacting us. Your message is:<br><br>$message<br><br>We'll get back to you as soon as possible.<br><br>Best regards,<br>Travel GO Philippines";
+
+        $mail->send();
+        echo "<script>alert('Email sent successfully')</script>";
+        // Redirect to a thank you page or any other page after sending the email
+        
+        
+    } catch (Exception $e) {
+        echo "Error sending email: {$mail->ErrorInfo}";
+    }
+}
+?>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
@@ -531,7 +600,10 @@ $(document).ready(function(){
     
 
 </script>
-
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     
 </body>

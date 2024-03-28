@@ -40,6 +40,55 @@ body{
     z-index: -1;
 }
 
+       /* Custom CSS for centering */
+       .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Changed to flex-start */
+        height: 100vh;
+        margin-top: 50px; /* Added margin-top */
+        box-shadow: 12px, 12px 12px rgba(0, 0, 0, 0.76);
+    }
+    /* Custom CSS for adjusting spacing */
+    .card {
+        max-width: 400px;
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+.container{
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    background-image: url(https://wallpapercave.com/wp/wp4863911.jpg);
+    background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://wallpapercave.com/wp/wp4863911.jpg);
+    background-position: center;
+    overflow: auto;
+    background-size: cover;
+    justify-content: center;
+    align-content: center;
+    display: table;
+}
+
+.cont{
+    text-align: center;
+    color: #fff;
+    
+}
+
+.for{
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 70px;
+    color: #fff;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+}
 
 
 
@@ -385,12 +434,7 @@ body{
  
 
 
-.for{
-    padding: 20px;
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-}
+
 
 .textdata{
     text-align: left;
@@ -557,26 +601,12 @@ body{
     border-bottom: 1px solid #000000;
 }
 
-.container{
-    height: 100vh;
-    width: 100%;
-    max-height: 100vh;
-    max-width: 100%;
-    background-attachment: fixed;
-    background-position: center;
-    overflow: auto;
-    justify-content: center;
-    align-content: center;
-    background-attachment: fixed;
-    display: table;
-    
-    }
 
 .container2 .promos {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -450%);
+    transform: translate(-50%, -480%);
     font-size: 60px;
     color: rgb(255, 255, 255);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -613,7 +643,7 @@ body{
 
 .box3 .image{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
     
 }
@@ -624,6 +654,7 @@ body{
     left: 50%;
     transform: translate(-50%, -80%);
     text-align: center;
+    object-fit: cover;
     width: 50%;
     z-index: 100;
 }

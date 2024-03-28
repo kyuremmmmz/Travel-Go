@@ -450,6 +450,30 @@ $(document).ready(function(){
 
 
 
+// JavaScript to trigger fade-in effect on scroll for all elements with class fade-in
+document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.inner-box');
+    const windowHeight = window.innerHeight;
+
+    function checkPosition() {
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            const positionFromTop = elements[i].getBoundingClientRect().top;
+
+            if (positionFromTop - windowHeight <= 0) {
+                element.classList.add('active');
+            }
+        }
+    }
+
+    // Initial check when page loads
+    checkPosition();
+
+    // Add scroll event listener
+    window.addEventListener('scroll', checkPosition);
+});
+
+
 
     
 
