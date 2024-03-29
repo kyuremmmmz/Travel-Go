@@ -47,7 +47,7 @@
               
                 <li class="li"><a href="#container2"  class="" id="a">About</a></li>
             
-                <li class="lis"><a href="#container"class="" id="a">Attractions</a></li>
+                <li class="lis"><a href="#container"class="" id="a">Contact Us</a></li>
 
                 <li class="lis"><a href="#container2"class="" id="a">Promo</a></li>
 
