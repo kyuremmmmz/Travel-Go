@@ -59,7 +59,7 @@
             
                 <li class="lis"><a href="#container"class="" id="a">Contact Us</a></li>
 
-                <li class="lis"><a href="#container2"class="" id="a">Promo</a></li>
+                <li class="lis"><a href="#container4"class="" id="a">Explore</a></li>
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
@@ -382,17 +382,65 @@ if (isset($_POST["submit"])) {
 ?>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
-<div class="flights" id="flights">
-<h1>Flights</h1>
-<div class="outer-flights">
-<div class="inner-flight">
-    <img src="/images/65f9dbbe20835.jpg" alt="" srcset="">
-</div>
+<div class="container" id="container4">
+
+
+                
+<h1 class="for2">Book and Explore!</h1>
+
+
+<?php
+$conn = new mysqli("localhost:3307", "root", "admin", "sample");
+
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to retrieve image data
+$sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+// Output data of each row
+while($row = $result->fetch_assoc()) {
+     if (isset($_POST['book'])) {
+        
+  
+   
+}
+ // Display the image
+    $imageData = base64_encode($row['image']);
+    $price = $row['price'];
+    $textData = $row['place'];
+    
+    echo '<div class="inner-box">
+    <div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>
+    <h2 class="textdata">Explore '.$textData.'!</h2>
+    <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
+
+    <hr class="solidblack"></hr>
+    <a href="/hotel_booking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
+    
+    <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
+</div>';
+     
+}
+} else {
+echo "0 results";
+}
+
+
+
+
+
+   
+  
+?>
+
+
 
 </div>
- 
-</div>
-
 
 <!----------------------------------------------------------------------------------------------FLGIHTS CONTAINER------------------------------------------------------------------------------------------->
 
