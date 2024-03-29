@@ -59,16 +59,17 @@ body{
     }
 
 .container{
-    height: 100vh;
+    height: auto;
     width: 100%;
-    max-height: 100vh;
+    max-height: auto;
     max-width: 100%;
-    background-image: url(https://wallpapercave.com/wp/wp4863911.jpg);
+    background-image: url(contact.jpg);
     background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
-    url(https://wallpapercave.com/wp/wp4863911.jpg);
+    url(contact.jpg);
     background-position: center;
     overflow: auto;
     background-size: cover;
+    background-attachment:fixed ;
     justify-content: center;
     align-content: center;
     display: table;
@@ -79,12 +80,13 @@ body{
     width: 100%;
     max-height: auto;
     max-width: 100%;
-    background-image: url(https://wallpapercave.com/wp/wp4863911.jpg);
+    background-image: url(explore.jpg);
     background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
-    url(https://wallpapercave.com/wp/wp4863911.jpg);
+    url(explore.jpg);
     background-position: center;
     overflow: auto;
     background-size: cover;
+    background-attachment:fixed ;
     justify-content: center;
     align-content: center;
     display: table;

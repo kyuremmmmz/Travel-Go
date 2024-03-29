@@ -382,11 +382,12 @@ if (isset($_POST["submit"])) {
 ?>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
-<div class="container" id="container4">
+<div class="container4" id="container4">
 
 
                 
 <h1 class="for2">Book and Explore!</h1>
+
 
 
 <?php
@@ -420,7 +421,7 @@ while($row = $result->fetch_assoc()) {
     <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
 
     <hr class="solidblack"></hr>
-    <a href="/hotel_booking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
+    <a href="/login_page.php" class="book">Book now</a>
     
     <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
 </div>';
