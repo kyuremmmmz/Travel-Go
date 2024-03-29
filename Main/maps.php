@@ -48,7 +48,16 @@
 </head>
 <body>
 <div id="search-container">
-    <input id="pac-input" type="text" placeholder="Search for a place">
+    <input id="pac-input" type="text" placeholder="Search for a place" value="<?php 
+    $img = isset($_GET["choices"]) ? $_GET["choices"] : 'No choice selected';
+    echo $img;
+
+    
+    
+    
+    
+    
+    ?>">
     <button id="search-button">Search</button> <!-- Add a search button -->
 </div>
 <div id="map-container">

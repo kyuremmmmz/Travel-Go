@@ -24,6 +24,16 @@
     
     <title>Travel go ph</title>
 
+    <style>
+        .travel{
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+    
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -41,7 +51,7 @@
     <nav class="navigation" id="navbar">
            
         <ul class="myul">
-                <h1 class="travel">Travel Go PH</h1>
+                <img src="2024-03-29-removebg-preview.png" class="travel" alt="" srcset="">
                 
                 <li class="li"><a href="#banner" class="active" id="a">Home</a> </li>
               
