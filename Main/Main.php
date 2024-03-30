@@ -206,7 +206,7 @@
             <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
   
             <hr class="solidblack"></hr>
-            <a href="/hotel_booking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
+            <a href="/placesbooking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
             
             <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
         </div>';

@@ -331,6 +331,9 @@
 </div>
 
 
+
+
+
 </div>
 
         
@@ -356,8 +359,8 @@ if (isset($_POST["submit"])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'kurosawataki84@gmail.com'; // Indicate My Gmail email address
-        $mail->Password = 'fwbmdkvlhkxivqet'; // Indicate my Gmail password here
+        $mail->Username = 'kurosawataki84@gmail.com'; // TODO:  Indicate My Gmail email address
+        $mail->Password = 'fwbmdkvlhkxivqet'; //TODO: Indicate my Gmail password here
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption here
         $mail->Port = 587; // TCP port to connect to 
 
@@ -372,7 +375,7 @@ if (isset($_POST["submit"])) {
 
         $mail->send();
         echo "<script>alert('Email sent successfully')</script>";
-        // Redirect to a thank you page or any other page after sending the email
+        // TODO: Redirect to a thank you page or any other page after sending the email
         
         
     } catch (Exception $e) {
@@ -381,7 +384,9 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
+<!---------------------------------------------------------------------------------------------Places------------------------------------------------------------------------------------>
+
+
 <div class="container4" id="container4">
 
 
@@ -397,20 +402,20 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to retrieve image data
+// TODO: SQL query to retrieve image data
 $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
 $result = $conn->query($sql);
 
 
 if ($result->num_rows > 0) {
-// Output data of each row
+// TODO: Output data of each row
 while($row = $result->fetch_assoc()) {
      if (isset($_POST['book'])) {
         
   
    
 }
- // Display the image
+ // TODO: Display the image
     $imageData = base64_encode($row['image']);
     $price = $row['price'];
     $textData = $row['place'];
@@ -505,6 +510,7 @@ echo "0 results";
             </div>
 
             <h1 class="h2">Starts from PHP '.$prices.'</h1>
+           
             
         </div>'; 
         

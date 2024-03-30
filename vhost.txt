@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+    ServerName travelgoph.com
+    ServerAlias www.travelgoph.com
+    DocumentRoot "C:/xampp/htdocs/Website"
+    RewriteEngine on
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://www.travelgoph.com/$1 [R,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName www.travelgoph.com
+    ServerAlias travelgoph.com
+    DocumentRoot "C:/xampp/htdocs/Website"
+    SSLEngine on
+    SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/server.key"
+</VirtualHost>
