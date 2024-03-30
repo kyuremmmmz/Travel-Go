@@ -61,7 +61,7 @@
 
                 <li class="lis"><a href="#container4"class="" id="a">Explore</a></li>
 
-                <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
+                <li class="lis"><a href="#flights"class="" id="a">Hotels</a></li>
 
                
 
