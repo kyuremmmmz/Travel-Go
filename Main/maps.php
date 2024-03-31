@@ -82,7 +82,7 @@
 
     function searchPlaces(query) {
     var myHeaders = new Headers();
-    myHeaders.append("X-API-KEY", "8ccee2fb4c5a9e6453663a6e9f00533b7919b05c");
+    myHeaders.append("X-API-KEY", "2ed3f8f207ac5be7669b246d2924381911403f34");
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({

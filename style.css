@@ -800,6 +800,9 @@ body{
     
 }
 
+
+
+
 .container3 .liss{
     display: inline-block;
     text-decoration: none;
@@ -827,11 +830,12 @@ body{
     display: inline-block;
     width: 270px;
     height: 350px;
-    margin: 0px 30px;
-    border-radius: 30px;
+    margin: 0px 10px;
+    border-radius: 10px;
     position: relative;
     transform: translate(50%, 20%);
     overflow: hidden;
+    box-shadow: 15px 15px 15px 10px #000;
     cursor: pointer;
     grid-template-columns: repeat(auto-fill);
 }
@@ -839,10 +843,34 @@ body{
 
 .container3 .hotels .in{
     background-color: #8adeec;
-    height: 190px;
+    height: 70%;
     overflow: hidden;
 
 
+}
+
+/*--------------===========================================================================================HOTEL BOOKING DESIGN=====================================================================================================================================================================================================================================*/
+.hotels .book_hotel{
+   color: #000;
+   display: block;
+   position: absolute;
+   transform: translate(20%, 35%);
+   background: none;
+   transition: all 0.3s ease-in-out;
+
+}
+
+.hotels .book_hotel:hover{
+    color: #3af30b;
+
+}
+
+
+
+.container3 .hotels .in img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 

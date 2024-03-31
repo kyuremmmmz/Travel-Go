@@ -61,7 +61,7 @@
 
                 <li class="lis"><a href="#container4"class="" id="a">Explore</a></li>
 
-                <li class="lis"><a href="#flights"class="" id="a">Hotels</a></li>
+                <li class="lis"><a href="#container3"class="" id="a">Hotels</a></li>
 
                
 
@@ -417,7 +417,7 @@ while($row = $result->fetch_assoc()) {
 }
  // TODO: Display the image
     $imageData = base64_encode($row['image']);
-    $price = $row['price'];
+    $price = number_format($row['price']);
     $textData = $row['place'];
     
     echo '<div class="inner-box">
@@ -479,7 +479,9 @@ echo "0 results";
         $sql = "SELECT hotel, price, image FROM for_creating_a_hotel"; // Adjust the query according to your database schema
         $result = $conn->query($sql);
     
-        
+       
+
+
         if ($result->num_rows > 0) {
             // Output data of each row
             while($row = $result->fetch_assoc()) {
@@ -490,29 +492,22 @@ echo "0 results";
             }
              // Display the image
                 $imagedata = base64_encode($row['image']);
-                $prices = $row['price'];
+                $prices = number_format($row['price']);
                 $textdata = $row['hotel'];
         
         echo' <div class="hotels" id="hotels">
             <div class="in">
+            
             <img src="/images/'.$row["image"].'" alt="" srcset="">
             </div>
             <h1>'.$textdata.'</h1>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-
-            <div class="reviews">
-               <p>5.0/5</p> 
-               
-            </div>
 
             <h1 class="h2">Starts from PHP '.$prices.'</h1>
+
+            <a href="/login_page.php" class="book_hotel">Book now</a>
+    
            
-            
-        </div>'; 
+    </div>'; 
         
     }
 } else {

@@ -27,12 +27,12 @@ if (isset($_POST["submit"])) {
         $tempname = $file['tmp_name'];
 
         // Valid image extensions
-        $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png'];
+        $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
         $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         // Check if the image extension is valid
         if (!in_array($imageExtension, $validImageExtensions)) {
-            echo '<script>sweetAlert("Invalid image extension", "Please upload jpg, jpeg, png, or gif files.", "error");</script>';
+            echo '<script>sweetAlert("Invalid image extension", "Please upload jpg, jpeg, png, gif  or webp files.", "error");</script>';
         } elseif ($filesize >= 10000000) { // Check if file size exceeds limit
             echo'<script>';
             echo'sweetAlert("Invalid", "Wrong Password or Email try again", "error");';
@@ -79,44 +79,49 @@ if (isset($_POST["submit"])) {
         }
         .container {
             margin-top: 50px;
+            width: auto;
+            max-width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            align-self: center;
+        }
+
+        .form-group{
+            padding-top: 25px;
+        }
+        .vertical-center {
+            display: flex;
+            align-items: center; /* Vertically center align */
+            justify-content: center; /* Horizontally center align */
+            height: 100%; /* Take up full height of the body */
+            margin-top: 200px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <form action="post_hotels.php" method="post" autocomplete="off" enctype="multipart/form-data">
-        <h1 class="mb-4">Post Places in TravelGoPH</h1>
-        
-        <div class="form-group">
-            <input type="text" class="form-control" name="place" placeholder="Place...">
-        </div>
+<div class="vertical-center"> <!-- Center the container both horizontally and vertically -->
+    <div class="container">
+        <form action="post_hotels.php" method="post" autocomplete="off" enctype="multipart/form-data">
+            <h1 class="mb-4 text-center">Post Hotels in TravelGoPH</h1>
+            
+            <div class="form-group">
+                <input type="text" class="form-control" name="place" placeholder="Place...">
+            </div>
 
-        <div class="form-group">
-            <input type="text" class="form-control" name="price" placeholder="Price...">
-        </div>
-        
-        <div class="form-group">
-            <input type="file" class="form-control-file" name="file" accept=".jpg, .jpeg, .gif, .png">
-        </div>
-       
-        <button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
-        <a href="system.php" class="btn btn-secondary">Back</a>
-    </form>
+            <div class="form-group">
+                <input type="text" class="form-control" name="price" placeholder="Price...">
+            </div>
+            
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="file" accept=".jpg, .jpeg, .gif, .png">
+            </div>
+           
+            <button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
+            <a href="system.php" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
 </div>
-
-<?php
-// PHP code to fetch image URLs from the database
-$sql = "SELECT image FROM for_creating_a_hotel";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo '<script>Sweetalert("Successfully fetched the image");</script>';
-    }
-    echo '<script>alert("Doesn\'t contain an image or invalid file name");</script>';
-}
-?>
 
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
