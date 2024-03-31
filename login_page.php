@@ -27,7 +27,7 @@ session_start(); // Start the session
 // Check if the form is submitted
 if (isset($_POST['Submit'])) {
     // Database connection
-    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
+    $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

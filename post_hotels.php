@@ -94,7 +94,7 @@ if (isset($_POST["submit"])) {
             align-items: center; /* Vertically center align */
             justify-content: center; /* Horizontally center align */
             height: 100%; /* Take up full height of the body */
-            margin-top: 200px;
+            
         }
     </style>
 </head>

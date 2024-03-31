@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
     // Execute the statement
     if ($stmt->execute()) {
         echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
-        header("Location: booking_tracker.php");
+        header("Location: system.php");
 
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

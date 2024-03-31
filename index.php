@@ -458,13 +458,13 @@ echo "0 results";
 <h1 class="featured_properties">
     Hotel Recommendations
 </h1>
-        <ul>
+        <ul class="ul2">
             <li class="lis" onclick=""><a href="" >Manila</a></li>
             <li class="lis" onclick=""><a href="">Cebu</a></li>
-            <li class="liss" onclick=""><a href="">Batanes</a></li>
+            <li class="lis" onclick=""><a href="">Batanes</a></li>
             <li class="lis" onclick=""><a href="">Bohol</a></li>
-            <li class="listt"onclick=""><a href="">Davao</a></li>
-            <li class="listt"onclick=""><a href="">Albay</a></li>
+            <li class="lis"onclick=""><a href="">Davao</a></li>
+            <li class="lis"onclick=""><a href="">Albay</a></li>
             
         </ul>
 
@@ -475,8 +475,8 @@ echo "0 results";
             die("Connection failed: " . $conn->connect_error);
         }
     
-        // SQL query to retrieve image data
-        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel"; // Adjust the query according to your database schema
+        //TODO: SQL query to retrieve image data
+        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel"; //TODO: Adjust the query according to your database schema
         $result = $conn->query($sql);
     
        
