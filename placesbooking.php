@@ -93,7 +93,7 @@ if (isset($_POST["submit"])) {
             $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
             echo "<h2 class='text-center mb-4'>Book this to: $img</h2>";
            ?>
-                <h2 class="text-center mb-4">Booking Form</h2>
+                <h2 class="text-center mb-4">1. Fill The Credentials</h2>
                 <form action="placesbooking.php" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>

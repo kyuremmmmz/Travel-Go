@@ -34,6 +34,7 @@
             background-color: #454d55;
             min-height: 100vh;
             width: 100%;
+            overflow: hidden;
         }
 
         .nav-link {
@@ -111,7 +112,7 @@
 
     
 
-    <div class="container mt-5 content" id="tracker">
+    <div class="content" id="tracker">
     <h2>Booking Tracker</h2>
     
     <!-- Booking Search Form -->

@@ -460,6 +460,75 @@ echo "0 results";
 </h1>
         <ul class="ul2">
             <li class="lis" onclick=""><a href="" >Manila</a></li>
+            <li class="lis" onclick=""><a href="#container5">Cebu</a></li>
+            <li class="lis" onclick=""><a href="">Batanes</a></li>
+            <li class="lis" onclick=""><a href="">Bohol</a></li>
+            <li class="lis"onclick=""><a href="">Davao</a></li>
+            <li class="lis"onclick=""><a href="">Albay</a></li>
+            
+        </ul>
+
+        <?php 
+        $conn = new mysqli("localhost:3307", "root", "admin", "sample");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+    
+        //TODO: SQL query to retrieve image data
+        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'"; //TODO: Adjust the query according to your database schema
+        $result = $conn->query($sql);
+    
+       
+
+
+        if ($result->num_rows > 0) {
+            // Output data of each row
+            while($row = $result->fetch_assoc()) {
+                 if (isset($_POST['book'])) {
+                    
+              
+               
+            }
+             // Display the image
+                $imagedata = base64_encode($row['image']);
+                $prices = number_format($row['price']);
+                $textdata = $row['hotel'];
+        
+        echo' <div class="hotels" id="hotels">
+            <div class="in">
+            
+            <img src="/images/'.$row["image"].'" alt="" srcset="">
+            </div>
+            <h1>'.$textdata.'</h1>
+
+            <h1 class="h2">Starts from PHP '.$prices.'</h1>
+
+            <a href="/login_page.php" class="book_hotel">Book now</a>
+    
+           
+    </div>'; 
+        
+    }
+} else {
+echo "0 results";
+}?> 
+
+       
+
+
+        
+
+
+
+    
+<!-------------- ===================================================================CONTAINER5 ============================================= -------------------------------->
+<div class="container5" id="container5">
+<h1 class="featured_properties">
+    Hotel Recommendations
+</h1>
+        <ul class="ul2">
+            <li class="lis" onclick=""><a href="" >Manila</a></li>
             <li class="lis" onclick=""><a href="">Cebu</a></li>
             <li class="lis" onclick=""><a href="">Batanes</a></li>
             <li class="lis" onclick=""><a href="">Bohol</a></li>
@@ -476,7 +545,7 @@ echo "0 results";
         }
     
         //TODO: SQL query to retrieve image data
-        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel"; //TODO: Adjust the query according to your database schema
+        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place = 'Cebu'"; //TODO: Adjust the query according to your database schema
         $result = $conn->query($sql);
     
        
@@ -525,9 +594,18 @@ echo "0 results";
 
         </div>
 
+        
 
 
+        
        
+
+
+        </div>
+
+
+
+
         
     
     
