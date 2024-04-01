@@ -1,10 +1,14 @@
 {
   "dependencies": {
     "bootstrap": "^3.4.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "gentelella": "^1.4.0",
+    "node-fetch": "^3.3.2",
     "sweetalert": "^2.1.2",
     "twilio": "^4.22.0"
   }
 }
+
 
 

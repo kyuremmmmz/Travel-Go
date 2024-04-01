@@ -60,7 +60,7 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: calendar.php");
+                    header("Location: payment.php");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";
@@ -150,13 +150,42 @@ if (isset($_POST["submit"])) {
                             <!-- Add more options as needed -->
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Next</button>
                     <input type="hidden" name="voucher_code" value="<?php echo $voucherCode;?>">
                 </form>
-            </div>
+                <div id="paypal-button-container"></div>
         </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AXhUv-yDdR_jwAUx76BMOQ_lRBTTiJeV6o99AyNdJbE2ntg-3OYUl8ddgL8JP1wIkJH92GveA-g7zsQ_&currency=USD"></script>
+
+
+     <!-- PayPal SDK Script -->
+     <script>
+        // Render PayPal Buttons
+        paypal.Buttons({
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '500000000000' // Set the amount here
+                        }
+                    }]
+                });
+            },
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Call your server to save the transaction
+                    return fetch('/api/orders/' + data.orderID + '/capture', {
+                        method: 'POST'
+                    });
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+
 </body>
 </html>
