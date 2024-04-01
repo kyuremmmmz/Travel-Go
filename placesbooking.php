@@ -1,14 +1,12 @@
 <?php
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\PHPMailer;
+
 
 require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 
-
-
 if (isset($_POST["submit"])) {
+    // Capture form data
     $fullname = $_POST["name"];
     $children = $_POST["children"];
     $adult = $_POST["adults"];
@@ -19,63 +17,59 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
 
+    // Check arrival and departure dates
     if ($arrival == $departure) {
         echo "Cannot match arrival and departure dates.";
     } elseif ($arrival > $departure) {
         echo "<script>alert('Invalid departure')</script>";
     } else {
-            // Generate a voucher code
-            $voucherCode = generateVoucher();
-    
-            // Connect to MySQL database
-            $conn = new mysqli('localhost:3307', 'root', 'admin', 'sample');
-            if ($conn->connect_error) {
-                die("Connection error: " . $conn->connect_error);
-            }
-    
-            // Construct the SQL query
-            $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code) 
-                    VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode')";
-    
-            // Execute the SQL query
-            if ($conn->query($sql) === TRUE) {
-                // Send confirmation email using PHPMailer
-                $mail = new PHPMailer(true);
-                try {
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'kurosawataki84@gmail.com'; // Your Gmail email address
-                    $mail->Password = 'fwbmdkvlhkxivqet'; // Your Gmail password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-                    $mail->Port = 587; // TCP port to connect to
-    
-                    // Set email recipients and content
-                    $mail->setFrom('kurosawataki84@gmail.com', 'Your Name');
-                    $mail->addAddress($email, $fullname); // Recipient email address
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Your Booking Confirmation and Voucher';
-                    $mail->Body = "Dear $fullname,<br><br>Thank you for booking with us. Your reservation details are as follows:<br>Hotel: $hotel<br>Arrival Date: $arrival<br>Departure Date: $departure<br>Voucher Code: $voucherCode<br><br>We look forward to welcoming you.<br><br>Best regards,<br>Travel GO Philippines";
-    
-                    // Send email
-                    $mail->send();
-                    echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: payment.php");
-                    exit;
-                } catch (Exception $e) {
-                    echo "Error sending email: {$mail->ErrorInfo}";
-                }
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+        // Generate a voucher code
+        $voucherCode = generateVoucher();
+
+        // Connect to MySQL database
+        $conn = new mysqli('localhost:3307', 'root', 'admin', 'sample');
+        if ($conn->connect_error) {
+            die("Connection error: " . $conn->connect_error);
         }
+
+        // Construct the SQL query to insert booking details
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode')";
+
+        // Execute the SQL query to insert booking details
+        if ($conn->query($sql) === TRUE) {
+            // Payment transaction details
+            $paypalTransactionID = $_POST['paypal_transaction_id']; // Assuming you receive this from the PayPal transaction response
+
+            // Construct the SQL query to insert payment transaction
+            $sqlPaypal = "INSERT INTO payment_transactions (voucher_code, transaction_id) 
+                          VALUES ('$voucherCode', '$paypalTransactionID')";
+
+            // Execute the SQL query to insert payment transaction
+            if ($conn->query($sqlPaypal) === TRUE) {
+                // Redirect to payment page
+                header("Location: payment.php");
+                exit;
+            } else {
+                // Error inserting payment transaction
+                echo "Error: " . $sqlPaypal . "<br>" . $conn->error;
+            }
+        } else {
+            // Error inserting booking details
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        // Close the database connection
+        $conn->close();
     }
-    
-    function generateVoucher() {
-        //TODO: Generate a unique voucher code 
-        return uniqid();
-    }
+}
+
+function generateVoucher() {
+    //TODO: Generate a unique voucher code 
+    return uniqid();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,42 +144,59 @@ if (isset($_POST["submit"])) {
                             <!-- Add more options as needed -->
                         </select>
                     </div>
+                     <!-- PayPal SDK Script -->
+                    <div id="paypal-button-container"></div>
                     <button type="submit" class="btn btn-primary" name="submit">Next</button>
                     <input type="hidden" name="voucher_code" value="<?php echo $voucherCode;?>">
+                    <p id="result-message"></p>
                 </form>
-                <div id="paypal-button-container"></div>
+               
         </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AXhUv-yDdR_jwAUx76BMOQ_lRBTTiJeV6o99AyNdJbE2ntg-3OYUl8ddgL8JP1wIkJH92GveA-g7zsQ_&currency=USD"></script>
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+   
      <!-- PayPal SDK Script -->
-     <script>
-        // Render PayPal Buttons
-        paypal.Buttons({
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '500000000000' // Set the amount here
-                        }
-                    }]
-                });
-            },
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Call your server to save the transaction
-                    return fetch('/api/orders/' + data.orderID + '/capture', {
-                        method: 'POST'
-                    });
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
+     <script src="https://www.paypal.com/sdk/js?client-id=AXhUv-yDdR_jwAUx76BMOQ_lRBTTiJeV6o99AyNdJbE2ntg-3OYUl8ddgL8JP1wIkJH92GveA-g7zsQ_&currency=USD"></script>
+     <script src="add.js"></script>
+
+
+<script>
+    paypal.Buttons({
+  createOrder: function(data, actions){
+    
+    
+    console.log('Data: ' + data);
+    console.log('Actions: ' + actions);
+    
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value:'200',
+
+        }
+      }]
+
+    })
+  },
+  onApprove: function(data, actions) {
+console.log('Data: ' + data);
+    console.log('Actions: ' + actions);
+    return actions.order.capture().then(function(details) {
+      alert('Transaction completed by'+ details.payer.name.given_name);
+    });
+    
+  }
+
+    
+}).render(
+  '#paypal-button-container',
+);
+</script>
+
 
 </body>
 </html>

@@ -1,4 +1,12 @@
 {
+  "name": "paypal-standard-integration",
+  "description": "Sample Node.js web app to integrate PayPal Standard Checkout for online payments",
+  "version": "1.0.0",
+  "main": "add.js",
+  "type": "module",
+  "scripts": {
+    "start": "node add.js"
+  },
   "dependencies": {
     "bootstrap": "^3.4.1",
     "dotenv": "^16.4.5",
@@ -9,6 +17,3 @@
     "twilio": "^4.22.0"
   }
 }
-
-
-
