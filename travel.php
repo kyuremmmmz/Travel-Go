@@ -23,7 +23,7 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Bookings</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* CSS for the progress bar container */
         .progress-container {
@@ -49,7 +49,7 @@ $result = $stmt->get_result();
         }
 
         /* CSS for the plane icon */
-        .plane-icon {
+        .fas.travel-2 {
             position: absolute;
             transform: translateY(-60%); /* Adjust vertically to center the icon */
             font-size: 30px; /* Adjust the font size of the icon */
@@ -93,7 +93,7 @@ $result = $stmt->get_result();
 
             // Progress bar
             echo '<div class="progress-container">
-                <i class="material-icons plane-icon" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);">flight</i>
+                <i class="fas fa-calendar" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
                 <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
             </div>
            <h1>Already travelling</h1>';
@@ -110,7 +110,7 @@ $result = $stmt->get_result();
     
                 // Progress bar
                 echo '<div class="progress-container">
-                    <i class="material-icons plane-icon" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);">flight</i>
+                    <i class="fas travel-2" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
                     <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
                 </div>
                <h1>Get READY</h1>';
@@ -128,7 +128,7 @@ $result = $stmt->get_result();
     
                 // Progress bar
                 echo '<div class="progress-container">
-                    <i class="material-icons plane-icon" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);">flight</i>
+                    <i class="material-icons plane-icon" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
                     <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
                 </div>
                <h1>Arrived</h1>';
