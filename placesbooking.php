@@ -1,13 +1,15 @@
 <?php
-
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 
+
+
 if (isset($_POST["submit"])) {
-    // Capture form data
-    $fullname = $_POST["name"];
+        $fullname = $_POST["name"];
     $children = $_POST["children"];
     $adult = $_POST["adults"];
     $arrival = $_POST["adate"];
@@ -17,8 +19,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
 
-    // Check arrival and departure dates
-    if ($arrival == $departure) {
+        if ($arrival == $departure) {
         echo "Cannot match arrival and departure dates.";
     } elseif ($arrival > $departure) {
         echo "<script>alert('Invalid departure')</script>";
@@ -32,35 +33,41 @@ if (isset($_POST["submit"])) {
             die("Connection error: " . $conn->connect_error);
         }
 
-        // Construct the SQL query to insert booking details
+        // Construct the SQL query
         $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code) 
                 VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode')";
 
-        // Execute the SQL query to insert booking details
+        // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
-            // Payment transaction details
-            $paypalTransactionID = $_POST['paypal_transaction_id']; // Assuming you receive this from the PayPal transaction response
-
-            // Construct the SQL query to insert payment transaction
-            $sqlPaypal = "INSERT INTO payment_transactions (voucher_code, transaction_id) 
-                          VALUES ('$voucherCode', '$paypalTransactionID')";
-
-            // Execute the SQL query to insert payment transaction
-            if ($conn->query($sqlPaypal) === TRUE) {
-                // Redirect to payment page
-                header("Location: payment.php");
-                exit;
+            // Send confirmation email using PHPMailer
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'kurosawataki84@gmail.com'; // Your Gmail email address
+                    $mail->Password = 'fwbmdkvlhkxivqet'; // Your Gmail password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
+                    $mail->Port = 587; // TCP port to connect to
+    
+                    // Set email recipients and content
+                    $mail->setFrom('kurosawataki84@gmail.com', 'Your Name');
+                    $mail->addAddress($email, $fullname); // Recipient email address
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Your Booking Confirmation and Voucher';
+                    $mail->Body = "Dear $fullname,<br><br>Thank you for booking with us. Your reservation details are as follows:<br>Hotel: $hotel<br>Arrival Date: $arrival<br>Departure Date: $departure<br>Voucher Code: $voucherCode<br><br>We look forward to welcoming you.<br><br>Best regards,<br>Travel GO Philippines";
+    
+                    // Send email
+                    $mail->send();
+                    echo "<script>alert('Email sent successfully')</script>";
+                    header("Location: travel.php");
+                    exit;
+                } catch (Exception $e) {
+                    echo "Error sending email: {$mail->ErrorInfo}";
+                }
             } else {
-                // Error inserting payment transaction
-                echo "Error: " . $sqlPaypal . "<br>" . $conn->error;
+                echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        } else {
-            // Error inserting booking details
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        // Close the database connection
-        $conn->close();
     }
 }
 
@@ -69,7 +76,6 @@ function generateVoucher() {
     return uniqid();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,38 +170,7 @@ function generateVoucher() {
      <script src="add.js"></script>
 
 
-<script>
-    paypal.Buttons({
-  createOrder: function(data, actions){
-    
-    
-    console.log('Data: ' + data);
-    console.log('Actions: ' + actions);
-    
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          value:'200',
 
-        }
-      }]
-
-    })
-  },
-  onApprove: function(data, actions) {
-console.log('Data: ' + data);
-    console.log('Actions: ' + actions);
-    return actions.order.capture().then(function(details) {
-      alert('Transaction completed by'+ details.payer.name.given_name);
-    });
-    
-  }
-
-    
-}).render(
-  '#paypal-button-container',
-);
-</script>
 
 
 </body>

@@ -37,7 +37,7 @@
                 
             </div>
 
-            <li class="liko"><i class="fas fa-calendar"></i><a  href="/calendar.php" class="bookings_ko" title="See my bookings">My Bookings</a></li>
+            <li class="liko"><i class="fas fa-calendar"></i><a  href="/travel.php" class="bookings_ko" title="See my bookings">My Bookings</a></li>
             <div class="me">
                 <?php 
 
