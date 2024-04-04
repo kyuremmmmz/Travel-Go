@@ -9,7 +9,7 @@ require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 
 
 if (isset($_POST["submit"])) {
-        $fullname = $_POST["name"];
+    $fullname = $_POST["name"];
     $children = $_POST["children"];
     $adult = $_POST["adults"];
     $arrival = $_POST["adate"];
@@ -18,6 +18,9 @@ if (isset($_POST["submit"])) {
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
+    $book  = $_POST["book_type"];
+
+
 
         if ($arrival == $departure) {
         echo "Cannot match arrival and departure dates.";
@@ -34,8 +37,8 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code) 
-                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode')";
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code, booked) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode', $book)";
 
         // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
@@ -107,7 +110,9 @@ function generateVoucher() {
                         <label for="hotel" class="form-label">Book this to</label>
                         <input type="text" class="form-control" id="hotel" name="hotel" value= <?php  
                         $choice = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
-                        echo $choice;?> required>
+                        $price = isset($_GET["price"])? $_GET["price"] :"";
+                        echo $choice, ' With PHP ';?><?php echo $price;?> required>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone number</label>
@@ -120,6 +125,15 @@ function generateVoucher() {
                     <div class="mb-3">
                         <label for="departure_date" class="form-label">Departure Date</label>
                         <input type="date" class="form-control" id="departure_date" name="ddate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="departure_date" class="form-label">Book type</label>
+                        <select class="form-select" id="booktype" name="book_type" required>
+                            <option value="">Select</option>
+                            <option value="hotel">hotel</option>
+                            <option value="flight">flight</option>
+                            <!-- Add more options as needed -->
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="adults" class="form-label">Number of Adults</label>
@@ -140,16 +154,6 @@ function generateVoucher() {
                             <!-- Add more options as needed -->
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="payment_method" class="form-label">Payment Method</label>
-                        <select class="form-select" id="payment_method" name="payment_method" required>
-                            <option value="">Select</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="debit_card">Debit Card</option>
-                            <option value="paypal">PayPal</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </div>
                      <!-- PayPal SDK Script -->
                     <div id="paypal-button-container"></div>
                     <button type="submit" class="btn btn-primary" name="submit">Next</button>
@@ -164,13 +168,6 @@ function generateVoucher() {
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-   
-     <!-- PayPal SDK Script -->
-     <script src="https://www.paypal.com/sdk/js?client-id=AXhUv-yDdR_jwAUx76BMOQ_lRBTTiJeV6o99AyNdJbE2ntg-3OYUl8ddgL8JP1wIkJH92GveA-g7zsQ_&currency=USD"></script>
-     <script src="add.js"></script>
-
-
-
 
 
 </body>

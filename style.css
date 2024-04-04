@@ -766,8 +766,15 @@ body{
     background-color: rgb(35, 71, 122);
 }
 
-
-.container3{
+.sec3{
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+ .container3{
     position: relative;
     padding: 20px;
     max-height: 100vh;
@@ -781,6 +788,20 @@ body{
     overflow: hidden;
     background-color: rgb(35, 71, 122);
 }
+.map-container {
+    width: fit-content;
+    display: inline-block;
+    transform: translate(520%, -150%);
+    text-align: justify;
+    overflow-x: auto;
+    color: white;
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+
+}
+
+
+
+
 
 
  .featured_properties{
@@ -807,7 +828,7 @@ body{
 }
 
 .container3 .ul2{
-    transform: translate(2%, 200%);
+    transform: translate(-34%, 200%);
 }
 
 .container3 .listt {
@@ -855,7 +876,7 @@ body{
     margin: 0px 10px;
     border-radius: 10px;
     position: relative;
-    transform: translate(20%, 20%);
+    transform: translate(-1%, 20%);
     overflow: hidden;
     box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
@@ -870,6 +891,8 @@ body{
 
 
 }
+
+
 
 /*--------------===========================================================================================HOTEL BOOKING DESIGN=====================================================================================================================================================================================================================================*/
 .hotels .book_hotel{
@@ -1036,7 +1059,7 @@ i{
   }
 
   .hotels .h2{
-    transform: translate(40%, 200%);
+    transform: translate(20%, 200%);
   }
 
   .hotels .h3{

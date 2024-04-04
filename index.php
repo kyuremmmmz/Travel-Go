@@ -330,17 +330,28 @@
     </div>
 </div>
 
-
-
-
+<div class="text-container">
+<div class="map-container" style="height: 500px; ">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15904.22199331931!2d120.3220124!3d16.1856156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339164eab7fb75c1%3A0x8a0f06775e05237a!2sSan%20Fabian%2C%20Pangasinan!5e0!3m2!1sen!2sph!4v1649238830344!5m2!1sen!2sph"
+            height="50%" style="width: 100%; border:0; " allowfullscreen="" loading="lazy"></iframe>
+            <p>Email: TravelGoPh@gmail.com</p>
+            <p>Phone: +63 907 321 7264</p>
+            <p>Website: www.travelgo.ph</p>
+            <p>Address: Binday, San Fabian Pangasinan</p>
+            <p>Hours: Monday - Friday: 9:00am - 5:00pm</p>
+            
+    
+</div>
 
 </div>
 
+</div>
+
+
         
         
         
         
- </div>
  <?php
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -383,6 +394,8 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
+
+
 
 <!---------------------------------------------------------------------------------------------Places------------------------------------------------------------------------------------>
 
@@ -454,6 +467,8 @@ echo "0 results";
 
 
 <!-----------------------------------------------------------------------------------------------CONTAINER 3--------------------------------------------------------------------------------------------->
+
+<div class="sec3">
 <div class="container3" id="container3">
 <h1 class="featured_properties">
     Hotel Recommendations
@@ -515,20 +530,14 @@ echo "0 results";
 }?> 
 
        
+</div>
 
-
-        
-
-
-
-    
-<!-------------- ===================================================================CONTAINER5 ============================================= -------------------------------->
-<div class="container5" id="container5">
+<div class="container3" id="container5">
 <h1 class="featured_properties">
     Hotel Recommendations
 </h1>
         <ul class="ul2">
-            <li class="lis" onclick=""><a href="" >Manila</a></li>
+            <li class="lis" onclick=""><a href="#container3" >Manila</a></li>
             <li class="lis" onclick=""><a href="">Cebu</a></li>
             <li class="lis" onclick=""><a href="">Batanes</a></li>
             <li class="lis" onclick=""><a href="">Bohol</a></li>
@@ -545,7 +554,7 @@ echo "0 results";
         }
     
         //TODO: SQL query to retrieve image data
-        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place = 'Cebu'"; //TODO: Adjust the query according to your database schema
+        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place = 'cebu'"; //TODO: Adjust the query according to your database schema
         $result = $conn->query($sql);
     
        
@@ -600,8 +609,18 @@ echo "0 results";
         
        
 
+    
 
-        </div>
+</div>
+
+
+
+    
+<!-------------- ===================================================================CONTAINER5 ============================================= -------------------------------->
+
+        
+
+
 
 
 
@@ -736,6 +755,69 @@ $(document).ready(function(){
 
 
     
+
+        var number = 1;
+var country=document.getElementById("countryName");
+setInterval(()=>{
+    var name = document.getElementById("country"+number);
+    country.innerText=name.innerText;
+    var line1 = document.getElementById("country"+number);
+    line1.style.borderBottom= "thick solid #0000FF";
+    for(var i=1;i<=10;i++)
+    {  
+        if(i!==number)
+        {
+            line1.style.borderBottom="0";
+        }
+    }
+    number++;
+    if(number===11){
+        number=1;
+    }
+},3000);
+
+
+document.querySelector(".burger").addEventListener("click",()=>{
+    var x = document.getElementById("topnav")
+
+    if(x.style.display === "block")
+    {
+        x.style.display = "none"
+        x.style.transition= "2s,ease-out";
+    }
+    else{
+        x.style.display = "block"
+        x.style.borderBottom="thick solid #0000FF"
+    }
+})
+
+var featureSS = document.querySelector(".first");
+var slide = 20
+// setInterval(()=>{
+// featureSS.style.marginLeft= `${0-slide}%`
+// slide=slide+20;
+// if(slide===80)
+// {
+//     slide=0;
+// }
+// var n=1;
+// var btn = document.getElementById("mbtn"+n);
+// btn.style.backgroundColor="#4d3af7";
+// n++;
+// if(n===6)
+// n=0;
+// for(var i=1;i<=5;i++)
+// {
+//     // if(i!==n)
+//     // {
+//     //     btn.style.backgroundColor="#dfe1e296"
+//     // }
+// }
+
+// },5000)
+
+
+
 
 </script>
 <!-- Bootstrap JS -->

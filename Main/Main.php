@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="/icon.ico" type="image/x-icon">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--============================================================================================== SPLIDE ===================================================== -->
+    
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
     
 
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
@@ -194,6 +197,10 @@
             $imageData = base64_encode($row['image']);
             $price = $row['price'];
             $textData = $row['place'];
+
+
+            
+
             
             echo '<div class="inner-box">
             <div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>
@@ -201,7 +208,7 @@
             <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
   
             <hr class="solidblack"></hr>
-            <a href="/placesbooking.php?choice='. urlencode($textData)," starting PHP ", urlencode($price).'" class="book">Book now</a>
+            <a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>
             
             <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
         </div>';
@@ -242,80 +249,140 @@
 
 
 <!-----------------------------------------------------------------------------------------------CONTAINER 3--------------------------------------------------------------------------------------------->
-<div class="container3" id="container3">
-<h1 class="featured_properties">
-    Hotel Recommendations
-</h1>
-        <ul>
-            <li class="lis" onclick=""><a href="" >Manila</a></li>
-            <li class="lis" onclick=""><a href="">Cebu</a></li>
-            <li class="liss" onclick=""><a href="">Batanes</a></li>
+
+<div class="sec3" id="sec3">
+    <div class="container3" id="container3">
+        <h1 class="featured_properties">
+            Hotel Recommendations in Manila
+        </h1>
+        <ul class="ul2">
+            <li class="lis" onclick=""><a href="#sec3" >Manila</a></li>
+            <li class="lis" onclick=""><a href="#container5">Cebu</a></li>
+            <li class="lis" onclick=""><a href="">Batanes</a></li>
             <li class="lis" onclick=""><a href="">Bohol</a></li>
-            <li class="listt"onclick=""><a href="">Davao</a></li>
-            <li class="listt"onclick=""><a href="">Albay</a></li>
-            
+            <li class="lis"onclick=""><a href="">Davao</a></li>
+            <li class="lis"onclick=""><a href="">Albay</a></li>
         </ul>
 
-        <?php 
-        $conn = new mysqli("localhost:3307", "root", "admin", "sample");
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-    
-        // SQL query to retrieve image data
-        $sql = "SELECT hotel, price, image FROM for_creating_a_hotel"; // Adjust the query according to your database schema
-        $result = $conn->query($sql);
-    
-        
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while($row = $result->fetch_assoc()) {
-                 if (isset($_POST['book'])) {
-                    
-              
-               
-            }
-             // Display the image
-                $imagedata = base64_encode($row['image']);
-                $prices = $row['price'];
-                $textdata = $row['hotel'];
-        
-        echo' <div class="hotels" id="hotels">
-            <div class="in">
-            <img src="/images/'.$row["image"].'" alt="" srcset="">
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php 
+                    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $imagedata = base64_encode($row['image']);
+                            $prices = number_format($row['price']);
+                            $textdata = $row['hotel'];
+                            echo '<li class="splide__slide">';
+                            echo '<div class="hotels" id="hotels">';
+                            echo '<div class="in">';
+                            echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
+                            echo '</div>';
+                            echo '<h1>'.$textdata.'</h1>';
+                            echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
+                            echo '<a href="/login_page.php" class="book_hotel">Book now</a>';
+                            echo '</div>';
+                            echo '</li>';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    $conn->close();
+                    ?>
+                </ul>
             </div>
-            <h1>'.$textdata.'</h1>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-
-            <div class="reviews">
-               <p>5.0/5</p> 
-               
-            </div>
-
-            <h1 class="h2">Starts from PHP '.$prices.'</h1>
-            
-        </div>'; 
-        
-    }
-} else {
-echo "0 results";
-}?> 
-
-       
-
-
-        
-        
-        
-       
-
-
         </div>
+    </div>
+
+    <div class="container3" id="container5">
+        <h1 class="featured_properties">
+            Hotel Recommendations in Cebu
+        </h1>
+        <ul class="ul2">
+            <li class="lis" onclick=""><a href="#container3" >Manila</a></li>
+            <li class="lis" onclick=""><a href="#sec3">Cebu</a></li>
+            <li class="lis" onclick=""><a href="">Batanes</a></li>
+            <li class="lis" onclick=""><a href="">Bohol</a></li>
+            <li class="lis"onclick=""><a href="">Davao</a></li>
+            <li class="lis"onclick=""><a href="">Albay</a></li>
+        </ul>
+
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php 
+                    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place = 'cebu'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $imagedata = base64_encode($row['image']);
+                            $prices = number_format($row['price']);
+                            $textdata = $row['hotel'];
+                            echo '<li class="splide__slide">';
+                            echo '<div class="hotels" id="hotels">';
+                            echo '<div class="in">';
+                            echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
+                            echo '</div>';
+                            echo '<h1>'.$textdata.'</h1>';
+                            echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
+                            echo '<a href="/login_page.php" class="book_hotel">Book now</a>';
+                            echo '</div>';
+                            echo '</li>';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    $conn->close();
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+       
+
+
+        
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script type="text/javascript">
+    new Splide('.splide', {
+    perPage: 4,
+    perMove: '1',
+    nextPage: true,
+    pagination: true,
+
+    breakpoints: {
+        640: {
+            perPage: 5,
+        },
+        480: {
+            perPage: 1,
+            height: '5rem',
+        },
+    },
+    }).mount();
+
+    function handleCityClick(city) {
+        // Implement your logic here for handling the click event
+        console.log("Clicked on " + city);
+    }
+</script>
 
 
 

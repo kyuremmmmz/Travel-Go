@@ -5,7 +5,7 @@
  */ 
   
 // PayPal configuration 
-define('PAYPAL_ID', 'sb-i5eqx29965437@business.example.com'); 
+define('PAYPAL_ID', 'sb-oqwod30211458@business.example.com'); 
 define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE 
  
 define('PAYPAL_RETURN_URL', 'http://localhost/Website/success.php'); 
@@ -15,8 +15,8 @@ define('PAYPAL_CURRENCY', 'USD');
 // Database configuration 
 define('DB_HOST', 'localhost:3307'); 
 define('DB_USERNAME', 'root'); 
-define('DB_PASSWORD', 'admin'); 
-define('DB_NAME', 'paypal_con'); 
+define('DB_PASSWORD', ''); 
+define('DB_NAME', 'donation'); 
  
 // Change not required 
 define('PAYPAL_URL', (PAYPAL_SANDBOX == true)?"https://www.sandbox.paypal.com/cgi-bin/webscr":"https://www.paypal.com/cgi-bin/webscr");

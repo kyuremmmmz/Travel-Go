@@ -15,6 +15,7 @@ if ($conn->connect_error) {
 // Handle form submission
 if (isset($_POST["submit"])) {
     $name = $_POST["price"];
+    $hotel = $_POST["hotel"];
     $file = $_FILES["file"];
     $place =  $_POST["place"];
 
@@ -43,7 +44,7 @@ if (isset($_POST["submit"])) {
 
             // Attempt to move the uploaded file to the specified destination
             if (move_uploaded_file($tempname, $uploadPath)) {
-                $query = "INSERT INTO for_creating_a_hotel(price, hotel,image, place) VALUES('$name', '$place', '$newImageName', )";
+                $query = "INSERT INTO for_creating_a_hotel(price, hotel,image, place) VALUES('$name', '$hotel', '$newImageName', '$place' )";
 
                 // Execute the query
                 if ($conn->query($query) === TRUE) {
@@ -89,13 +90,7 @@ if (isset($_POST["submit"])) {
         .form-group{
             padding-top: 25px;
         }
-        .vertical-center {
-            display: flex;
-            align-items: center; /* Vertically center align */
-            justify-content: center; /* Horizontally center align */
-            height: 100%; /* Take up full height of the body */
-            
-        }
+        
     </style>
 </head>
 <body>
