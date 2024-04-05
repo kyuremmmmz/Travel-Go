@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     
     <link rel="stylesheet" href="index.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="/icon.ico" type="image/x-icon">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!--============================================================================================== SPLIDE ===================================================== -->
     
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
@@ -25,84 +27,18 @@
 </head>
 
 <body>
-    
+    <div id="ewan"></div>
    <form action="Main.php" method="post">
     <section class="banner">
     <header>
     
     <nav class="navigation" id="navbar">
            
-        <div class="header" id="header">
-
-            <div class="nav2">
-
-            <div class="travelgoPHmember">
-                
-            </div>
-
-            <li class="liko"><i class="fas fa-calendar"></i><a  href="/travel.php" class="bookings_ko" title="See my bookings">My Bookings</a></li>
-            <div class="me">
-                <?php 
-
-            session_start(); // Start the session
-
-                // Check if the email session variable is set
-            if (!isset($_SESSION['email'])) {
-                header("Location: login_page.php"); // Redirect to the login page if the user is not logged in
-                exit();
-                
-
-                
-                
-            }
-
-
-                
-                
-                ?>
-                <div class="box_container">
-        <h3 class="myh3"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?> </h3>
-    </div>
-            </div>
-
-                <div class="text-container" id="">
-                    <h1 class="travel">Travel Go PH</h1>
-                <p class="para">Your ultimate Travel Companion!</p>
-
-                </div>
-                
-
-                
-                <div class="wrapper">
-                    
-                
-                    <input type="text" id="search" class="searchbar" placeholder="Search..." list="colors" autocomplete="off"><i id="icon" class="fas fa-search" onclick="" style="color:black;"></i>
-                    
-                        <div class="my-box" id="my-box">
-                           
-                            
- 
-                        
-                </div>
-
-                
-                
-
-
-              
-                    
-                </div>
-
-            </div>
-            
-            
-            
-          
-            <ul class="myul">
+    <ul class="myul">
            
                 
                 
-                <li class="li"><a href="#header" class="active" id="a">Home</a> </li>
+                <li class="li"><a href="#ewan" class="active" id="a">Home</a> </li>
           
                 <li class="li"><a href="#container3"class="" id="a">Hotels</a></li>
             
@@ -111,6 +47,8 @@
                 <li class="lis"><a href="#container2"class="" id="a">Promo</a></li>
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
+
+                <li class="lis"><a href="travel.php" class="" id="" title="See my bookings">My Bookings</a></li>
 
                
 
@@ -135,12 +73,78 @@
 
 
         
-        <p class="travel-2">YOUR TRAVEL STARTS HERE</p>
+        <p class="travel-2" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
+        <form action="" class="flightsearch">
+    <div class="flightsearch">
+        <h1>Book your flight now</h1>
+        <ul class="ul3">
+            <li class="inline">
+                <input type="radio" name="trip_type" id="round_trip" class="rad" value="Round Trip">
+                <label for="round_trip">Round Trip</label>
+            </li>
+            <li class="inline">
+                <input type="radio" name="trip_type" id="one_way" class="rad" value="One Way">
+                <label for="one_way">One Way</label>
+            </li>
+            <li class="inline">
+                <input type="radio" name="trip_type" id="multi_city" class="rad" value="Multi-City">
+                <label for="multi_city">Multi-City</label>
+            </li>
+        </ul>
+        
+        <ul class="ul3">
+            <li class="inlinee">
+                <label for="" class="for_text">Flying From: <br><input type="text" class="text"></label>
+            </li>
+            <li class="inlinee">
+                <label for="" class="for_text">Flying to: <br><input type="text" class="text"></label>
+            </li>
+        </ul>
+        <br>
+        <ul class="ul3">
+            <li class="inlineee">
+                <label for="for_text">Departing to: <br><input type="datetime-local" name="" id="" class="text"></label>
+            </li>
+            <li class="inlineee">
+                <label for="for_text">Arriving to: <br><input type="datetime-local" name="" id="" class="text"></label>
+            </li>
+        </ul>
+        <br>
+        <ul class="ul3">
+            <li class="inlineeee">
+                <label for="for_text">Adults: <br><input type="number" name="" id="" class="textt"></label>
+            </li>
+            <li class="inlineee">
+                <label for="for_text">Children: <br><input type="number" name="" id="" class="textt"></label>
+            </li>
+            <li class="inlineee">
+                <label for="for_text">Travel Class: <br><input type="value" name="" id="" class="textt"></label>
+            </li>
+        </ul>
+        <br>
+        <ul class="ul3">
+            <li class="inlineeee">
+             <br><button type="button" class="button1">Search</button></label>
+            </li>
+        </ul>
+    </div>
+</form>
+        
+        
+        
+        
+
+            </div>
+            </form>
+        
 
         
         </div>
+           
 
     </nav>
+    
    
 </header>
 
@@ -159,11 +163,13 @@
   <div class="container2" id="container2">
     <h1 class="promos">Promos</h1>
 
-    <div class="box3">
+    <div class="box3" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom">
         <img src="/Book your Hotels Stay now with a Discount of up to 30% with Savings24x7.jpg">
     </div>
     
-    <div class="box3">
+    <div class="box3" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom">
         <img src="/AirAsia B1G Sale drums up 2023 travel with Php 1 fare Promo.jpg">
     </div>
 </div>
@@ -172,11 +178,7 @@
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     <div class="container" id="container">
-
-
-                
         <h1 class="for">Popular Attractions</h1>
-        
 
         <?php
     $conn = new mysqli("localhost:3307", "root", "admin", "sample");
@@ -188,7 +190,6 @@
     // SQL query to retrieve image data
     $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
     $result = $conn->query($sql);
-
     
     if ($result->num_rows > 0) {
         // Output data of each row
@@ -198,36 +199,22 @@
             $price = $row['price'];
             $textData = $row['place'];
 
-
-            
-
-            
-            echo '<div class="inner-box">
-            <div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>
-            <h2 class="textdata">'.$textData.'</h2>
-            <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
-  
-            <hr class="solidblack"></hr>
-            <a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>
-            
-            <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
-        </div>';
-             
+            echo '<div class="inner-box">';
+            echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
+            echo '<h2 class="textdata">'.$textData.'</h2>';
+            echo '<div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>';
+            echo '<hr class="solidblack"></hr>';
+            echo '<a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
+            echo '<a href="/hotelsearch.php" class="see_details" data-place="' . urlencode($textData) . '">See Details</a>';
+            echo '</div>';
         }
         } else {
         echo "0 results";
         }
        
+    $conn->close();
+    ?>
 
-       
-        
-
-           
-          
-?>
-        
-        
-        
  </div>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
@@ -295,6 +282,53 @@
                     }
                     $conn->close();
                     ?>
+                     <?php 
+                    // cURL request for fetching hotels in Cebu
+                    $searchValue = 'Manila'; // Adjust the search value as needed
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, [
+                        CURLOPT_URL => "https://booking-com.p.rapidapi.com/v1/hotels/locations?name={$searchValue}&locale=en-gb",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 30,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "GET",
+                        CURLOPT_HTTPHEADER => [
+                            "X-RapidAPI-Host: booking-com.p.rapidapi.com",
+                            "X-RapidAPI-Key: fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d"
+                        ],
+                    ]);
+
+                    $response = curl_exec($curl);
+                    $err = curl_error($curl);
+
+                    curl_close($curl);
+
+                    if ($err) {
+                        echo "cURL Error #:" . $err;
+                    } else {
+                        $hotelLocations = json_decode($response, true);
+
+                        if ($hotelLocations) {
+                            foreach ($hotelLocations as $location) {
+                                echo "<li class='splide__slide'>";
+                                echo "<div class='hotels' id='hotels'>";
+                                echo "<div class='in'>";
+                                echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
+                                echo "</div>";
+                                echo "<h1>{$location['name']}</h1>";
+                                
+                                echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
+                                echo "</div>";
+                                echo "</li>";
+                            }
+                        } else {
+                            echo "No hotel locations found.";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -321,7 +355,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place = 'cebu'";
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='cebu'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -344,11 +378,59 @@
                     }
                     $conn->close();
                     ?>
+                    <?php 
+                    // cURL request for fetching hotels in Cebu
+                    $searchValue = 'Cebu'; // Adjust the search value as needed
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, [
+                        CURLOPT_URL => "https://booking-com.p.rapidapi.com/v1/hotels/locations?name={$searchValue}&locale=en-gb",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 30,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "GET",
+                        CURLOPT_HTTPHEADER => [
+                            "X-RapidAPI-Host: booking-com.p.rapidapi.com",
+                            "X-RapidAPI-Key: fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d"
+                        ],
+                    ]);
+
+                    $response = curl_exec($curl);
+                    $err = curl_error($curl);
+
+                    curl_close($curl);
+
+                    if ($err) {
+                        echo "cURL Error #:" . $err;
+                    } else {
+                        $hotelLocations = json_decode($response, true);
+
+                        if ($hotelLocations) {
+                            foreach ($hotelLocations as $location) {
+                                echo "<li class='splide__slide2'>";
+                                echo "<div class='hotels' id='hotels'>";
+                                echo "<div class='in'>";
+                                echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
+                                echo "</div>";
+                                echo "<h1>{$location['name']}</h1>";
+                                
+                                echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
+                                echo "</div>";
+                                echo "</li>";
+                            }
+                        } else {
+                            echo "No hotel locations found.";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -570,7 +652,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
-    
+   
+<script>
+  AOS.init();
+</script>
 </body>
 </html>
 

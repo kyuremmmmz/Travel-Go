@@ -47,28 +47,6 @@ body{
 }
 
 
-.text-container{
-    font-family: Arial, Helvetica, sans-serif;
-    display: block;
-    color: white;
-    justify-content: center;
-    padding: 1px;
-    align-items: center;
-    text-align: center;
-    transform: translate(160%, -100%);
-}
-.text-container .para{
-    margin-top: 10px;
-    
-}
-.text-container .travel{
-    font-size: 25px;
-}
-
-.nav2 .bookings_ko {
-    color: white;
-    text-decoration: none;
-}
 
 .nav2 .fas.fa-calendar{
     color: #ffffff;
@@ -104,7 +82,8 @@ body{
     position: fixed; /* Fixed position to stick to top */
     width: 100%; /* Take full width */
     transition: top 0.3s; /* Smooth transition when affixed */
-    transform: translateY(20%);
+    top: 0;
+    transform: translateY(-10%);
 }
 
 .navigation .myul.sticky {
@@ -147,14 +126,15 @@ body{
 
 .list .button {
     background: transparent;
+    display: inline-block;
     color: #fadddd;
     width: 100px;
     font-size: 100%;
     height: 35px;
     border: none;
-    transform: translateX(370%);
+    margin-right: 50px;
     border: solid  1px #d3bdbd;
-    border-radius: 50px;
+    border-radius: 10px;
     transition: all, 0.7s;
 }
 
@@ -262,10 +242,10 @@ body{
 .nav2 .wrapper .searchbar + .fas.fa-search {
     position: absolute; 
     transform: translateX(500%);
-    top: 70%;
+    top: 0%;
     left: 350px; /* Adjust as needed */
     cursor: pointer;
-    transform: translateY(-50%);
+    transform: translateY(0%);
     color: #000000;
 }
 
@@ -811,14 +791,70 @@ body{
 }
 
 
-.flightsearch{
-    max-height: 100px;
-    max-width: 100px;
-    background-color: rgba(47, 134, 214, 1);
+.flightsearch {
+    max-width: fit-content;
+    background-color: rgba(201, 201, 201, 1);
     color: black;
+    display: block;
+    transform: translate(35%, 10%);
+    
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.button1{
+    border: none;
+    color: white;
+    background-color: rgba(70, 126, 178, 1);
+    transform: translate(0%,-30%);
+    width: 850px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    height: 50px;
+    cursor: pointer;
+}
+
+.ul3 {
+    display: flex; /* Use flexbox to align the elements horizontally */
+    justify-content: space-between; /* Distribute the items evenly along the main axis */
+}
+
+.inline, .inlinee, .inlineee, .inlineeee {
+    flex-basis: calc(33.33% - 40px); /* Adjust the width of each element to fit 3 items per row */
+    margin: 0 20px;
+    font-size: 16px;
+    list-style: none;
+}
+
+.inlinee {
+    margin-top: 30px; /* Add margin-top to separate the groups */
 }
 
 
+.text{
+    outline: none;
+    width: 360px;
+    font-size: 16px;
+    border: none;
+    height: 25px;
+}
+
+
+.textt{
+    outline: none;
+    
+    border: none;
+    height: 20px;
+}
+.ul3 {
+    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
+}
+
+.ul4 {
+    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
+}
 .container3 .lis {
     display: inline-flex;
     text-decoration: none;
