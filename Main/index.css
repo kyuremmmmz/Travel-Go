@@ -751,6 +751,17 @@ body{
 
 }
 
+.splide__track{
+    height: 500px;
+}
+
+.splide2{
+    transform: translateY(10%);
+
+}
+.splide__track2{
+    height: 500px;
+}
 .sec3{
     height: 100vh;
     width: 100%;
@@ -770,7 +781,7 @@ body{
     background-size: cover;
     justify-content: center;
     align-self: center;
-    overflow: hidden;
+    overflow: auto;
     background-color: rgb(35, 71, 122);
 }
 .map-container {
@@ -784,7 +795,9 @@ body{
 
 }
 
-
+.splide__slide2{
+    display: inline-block;
+}
 
 
 
@@ -798,7 +811,12 @@ body{
 }
 
 
-
+.flightsearch{
+    max-height: 100px;
+    max-width: 100px;
+    background-color: rgba(47, 134, 214, 1);
+    color: black;
+}
 
 
 .container3 .lis {

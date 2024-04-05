@@ -313,9 +313,9 @@
             <li class="lis"onclick=""><a href="">Albay</a></li>
         </ul>
 
-        <div class="splide">
-            <div class="splide__track">
-                <ul class="splide__list">
+        <div class="splide2">
+            <div class="splide__track2">
+                <ul class="splide__list2">
                     <?php 
                     $conn = new mysqli("localhost:3307", "root", "admin", "sample");
                     if ($conn->connect_error) {
@@ -328,7 +328,7 @@
                             $imagedata = base64_encode($row['image']);
                             $prices = number_format($row['price']);
                             $textdata = $row['hotel'];
-                            echo '<li class="splide__slide">';
+                            echo '<li class="splide__slide2">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
                             echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
@@ -359,13 +359,19 @@
         
 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
     new Splide('.splide', {
+    type:Infinity,
     perPage: 4,
     perMove: '1',
     nextPage: true,
     pagination: true,
+    autoplay: true,
+    start: 4,
+    wheel: true,
+
 
     breakpoints: {
         640: {
@@ -377,6 +383,29 @@
         },
     },
     }).mount();
+
+    new Splide('.splide2', {
+    type:Infinity,
+    perPage: 4,
+    perMove: '1',
+    nextPage: true,
+    pagination: true,
+    autoplay: true,
+    start: 4,
+    wheel: true,
+
+
+    breakpoints: {
+        640: {
+            perPage: 5,
+        },
+        480: {
+            perPage: 1,
+            height: '5rem',
+        },
+    },
+    }).mount();
+
 
     function handleCityClick(city) {
         // Implement your logic here for handling the click event

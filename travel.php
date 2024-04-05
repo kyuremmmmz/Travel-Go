@@ -19,34 +19,69 @@
 </head>
 <body>
   <h1>Fetch API Data</h1>
+  <input type="text" id="fetch-text">
   <button id="fetchButton">Fetch Data</button>
-  <div id="output">
-    <pre></pre>
+  <div id="text">
+    
   </div>
 
-  <script>
-  async function fetchData() {
-  const url = 'https://local-business-data.p.rapidapi.com/search-in-area?query=Airport&lat=37.359428&lng=-121.925337&zoom=13&limit=20&language=en&region=ph';
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '0619543772msh81be927ff53aafcp142370jsne69313bfd2c6',
-      'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
-    }
-  };
 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-  }
+  <script type="text/javascript">
+ // Define the fetchData function
+// Define the fetchData function
+async function fetchData() {
+    var searchQuery = document.getElementById("fetch-text").value;
+
+    const url = 'https://local-business-data.p.rapidapi.com/search';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': 'fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d',
+            'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
+        },
+        body: JSON.stringify({
+            queries: [
+                `${searchQuery}`,
+                `${searchQuery}`,
+                `${searchQuery}`
+            ],
+            limit: 2,
+            region: 'ph',
+            language: 'en',
+            coordinates: '38.447030, -101.547385',
+            zoom: 13,
+            dedup: true
+        })
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+
+        // Access photo URLs
+        const data = result.data;
+        data.forEach(item => {
+            if (item.photos_sample && item.photos_sample.length > 0) {
+                const photoUrl = item.photos_sample[0].photo_url;
+                console.log(photoUrl);
+            } else {
+                console.log("No photos available for this item.");
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-fetchData(); // Call the function to initiate fetching
+// Attach event listener to the fetch button
+document.getElementById("fetchButton").addEventListener("click", fetchData);
 
+   
+</script>
 
-  </script>
+   
+
 </body>
 </html>
