@@ -44,11 +44,9 @@
             
                 <li class="lis"><a href="#container"class="" id="a">Attractions</a></li>
 
-                <li class="lis"><a href="#container2"class="" id="a">Promo</a></li>
-
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
-                <li class="lis"><a href="travel.php" class="" id="" title="See my bookings">My Bookings</a></li>
+                <li class="lis"><a href="travel.php" class="a" id="" title="See my bookings">My Bookings</a></li>
 
                
 
@@ -77,8 +75,8 @@
      data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
         <form action="" class="flightsearch">
     <div class="flightsearch">
-        <h1>Book your flight now</h1>
-        <ul class="ul3">
+        <h1 class="book_your_flight_now">Book your flight now</h1>
+        <ul class="ul4">
             <li class="inline">
                 <input type="radio" name="trip_type" id="round_trip" class="rad" value="Round Trip">
                 <label for="round_trip">Round Trip</label>
@@ -159,20 +157,7 @@
 
 
 
-  <!--====================================================================================== NUMBER 2 CONTAINER================================================================================ -->
-  <div class="container2" id="container2">
-    <h1 class="promos">Promos</h1>
-
-    <div class="box3" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom">
-        <img src="/Book your Hotels Stay now with a Discount of up to 30% with Savings24x7.jpg">
-    </div>
-    
-    <div class="box3" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom">
-        <img src="/AirAsia B1G Sale drums up 2023 travel with Php 1 fare Promo.jpg">
-    </div>
-</div>
+ 
 
     
    

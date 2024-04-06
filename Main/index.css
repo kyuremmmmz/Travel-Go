@@ -316,7 +316,7 @@ body{
     font-weight: 500;
     font-style: normal;
     text-align: center;
-    margin-top: 350px;
+    margin-top: 200px;
    
     
 }
@@ -793,15 +793,33 @@ body{
 
 .flightsearch {
     max-width: fit-content;
-    background-color: rgba(201, 201, 201, 1);
-    color: black;
+    background: url(/cool-background.svg);
+    background-color: #4eafd6;
+    color: rgb(0, 0, 0);
     display: block;
-    transform: translate(35%, 10%);
-    
+    transform: translate(50%, 10%);
+    border-radius: 50px;
     padding: 20px;
     box-sizing: border-box;
-    overflow: auto;
+    overflow: hidden;
+    
+    
 }
+
+.a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+.book_your_flight_now{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    padding-bottom: 25px;
+    
+} 
 
 .button1{
     border: none;
@@ -814,6 +832,14 @@ body{
     font-weight: 400;
     height: 50px;
     cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 20px;
+}
+
+.button1:hover{
+    background-color: greenyellow;
+    color: #000;
+
 }
 
 .ul3 {
@@ -844,16 +870,17 @@ body{
 
 .textt{
     outline: none;
-    
     border: none;
     height: 20px;
 }
 .ul3 {
-    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
+    margin-left: 50px; /* Adjust this value to position the radio buttons horizontally */
 }
 
 .ul4 {
-    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
+    margin-left: 200px; /* Adjust this value to position the radio buttons horizontally */
+    display: flex; /* Use flexbox to align the elements horizontally */
+    justify-content: space-between; /* Distribute the items evenly along the main axis */
 }
 .container3 .lis {
     display: inline-flex;
