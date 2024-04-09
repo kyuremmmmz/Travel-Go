@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: travel.php");
+                    header("Location: Main/travel.php");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";

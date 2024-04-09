@@ -2,19 +2,25 @@
     margin: 0;
     padding: 0;
     font-family: "Nunito Sans", sans-serif;
+   
 }
 
+body{
+    scroll-behavior: smooth;
+}
 .banner {
     position: relative;
-    background: url(/pic.jpg);
+    background: url(https://nicosbound.weebly.com/uploads/8/1/3/8/8138094/w_orig.jpg);
     background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
-        url(/pic.jpg);
+        url(https://nicosbound.weebly.com/uploads/8/1/3/8/8138094/w_orig.jpg);
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh;
     overflow: hidden;
 
 }
+
 
 
 
@@ -41,15 +47,17 @@
    
 }
 
-.nav2 .travel{
-    transform: translate(490%, -250%);
-    font-size: 150%;
-    text-align: center;
-    color: #ecebeb;
-    
+
+
+.nav2 .fas.fa-calendar{
+    color: #ffffff;
+    transform: translateX(-70%);
 }
 
-.nav2 .bookings_ko{
+.nav2 .liko {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     color: white;
     text-decoration: none;
     height: 15%;
@@ -57,14 +65,10 @@
     background-color: rgba(0, 0, 0, 0.5);
     background: transparent;
     border: 2px solid #efefef;
-
-    border-radius: 30px;
-    text-align: center;
     position: relative;
-    
-
-    transform: translate(1100%, 50%);
+    transform: translate(1000%);
 }
+
 
 
 
@@ -76,70 +80,69 @@
     justify-content: center;
     list-style: none;
     z-index: 999999;
-    transform: translateY(30px);
-    
+    position: fixed; /* Fixed position to stick to top */
+    width: 100%; /* Take full width */
+    transition: top 0.3s; /* Smooth transition when affixed */
+    top: 0;
+    transform: translateY(-10%);
 }
 
+.navigation .myul.sticky {
+    transform: translateY(0%);
+    top: 0; /* Stick to top when scrolled */
+}
 
-.navigation .li {
+.li, .lis {
     font-weight: 500;
     text-align: center;
     color: white;
     list-style: none;
     display: inline-block;
     transition: text-decoration-color, 0.7s;
-    margin:0 20px;
-    transform: translateX(100%);
-    
+    transform: translate(10%);
+    margin: 0 20px;
 }
 
-.navigation .lis {
-    font-weight: 500;
-    text-align: center;
-    color: white;
-    list-style: none;
-    display: inline-block;
-    transition: text-decoration-color, 0.7s;
-    margin:0 30px;
-    transform: translateX(40%);
-    
+.lis {
+    margin: 0 20px;
+    transform: translateX(  0%);
 }
 
-.navigation .a {
+#a {
     color: azure;
     text-decoration: none;
-    margin: 50%;
-    text-align: right;
     transition: all, 0.1s;
     padding: 10px;
-   
 }
 
-.header .a:hover {
-    border-bottom:solid 1px #e20000;
-    transition: 0.4s;
+#a:hover {
+    border-bottom: solid 1px #e20000;
 }
 
-.navigation .list .button {
+
+.active{
+    border-bottom: solid 1px #e20000;
+
+}
+
+.list .button {
     background: transparent;
+    display: inline-block;
     color: #fadddd;
     width: 100px;
     font-size: 100%;
     height: 35px;
     border: none;
-    transform: translateX(370%);
+    margin-right: 50px;
     border: solid  1px #d3bdbd;
-    border-radius: 50px;
+    border-radius: 10px;
     transition: all, 0.7s;
 }
 
-
-
-nav .list .button:hover {
+.list .button:hover {
     background-color: #000000;
     cursor: pointer;
 }
-
 .input .para {
     color: #c9c4c4;
     margin-top: 8%;
@@ -202,15 +205,20 @@ nav .list .button:hover {
     
 }
 .nav2 .wrapper{
-    transform: translate(-30%, 30%);
+    transform: translate(-77%, 60%);
     max-width: 450px;
     margin: 150px auto;
     position: relative;
     background-color: white;
+    align-self: center;
     border-top: 1px solid black;
     border-radius: 5px;
-    z-index: 99;
+    z-index: 9999999;
 }
+
+
+
+
 
 .nav2 .wrapper .searchbar{
     position: relative;
@@ -218,6 +226,7 @@ nav .list .button:hover {
     align-items: center;
     width: 450px;
     outline: none;
+    overflow: hidden;
     border: none;
     height: 40px;
     border-radius: 5px;
@@ -225,6 +234,30 @@ nav .list .button:hover {
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12);
 
     
+    
+}
+
+
+
+
+.nav2 .wrapper .searchbar + .fas.fa-search {
+    position: absolute; 
+    transform: translateX(500%);
+    top: 0%;
+    left: 350px; /* Adjust as needed */
+    cursor: pointer;
+    transform: translateY(0%);
+    color: #000000;
+}
+
+.my-ul + .nav-divider{
+    position: absolute; 
+    transform: translateX(500%);
+    top: 70%;
+    left: 350px; /* Adjust as needed */
+    cursor: pointer;
+    transform: translateY(-50%);
+    color: #000000;
     
 }
 
@@ -247,8 +280,9 @@ nav .list .button:hover {
   
    
 
-
 }
+
+
 
 #my-box li{
     list-style: none;
@@ -277,21 +311,68 @@ nav .list .button:hover {
     color: white;
 }
 .banner .travel-2{
-   
-    transform: translate(39%, 650%);
-    font-size: 200%;
+    font-size: 400%;
     color: #ffffff;
     font-family: "Nanum Gothic", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
+    text-align: center;
+    margin-top: 200px;
    
     
 }
+
+/*====================================================================================================user information================================================================*/
+
+.nav2 .box_container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    height: 15%;
+    width:300px;
+    background-color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+    border: 2px solid #efefef;
+    position: relative;
+    transform: translate(450%, -150%);
+}
+e
+.nav2 .box_container .myh3 {
+    color: rgb(252, 233, 233);
+    text-align: center;
+    transform: translateX(-4%);
+    
+  
+}
+
+.nav2 .box_container .fas.fa-user {
+    color: white;
+    transform: translate(5%);
+}
+
 
 .banner .con{
     background-color: rgba(209, 185, 185);
     height: 50%;
 }
+
+/*========================================================================================================BOOKING BUTTONS=============================================================*/
+ 
+
+.details{
+    color: #000000;
+    background-color: white;
+    border: none;
+    margin: 20px;
+    }
+
+    
+
+
+/* END*/
 
 .input .x{
     position: absolute;
@@ -389,30 +470,19 @@ nav .list .button:hover {
 
  
 
-.for{
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 550;
+
+
+hr{
+    width: 1000px;
+    margin-top:20px;
+    transform: translate(-15%, -100%);
 }
 
-.sec2 {
-    background-color: rgba(208, 225, 241, 1);
-    position: absolute;
-    height: 200vh;
-    background-size: cover;
-    transform: translateY(-10%);
-    left: 0%;
-    padding: 16px;
-    align-self: center;
-    width: 99%;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-}
 
 .box2 {
     display: inline-block;
     background-color: rgb(199, 73, 73);
-    height: 400px;
+    height: auto;
     border-radius: 30px;
     text-align: center;
     margin-top: 50px;
@@ -425,40 +495,111 @@ nav .list .button:hover {
     cursor: pointer;
 }
 
-.container .box {
-    display: block;
-    background-color: rgb(255, 255, 255);
-    height: 250px;
+
+
+
+.for{
+    padding: 20px;
     text-align: center;
-    overflow: hidden;
-    position: relative;
-    transition: 1s;
-    cursor: pointer;
-    z-index: 999999999999999999999999999;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 35px;
+    transform: translateX(-39%);
+    color: rgb(12, 12, 12);
+}
+.textdata, .outer{
+    text-align: left;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    transform: translate(36%, -500%);
+    color: #030303;
+    font-weight: 500;
+
+ 
 }
 
-.container .inner-box {
+
+
+
+.outer{
+    width: 20%;
+    transform: translate(400%, -100%);
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.outer .price{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    color: rgb(22, 22, 22);
+    font-weight: 500;
+   
+}
+
+.book, .see_details{
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border: none;
+    margin: 10px;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
-    height: 350px; 
-    border-radius: 30px; 
+    transform: translate(450%, -900%);
+    transition: all 0.4s;
+    text-decoration: none;
+    
+}
+hr {
+    height: 1px; /* Adjust the height of the horizontal rule */
+    margin: 5px 0; /* Adjust the top and bottom margin of the horizontal rule */
+}
+
+
+.amenties{
+    transform: translate(5%, -800%);
+    color: #4b4b4b;
+}
+
+
+.container .inner-box {
+    display: block;
+    width: 1000px;
+    height: 250px; /* Adjust the height as needed */
     margin-right: 40px;
     text-align: center;
-    overflow: hidden;
     position: relative;
     transition: all 0.7s ease;
     cursor: pointer;
-    transform: translate(20%, 5%);
-    margin-top: 40px;
+    color: #020202;
+    transform: translate(-15%, -10%);
+    margin-top: 10px;
     grid-template-columns: repeat(auto-fill);
-}
+    }
 
+    .btn.btn-primary.dropdown-toggle {
+        transform: translate(70%);
+        background-color: transparent;
+        border: none;
+    }
 
+    .btn.btn-primary.dropdown-toggle:hover{
+        background-color: blue;
+        
+    }
+
+    
 .container ul{
     
     transform: translate(1%);
     
 }
+
+.btn.btn-primary{
+    z-index: 11111111;
+    transform: translateX(50%);
+}
+
+
+
 
 .inner-box:hover{
     box-shadow:solid #111111;
@@ -466,12 +607,29 @@ nav .list .button:hover {
 
 .container .inner-box .box img {
     display: block;
-    height: 250px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
     right: 50%;
     bottom: 50%;
     transform: translate(0%, 0%);
     transition: all 0.7s;
+}
+
+
+
+.container .box {
+    display: block;
+    background-color: rgb(255, 255, 255);
+    height: 220px;
+    width: 350px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    transform: translateY(15%);
+    transition: 1s;
+    cursor: pointer;
+    z-index: 999999999999999999999999999;
 }
 
 .container .inner-box .box:hover img {
@@ -530,125 +688,359 @@ nav .list .button:hover {
     border-bottom: 1px solid #000000;
 }
 
-.container{
-
-    height: 29%;
-    width: 77%;
-    max-height: 29%;
-    max-width: 77%;
-    margin-top: 60px;
-    transform: translate(16%, 90%);
-    align-self: center;
-    background-color: rgba(158, 189, 199, 0.47);
-    border-radius: 60px;
-    overflow-x: auto;
-    
-}
 
 .container2 .promos {
+    position: absolute;
     text-align: center;
-    background-color: rgba(217, 217, 217, 1);
-    border-radius: 60px;
-    display: block;
-    height: 30%;
-    transform: translate(15%, -130%);
-    grid-template-columns: repeat(auto-fill);
-    overflow: hidden;
-    
-}
-
- .container2 {
-    display: block;
-    width: 77%;
-    height: 70%;
-    align-self: center;
-    
-    
-   
-    
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
 }
 
 
-.container2 .box3{
+.container2 {
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    background-color: rgb(14, 37, 70);
+    background-position: center;
+    overflow: auto;
+    justify-content: center;
+    align-content: center;
+}
+
+.box3{
     display: inline-block;
     background-color: #000000;
-    height: 15%; 
-    width: 40%;
+    height: 200px;
+    max-height: fit-content; 
+    max-width: fit-content;
+    transform: translate(0%, 150%);
     cursor: pointer;
-    transform: translate(53%, -430%);
     overflow: hidden;
     margin: 30px;
     transition: all 0.4s ease-in-out;
 }
 
-.box3 img{
+  .box3 img{
     height: 200px;
     width: 580px;
     transition: all 0.3s ease-in-out;
 }
 
 
-.box3 img:hover{
+ .box3 img:hover{
     transform: scale(1.1);
     
 }
 
 
-.container3{
+
+.splide__track{
+    height: 500px;
+}
+
+.splide{
+    transform: translateY(10%);
+
+}
+
+.splide__track{
+    height: 500px;
+}
+
+.splide2{
+    transform: translateY(10%);
+
+}
+.splide__track2{
+    height: 500px;
+}
+.sec3{
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+ .container3{
     position: relative;
     padding: 20px;
-    max-height: 590px;
-    height: 570px;
-    max-width: 75%;
+    max-height: 100vh;
+    height:100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
     justify-content: center;
     align-self: center;
-    overflow: hidden;
-    border-radius: 50px;
-    transform: translate(16%, -130%);
-    background-color: rgb(233, 211, 211);
+    overflow: auto;
+    background-color: rgb(35, 71, 122);
 }
+.map-container {
+    width: fit-content;
+    display: inline-block;
+    transform: translate(520%, -150%);
+    text-align: justify;
+    overflow-x: auto;
+    color: white;
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+
+}
+
+.splide__slide2{
+    display: inline-block;
+}
+
+
 
 
  .featured_properties{
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 550;
+    font-weight: 700;
+    font-size: 65px;
+    color: #fff;
 }
 
 
-.container3 span {
-    list-style: none;
+.flightsearch {
+    max-width: fit-content;
+    background: url(/cool-background.svg);
+    background-color: #4eafd6;
+    color: rgb(0, 0, 0);
+    display: block;
+    margin: 0 auto; /* Horizontal centering */
+    margin-top: 10vh; /* Adjust the top margin as needed */
+    border-radius: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .flightsearch {
+        width: 90%; /* Adjust width for smaller screens */
+        margin-top: 5vh; /* Adjust the top margin for smaller screens */
+    }
+}
+
+#ewan{
+    color: white;
     text-decoration: none;
-    z-index: 9999999;
-    cursor: pointer;
-   
+}
+
+.containerflights{
+    max-height: 500px;
+    background-color: #4eafd6;
+    color: rgb(0, 0, 0);
+    display: block;
+    margin: 0 auto; /* Horizontal centering */
+    margin-top: 10vh; /* Adjust the top margin as needed */
+    border-radius: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
     
 }
 
+.book_your_flight_now{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    padding-bottom: 25px;
+    
+} 
+
+.button1{
+    border: none;
+    color: white;
+    background-color: rgba(70, 126, 178, 1);
+    transform: translate(0%,-30%);
+    width: 850px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 20px;
+}
+
+.button1:hover{
+    background-color: greenyellow;
+    color: #000;
+
+}
+
+.ul3 {
+    display: flex; /* Use flexbox to align the elements horizontally */
+    justify-content: space-between; /* Distribute the items evenly along the main axis */
+}
+
+.inline, .inlinee, .inlineee, .inlineeee {
+    flex-basis: calc(33.33% - 40px); /* Adjust the width of each element to fit 3 items per row */
+    margin: 0 20px;
+    font-size: 16px;
+    list-style: none;
+}
+
+.inlinee {
+    margin-top: 30px; /* Add margin-top to separate the groups */
+}
+
+
+.text{
+    outline: none;
+    width: 360px;
+    font-size: 16px;
+    border: none;
+    height: 25px;
+}
+
+
+.textt{
+    outline: none;
+    border: none;
+    height: 20px;
+}
+.ul3 {
+    margin-left: 50px; /* Adjust this value to position the radio buttons horizontally */
+}
+
+.ul4 {
+    margin-left: 200px; /* Adjust this value to position the radio buttons horizontally */
+    display: flex; /* Use flexbox to align the elements horizontally */
+    justify-content: space-between; /* Distribute the items evenly along the main axis */
+}
 .container3 .lis {
     display: inline-flex;
-    margin: 0px 20px;
-    vertical-align: top; /* Align items to the top to ensure consistent spacing */
-    transform: translate(50%,250%);
+    text-decoration: none;
+    color: #fff;
+    margin: 0px 10px;
+    justify-content: left;
+    align-content: flex-start;
     
     
+}
+
+.container3 .ul2{
+    transform: translate(-34%, 200%);
 }
 
 .container3 .listt {
-    display: inline-flex;
-    margin: 0px 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    margin: 0px 10px;
     vertical-align: top; /* Align items to the top to ensure consistent spacing */
-    transform: translate(115%,250%);
+    transform: translate(150%,250%);
 
     
     
 }
-.container3 span:hover{
-    color: blue;
+
+
+
+
+.container3 .liss{
+    display: inline-block;
+    text-decoration: none;
+    color: #3af30b;
+    margin: 0px 20px;
+    vertical-align: top; /* Align items to the top to ensure consistent spacing */
+    transform: translate(110%,250%);
+
+    
+    
+}
+
+
+.container3 a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.container3 a:hover{
+    color: #3af30b;
 }
 
 .container3 .hotels{
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 10px;
+    border-radius: 10px;
+    position: relative;
+    transform: translate(-1%, 20%);
+    overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
+}
+
+
+.container3 .hotels .in{
+    background-color: #8adeec;
+    height: 70%;
+    overflow: hidden;
+
+
+}
+
+
+
+/*--------------===========================================================================================HOTEL BOOKING DESIGN=====================================================================================================================================================================================================================================*/
+.hotels .book_hotel{
+    color: #000;
+    display: block;
+    position: absolute;
+    transform: translate(20%, 129%);
+    background: none;
+    transition: all 0.3s ease-in-out;
+ 
+ }
+ 
+ .hotels .book_hotel:hover{
+     color: #3af30b;
+ 
+ }
+
+
+.container3 .hotels .in img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
+
+.flights{
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    overflow: auto;
+    background-color: rgb(14, 37, 70);
+}
+
+
+ .outer-flights{
     background-color: #ffffff;
     display: inline-block;
     width: 270px;
@@ -663,15 +1055,48 @@ nav .list .button:hover {
 }
 
 
-.container3 .hotels .in{
-    background-color: #8adeec;
-    height: 190px;
+.inner-flight{
+    display: inline-block;
+    background-color: #000000;
+    height: 200px;
+    max-height: fit-content; 
+    max-width: fit-content;
+    transform: translate(-12%,-18%);
+    cursor: pointer;
     overflow: hidden;
+    margin: 30px;
+    transition: all 0.4s ease-in-out;
+}
 
+.flights a{
+    text-decoration: none;
+    color: white;
+    
+}
 
+.inner-flight img{
+    height: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
 
+ .inner-flight img:hover{
+    transform: scale(1.1);
+    
+}
+.flights h1{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
 .container3 .hotels .in img{
     height: 100%;
@@ -694,7 +1119,7 @@ nav .list .button:hover {
 
 i{
     color: #FFB402;
-    transform: translate(780%, -105%);
+    transform: translate(780%, -155%);
 }
 
 #icon{
@@ -736,37 +1161,118 @@ i{
   }
 
   .hotels .h2{
-    transform: translate(40%, 350%);
+    transform: translate(20%, 200%);
   }
 
   .hotels .h3{
     transform: translate(40%, 345%);
   }
   .reviews{
-    background-color: #213869;
-    color: #f7f4f4;
-    width: 55px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    border-top-left-radius: 30px;
-    font-size: 100%;
-    overflow: hidden;
+    background-color:#213869 ;
+    width: 50%;
+    color: #fff;
+    transform: translateY(-150%);
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 
   }
 
   .reviews p{
     font-size: 15px;
+    margin-top: 10px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     
   }
 
 
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
+
+.flights{
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    overflow: auto;
+    background-color: rgb(14, 37, 70);
+}
+
+
+ .outer-flights{
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 30px;
+    border-radius: 30px;
+    position: relative;
+    transform: translate(15%, 20%);
+    overflow: hidden;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
+}
+
+
+.inner-flight{
+    display: inline-block;
+    background-color: #000000;
+    height: 200px;
+    max-height: fit-content; 
+    max-width: fit-content;
+    transform: translate(-12%,-18%);
+    cursor: pointer;
+    overflow: hidden;
+    margin: 30px;
+    transition: all 0.4s ease-in-out;
+}
+
+.flights a{
+    text-decoration: none;
+    color: white;
+    
+}
+
+.inner-flight img{
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+
+ .inner-flight img:hover{
+    transform: scale(1.1);
+    
+}
+.flights h1{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
+
+
   .contacts{
     border-top:1px solid #504c4c;
     border-bottom: 1px solid #4d4a4a;
     text-align: left;
-    transform: translate(50%, -130%);
+    transform: translate(50%, -100%);
+    margin-top: 500px;
     width: 50%;
     height: 400px;
     overflow: hidden;
@@ -803,7 +1309,8 @@ i{
 
   footer{
     text-align: center;
-    transform: translateY(-2000%);
+    transform: translateY(1%);
+   
   }
 
 
@@ -848,91 +1355,6 @@ i{
     
 }
 
- 
-/*==================================================================================================DESTINATION PAGE================================================================================*/
-
-
-
-
-
-
-/*=================================================================================================END===============================================================================================*/
-
-.body{
-    background: linear-gradient(rgba(12, 7, 7, 0.5), rgba(0, 0, 0, 0.5)),
-    url(pic.jpg);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    overflow: hidden;
-    
-}
-
-
-
-.container1{
-    background-color: rgba(0, 0, 0, 0.12);
-    height: 500px;
-    width: 400px;
-    transform: translate(190%, 50%);
-    align-self: center;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-}
-
-.container1 input{
-    outline: none;
-    border: none;
-    font-size: 18px;
-    height: 7%;
-    width: 350px;
-    transform: translate(-7%, 10%);
-    color: #000000;
-    transition: 0.5s;
-    display: block;
-    margin: 50px;
-    border-radius: 20px;
-
-    
-}
-
-
-.container1 #file{
-    background-color: none;
-}
-.container1 #submit{
-    width: 350px;
-    border: none;
-    height: 7%;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    
-}
-
-.container1 #submit:hover{
-    background-color: #000000;
-    color: #fdfdfd;
-}
-
-
-
-
-.container1 h1{
-    text-align: center;
-    font-size: 25px;
-    color: white;
-    margin-top: 50px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-}
-
-
-.container1 a{
-    color: white;
-    text-decoration: none;
-}
 
 
 
