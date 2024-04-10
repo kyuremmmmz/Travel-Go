@@ -310,7 +310,7 @@ body{
     text-decoration: none;
     color: white;
 }
-.banner .travel-2{
+.banner .travel-2 {
     font-size: 400%;
     color: #ffffff;
     font-family: "Nanum Gothic", sans-serif;
@@ -318,9 +318,8 @@ body{
     font-style: normal;
     text-align: center;
     margin-top: 200px;
-   
-    
 }
+
 
 /*====================================================================================================user information================================================================*/
 

@@ -20,127 +20,119 @@ $result = $stmt->get_result();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Bookings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-        /* CSS for the progress bar container */
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .booking {
+            margin-bottom: 40px;
+        }
+        .booking-info {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .booking-info h2 {
+            margin-top: 0;
+        }
         .progress-container {
             position: relative;
-            width: 80%; /* Width of the progress bar container */
+            width: 100%; /* Width of the progress bar container */
             background-color: #f3f3f3;
-            border-radius: 20px;
-            margin-top: 20px;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
         }
-
-        /* CSS for the progress bar */
         .progress-bar {
-            height: 20px;
+            height: 100%;
             background-color: #4caf50; /* Green color for completed progress */
-            border-radius: 20px;
             transition: width 0.5s ease; /* Transition effect for smooth width change */
         }
-
-        /* CSS for the progress percentage text */
-        .progress-text {
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        /* CSS for the plane icon */
-        .fas.travel-2 {
+        .progress-start {
             position: absolute;
-            transform: translateY(-60%); /* Adjust vertically to center the icon */
-            font-size: 30px; /* Adjust the font size of the icon */
-    }
-  </style>
+            width: 10px;
+            height: 10px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+        .plane-icon {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            color: #4caf50;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Bookings</h1>
-    <?php
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $place = $row['hotel'];
-            $price = $row['full_name'];
-            $startDate = $row['arrival'];
-            $endDate = $row['departure'];
+    <div class="container">
+        <h1>Travel Status</h1>
+        <?php
+        
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $place = $row['hotel'];
+                    $price = $row['full_name'];
+                    $startDate = $row['arrival'];
+                    $endDate = $row['departure'];
 
-            // Calculate progress bar
-            $currentDate = strtotime('now');
-            $startDateTimestamp = strtotime($startDate);
-            $endDateTimestamp = strtotime($endDate);
+                    // Calculate progress bar
+                    $currentDate = strtotime('now');
+                    $startDateTimestamp = strtotime($startDate);
+                    $endDateTimestamp = strtotime($endDate);
 
-            if ($currentDate < $startDateTimestamp) {
-                $progress = 0; // If current date is before the start date, progress is 0%
-            } elseif ($currentDate > $endDateTimestamp) {
-                $progress = 100; // If current date is after the end date, progress is 100%
-            } else {
-                $totalDuration = $endDateTimestamp - $startDateTimestamp;
-                $currentDuration = $currentDate - $startDateTimestamp;
-                $progress = ($currentDuration / $totalDuration) * 100;
-            }
-
-          
-
-
-
-            if ($progress>=30) {
-                echo '<div>';
-            echo '<h2>' . $place . '</h2>';
-            echo '<p>Name: ' . $price . '</p>';
-            echo '<p>Travel period: ' . date('F jS', strtotime($startDate)) . ' to ' . date('F jS', strtotime($endDate)) . '</p>';
-
-            // Progress bar
-            echo '<div class="progress-container">
-                <i class="fas fa-calendar" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
-                <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
-            </div>
-           <h1>Already travelling</h1>';
-
-            echo '</div>';
-                
-            }
-
-            else if ($progress<=0) {
-                echo '<div>';
-                echo '<h2>' . $place . '</h2>';
-                echo '<p>Name: ' . $price . '</p>';
-                echo '<p>Travel period: ' . date('F jS', strtotime($startDate)) . ' to ' . date('F jS', strtotime($endDate)) . '</p>';
-    
-                // Progress bar
-                echo '<div class="progress-container">
-                    <i class="fas travel-2" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
-                    <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
+                    if ($currentDate < $startDateTimestamp) {
+                        $progress = 0; // If current date is before the start date, progress is 0%
+                    } elseif ($currentDate > $endDateTimestamp) {
+                        $progress = 100; // If current date is after the end date, progress is 100%
+                    } else {
+                        $totalDuration = $endDateTimestamp - $startDateTimestamp;
+                        $currentDuration = $currentDate - $startDateTimestamp;
+                        $progress = ($currentDuration / $totalDuration) * 100;
+                    }
+        ?>
+                <div class="booking">
+                    <div class="booking-info">
+                        <h2><?php echo $place; ?></h2>
+                        <p>Name: <?php echo $price; ?></p>
+                        <p>Travel period: <?php echo date('F jS', strtotime($startDate)) . ' to ' . date('F jS', strtotime($endDate)); ?></p>
+                        <div class="progress-container">
+                            <div class="progress-start"></div>
+                            <div class="progress-bar" style="width: <?php echo $progress; ?>%;"></div>
+                            <i class="fas fa-plane plane-icon" style="left: <?php echo $progress; ?>%;"></i>
+                        </div>
+                    </div>
                 </div>
-               <h1>Get READY</h1>';
-    
-                echo '</div>';
-
-                
+        <?php
             }
-
-            else if ($progress==100) {
-                echo '<div>';
-                echo '<h2>' . $place . '</h2>';
-                echo '<p>Name: ' . $price . '</p>';
-                echo '<p>Travel period: ' . date('F jS', strtotime($startDate)) . ' to ' . date('F jS', strtotime($endDate)) . '</p>';
-    
-                // Progress bar
-                echo '<div class="progress-container">
-                    <i class="material-icons plane-icon" id="icon" style="left: '.$progress.'%; transform: translateX(-60%);"></i>
-                    <div class="progress-bar" id="progressBar" style="width: '.$progress.'%;"></div>
-                </div>
-               <h1>Arrived</h1>';
-    
-                echo '</div>';
-
-                # code...
-            }
+        } else {
+            echo '<p>No bookings found.</p>';
         }
-    } else {
-        echo '<p>No bookings found.</p>';
-    }
-    ?>
+        ?>
+    </div>
 </body>
 </html>

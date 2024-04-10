@@ -77,9 +77,7 @@
 
 
         
-        <p class="travel-2" data-aos="fade-up"
-     data-aos-anchor-placement="bottom-bottom">WELCOME TO <?php  $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected'; echo strtoupper($img); ?>!</p>
-     
+            <p class="travel-2" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">WELCOME TO <?php $img2 = isset($_GET["choice"]) ? $_GET["choice"] : 'No choice selected'; echo strtoupper($img2);?>!</p>
 
         
         
@@ -116,7 +114,7 @@
     
     <div class="container" id="container">
         
-        <h1 class="for">Recommended Places in Pangasinan</h1>
+        <h1 class="for">Recommended Places in  <?php  $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected'; echo $img; ?></h1>
         <hr>
         
         <?php
@@ -125,9 +123,9 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
     // SQL query to retrieve image data
-    $sql = "SELECT place, price,description, image, amenities FROM for_creating_a_place"; // Adjust the query according to your database schema
+    $sql = "SELECT specific_place, price,description, image, amenities FROM `create_see_details.php`  WHERE place = '$img'"; // Adjust the query according to your database schema
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -136,11 +134,11 @@
          // Display the image
             $imageData = base64_encode($row['image']);
             $price =number_format($row['price']);
-            $textData = $row['place'];
+            $textData = $row['specific_place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
 
             echo '<div class="inner-box">';
-            echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
+            echo '<div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>';
             echo '<h2 class="textdata">'.$textData.'</h2>';
             echo '<div class="outer"><p class="price"> Price: PHP '.$price.'/day</p></div>';
             echo '<p class="amenties">'.$amenities.'</p>'; 
@@ -187,14 +185,6 @@
         <h1 class="featured_properties">
             Hotel Recommendations in Pangasinan
         </h1>
-        <ul class="ul2">
-            <li class="lis" onclick=""><a href="#sec3" >Bolinao</a></li>
-            <li class="lis" onclick=""><a href="#container5">San Fabian</a></li>
-            <li class="lis" onclick=""><a href="">Lingayen</a></li>
-            <li class="lis" onclick=""><a href="">Dagupan City</a></li>
-            <li class="lis"onclick=""><a href="">San Jacinto</a></li>
-            <li class="lis"onclick=""><a href="">Manaoag</a></li>
-        </ul>
 
         <div class="splide">
             <div class="splide__track">
@@ -204,17 +194,18 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'";
+                    $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
+                    $sql = "SELECT hotels, price_for_hotel, image3 FROM `create_see_details.php` WHERE place ='$img'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            $imagedata = base64_encode($row['image']);
-                            $prices = number_format($row['price']);
-                            $textdata = $row['hotel'];
+                            $imagedata = base64_encode($row['image3']);
+                            $prices = number_format($row['price_for_hotel']);
+                            $textdata = $row['hotels'];
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
-                            echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
+                            echo '<img src="/details/'.$row["image3"].'" alt="" srcset="">';
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
@@ -231,63 +222,8 @@
             </div>
         </div>
     </div>
-
-    <div class="container3" id="container5">
-        <h1 class="featured_properties">
-            Hotel Recommendations in Pangasinan
-        </h1>
-
-        
-        <ul class="ul2">
-            <?php 
-            ?>
-       
-            <li class="lis" onclick=""><a href="#container3" >Bolinao</a></li>
-            <li class="lis" onclick=""><a href="#container5">San Fabian</a></li>
-            <li class="lis" onclick=""><a href="">Lingayen</a></li>
-            <li class="lis" onclick=""><a href="">Dagupan City</a></li>
-            <li class="lis"onclick=""><a href="">San Jacinto</a></li>
-            <li class="lis"onclick=""><a href="">Manaoag</a></li>
-        </ul>
-
-        <div class="splide2">
-            <div class="splide__track2">
-                <ul class="splide__list2">
-                    <?php 
-                    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='San Fabian'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $imagedata = base64_encode($row['image']);
-                            $prices = number_format($row['price']);
-                            $textdata = $row['hotel'];
-                            echo '<li class="splide__slide2">';
-                            echo '<div class="hotels" id="hotels">';
-                            echo '<div class="in">';
-                            echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
-                            echo '</div>';
-                            echo '<h1>'.$textdata.'</h1>';
-                            echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="/placesbooking.php?choice= '.urlencode($textdata).'" class="book_hotel">Book now</a>';
-                            echo '</div>';
-                            echo '</li>';
-                        }
-                    } else {
-                        echo "0 results";
-                    }
-                    $conn->close();
-                    ?>
-                   
-                   
-                </ul>
-            </div>
-        </div>
-    </div>
 </div>
+        
 
 
 

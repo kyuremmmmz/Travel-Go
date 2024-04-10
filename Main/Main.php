@@ -248,7 +248,8 @@
             $imageData = base64_encode($row['image']);
             $price = $row['price'];
             $textData = $row['place'];
-
+            
+            
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
             echo '<h2 class="textdata">'.$textData.'</h2>';
