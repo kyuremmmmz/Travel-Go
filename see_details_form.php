@@ -284,17 +284,17 @@ if (isset($_POST["submit"])) {
 
                 <div class="form-group">
                     <label for="image">Attraction Url</label>
-                    <input type="file" class="form-control-file" name="file" accept=".jpg, .jpeg, .gif, .png, .webp">
+                    <input type="file" class="form-control-file" name="file" accept=".jpg, .jpeg, .gif, .png, .webp" required  multiple>
                 </div>
 
                 <div class="form-group">
                     <label for="image2">Flights URL</label>
-                    <input type="file" class="form-control-file" name="file2" accept=".jpg, .jpeg, .gif, .png, .webp">
+                    <input type="file" class="form-control-file" name="file2" accept=".jpg, .jpeg, .gif, .png, .webp" required multiple>
                 </div>
 
                 <div class="form-group">
                     <label for="image3">Hotels URL</label>
-                    <input type="file" class="form-control-file" name="file3" accept=".jpg, .jpeg, .gif, .png, .webp">
+                    <input type="file" class="form-control-file" name="file3" accept=".jpg, .jpeg, .gif, .png, .webp" required multiple>
                 </div>
             </div>
         </div>

@@ -112,28 +112,28 @@
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     
-    <div class="container" id="container">
-        
-        <h1 class="for">Recommended Places in  <?php  $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected'; echo $img; ?></h1>
-        <hr>
-        
-        <?php
+    <div class="container">
+    <h1 class="for">Recommended Places in <?php $img = isset($_GET["choice"]) ? $_GET["choice"] : 'No choice selected';
+        echo $img; ?></h1>
+    <hr>
+
+    <?php
     $conn = new mysqli("localhost:3307", "root", "admin", "sample");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
-    $sql = "SELECT specific_place, price, description, image, place, amenities, rating FROM `create_see_details.php` WHERE place = '$img'";
-    
+    $img = isset($_GET["choice"]) ? $_GET["choice"] : 'No choice selected';
+    $sql = "SELECT * FROM `create_see_details.php` WHERE place = '$img'";
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         // Output data of each row
-        while($row = $result->fetch_assoc()) {
-         // Display the image
+        while ($row = $result->fetch_assoc()) {
+            // Display the image
             $imageData = base64_encode($row['image']);
-            $price =number_format($row['price']);
+            $price = number_format($row['price']);
             $textData = $row['specific_place'];
             $text = $row['place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
@@ -141,11 +141,11 @@
 
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>';
-            echo '<div class="data">';  
-            echo'<p class="text2">Budget Places in '.$text.'</p>';
-            echo '<h3 class="textdata">'.$textData.'</h3>';
-            echo '<p class="amenties"> '.$amenities.'</p>';
-            echo '<p class="ratings">Ratings ('.$rating.' / 5)</p>';
+            echo '<div class="data">';
+            echo '<p class="text2">Budget Places in ' . $text . '</p>';
+            echo '<h3 class="textdata">' . $textData . '</h3>';
+            echo '<p class="amenties"> ' . $amenities . '</p>';
+            echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
             for ($i = 1; $i <= $rating; $i++) {
                 if ($i <= $rating) {
                     echo '<span class="fa fa-star checked"></span>';
@@ -153,49 +153,45 @@
                     echo '<span class="fa fa-star"></span>';
                 }
             }
-            
-            echo '</div>'; 
-            
-            echo '<div class="outer"><p class="price"> Price: PHP '.$price.' / day</p></div>';
-            echo '<a href="#" class="book" >Book now</a>';
-            echo '<a href="#" class="book" >See Details</a>';
 
-           
-            
-          
-           
-           
+            echo '</div>';
+
+            echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
+            echo '<a href="#" class="book" >Book now</a>';
+            echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
+     
+
             echo '</div>
-            
+
             <hr>';
 
-            
+
         }
-        } else {
+    } else {
         echo "0 results";
-        }
-       
+    }
+
     $conn->close();
     ?>
     <div id="map-container">
         <h1>View on Maps</h1>
-    <div id="map"></div>
+        <div id="map"></div>
+    </div>
 </div>
+
 <script>
-        var map;
+    var map;
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat:12.8819585, lng:121.76654050000002 },
-                zoom: 8
-            });
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 12.8819585, lng: 121.76654050000002},
+            zoom: 8
+        });
 
-            // Add your map-related JavaScript here, such as marker placements or other interactions
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js" async defer></script>
-
- </div>
+        // Add your map-related JavaScript here, such as marker placements or other interactions
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js" async defer></script>
 
  
 
