@@ -124,8 +124,8 @@
         die("Connection failed: " . $conn->connect_error);
     }
     $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
-    // SQL query to retrieve image data
-    $sql = "SELECT specific_place, price,description, image, amenities FROM `create_see_details.php`  WHERE place = '$img'"; // Adjust the query according to your database schema
+    $sql = "SELECT specific_place, price, description, image, place, amenities, rating FROM `create_see_details.php` WHERE place = '$img'";
+    
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -135,13 +135,35 @@
             $imageData = base64_encode($row['image']);
             $price =number_format($row['price']);
             $textData = $row['specific_place'];
+            $text = $row['place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
+            $rating = $row['rating'];
 
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>';
-            echo '<h2 class="textdata">'.$textData.'</h2>';
-            echo '<div class="outer"><p class="price"> Price: PHP '.$price.'/day</p></div>';
-            echo '<p class="amenties">'.$amenities.'</p>'; 
+            echo '<div class="data">';  
+            echo'<p class="text2">Budget Places in '.$text.'</p>';
+            echo '<h3 class="textdata">'.$textData.'</h3>';
+            echo '<p class="amenties"> '.$amenities.'</p>';
+            echo '<p class="ratings">Ratings ('.$rating.' / 5)</p>';
+            for ($i = 1; $i <= $rating; $i++) {
+                if ($i <= $rating) {
+                    echo '<span class="fa fa-star checked"></span>';
+                } else {
+                    echo '<span class="fa fa-star"></span>';
+                }
+            }
+            
+            echo '</div>'; 
+            
+            echo '<div class="outer"><p class="price"> Price: PHP '.$price.' / day</p></div>';
+            echo '<a href="#" class="book" >Book now</a>';
+            echo '<a href="#" class="book" >See Details</a>';
+
+           
+            
+          
+           
            
             echo '</div>
             
@@ -155,6 +177,23 @@
        
     $conn->close();
     ?>
+    <div id="map-container">
+        <h1>View on Maps</h1>
+    <div id="map"></div>
+</div>
+<script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat:12.8819585, lng:121.76654050000002 },
+                zoom: 8
+            });
+
+            // Add your map-related JavaScript here, such as marker placements or other interactions
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js" async defer></script>
 
  </div>
 

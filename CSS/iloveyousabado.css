@@ -473,8 +473,8 @@ e
 
 hr{
     width: 1000px;
-    margin-top:20px;
-    transform: translate(-15%, -100%);
+    margin-top:40px;
+    transform: translate(-15%, -150%);
 }
 
 
@@ -506,23 +506,30 @@ hr{
     transform: translateX(-39%);
     color: rgb(12, 12, 12);
 }
-.textdata, .outer{
-    text-align: left;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 25px;
-    transform: translate(36%, -500%);
-    color: #030303;
-    font-weight: 500;
-
- 
+.data{
+    color: #000;
+    text-align: justify;
+    margin-left: 370px;
+    margin-top: -19%;
+    top: 50%;
 }
 
 
+.textdata{
+    color: #000;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 15px;
+   
+}
+
+.amenties{
+    margin-top: 10px;
+}
 
 
 .outer{
     width: 20%;
-    transform: translate(400%, -100%);
+    transform: translate(390%, -120%);
     border-top-right-radius: 50px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -533,43 +540,71 @@ hr{
     font-size: 20px;
     color: rgb(22, 22, 22);
     font-weight: 500;
+    margin-top: 42px;
    
 }
 
-.book, .see_details{
-    color: rgb(0, 0, 0);
-    background-color: white;
-    border: none;
-    margin: 10px;
-    display: inline-block;
-    transform: translate(450%, -900%);
-    transition: all 0.4s;
-    text-decoration: none;
+.book{
+    background-color: greenyellow;
+    color: #000;
+    display: inline-block; /* Ensure the button takes only the necessary width */
+    padding: 10px 20px; /* Add padding to the button */
+    text-decoration: none; /* Remove default underline */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s; /* Add smooth transition for background color */
+    transform: translate(-15%, -200%);
+    margin-left: 20px;
+}
+
+.book:hover {
+    background-color: lightgreen; /* Change background color on hover */
+}
+
+.checked {
+    color: orange; /* Or any other color you prefer for filled stars */
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
+
+
+
+
+ #map {
+    height: 632px; /* Adjust the height as needed */
+    width: 100%; /* Ensure the map takes the full width of its container */
+    transform: translateX(2%);
+}
+
+.container #map-container {
+    position: absolute; /* Position the map container relative to the page */
+    height: 700px;
+    overflow: hidden;
+    width: 700px; /* Set the width of the map */
+    transform: translate(126%, -100%);
+    text-align: center;
+    border-left: 1px solid black;
     
-}
-hr {
-    height: 1px; /* Adjust the height of the horizontal rule */
-    margin: 5px 0; /* Adjust the top and bottom margin of the horizontal rule */
+
 }
 
+.container #map-container h1 {
+    margin-bottom: 20px;
 
-.amenties{
-    transform: translate(5%, -800%);
-    color: #4b4b4b;
 }
 
 
 .container .inner-box {
     display: block;
     width: 1000px;
-    height: 250px; /* Adjust the height as needed */
+    height: 260px; /* Adjust the height as needed */
     margin-right: 40px;
     text-align: center;
     position: relative;
     transition: all 0.7s ease;
     cursor: pointer;
+    overflow: hidden;
     color: #020202;
-    transform: translate(-15%, -10%);
+    transform: translate(-15%, -5%);
     margin-top: 10px;
     grid-template-columns: repeat(auto-fill);
     }
@@ -584,7 +619,7 @@ hr {
         background-color: blue;
         
     }
-
+    
     
 .container ul{
     
