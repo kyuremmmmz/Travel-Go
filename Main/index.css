@@ -316,7 +316,7 @@ body{
     font-weight: 500;
     font-style: normal;
     text-align: center;
-    margin-top: 350px;
+    margin-top: 200px;
    
     
 }
@@ -791,70 +791,14 @@ body{
 }
 
 
-.flightsearch {
-    max-width: fit-content;
-    background-color: rgba(201, 201, 201, 1);
+.flightsearch{
+    max-height: 100px;
+    max-width: 100px;
+    background-color: rgba(47, 134, 214, 1);
     color: black;
-    display: block;
-    transform: translate(35%, 10%);
-    
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: auto;
-}
-
-.button1{
-    border: none;
-    color: white;
-    background-color: rgba(70, 126, 178, 1);
-    transform: translate(0%,-30%);
-    width: 850px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    height: 50px;
-    cursor: pointer;
-}
-
-.ul3 {
-    display: flex; /* Use flexbox to align the elements horizontally */
-    justify-content: space-between; /* Distribute the items evenly along the main axis */
-}
-
-.inline, .inlinee, .inlineee, .inlineeee {
-    flex-basis: calc(33.33% - 40px); /* Adjust the width of each element to fit 3 items per row */
-    margin: 0 20px;
-    font-size: 16px;
-    list-style: none;
-}
-
-.inlinee {
-    margin-top: 30px; /* Add margin-top to separate the groups */
 }
 
 
-.text{
-    outline: none;
-    width: 360px;
-    font-size: 16px;
-    border: none;
-    height: 25px;
-}
-
-
-.textt{
-    outline: none;
-    
-    border: none;
-    height: 20px;
-}
-.ul3 {
-    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
-}
-
-.ul4 {
-    margin-left: 275px; /* Adjust this value to position the radio buttons horizontally */
-}
 .container3 .lis {
     display: inline-flex;
     text-decoration: none;

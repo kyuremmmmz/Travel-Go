@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: travel.php");
+                    header("Location: Main/travel.php");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";
@@ -87,88 +87,132 @@ function generateVoucher() {
     <title>Book your travel</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+    body {
+        background-color: #444444; /* Light background color */
+        color: #FFFFFF; /* Text color */
+    }
+    .container {
+        margin-top: 50px;
+        width: 80%; /* Set wider container width */
+        border: 2px solid #dee2e6; /* Add border around container */
+        padding: 20px; /* Add padding inside container */
+        text-align: center; /* Align text to center within container */
+    }
+    .form-group {
+        display: inline-block;
+        width: calc(33% - 10px); /* Set width to fit three columns with spacing */
+        margin-right: 20px; /* Add spacing between columns */
+        margin-bottom: 20px; /* Add spacing between rows */
+        text-align: left; /* Align text to left within form-group */
+    }
+    /* Style for form inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+        background-color: #ffffff; /* Background color */
+        color: #343a40; /* Text color */
+        border-color: #ced4da; /* Border color */
+        width: 100%; /* Set width to 100% of parent container */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+    }
+    /* Style for form inputs on focus */
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus {
+        background-color: #ffffff; /* Background color */
+        color: #343a40; /* Text color */
+        border-color: #80bdff; /* Border color on focus */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add box shadow on focus */
+    }
+    /* Style for buttons */
+    .btn {
+        background-color: #007bff; /* Button background color */
+        color: #ffffff; /* Button text color */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Add padding */
+        width: 100%; /* Set width to 100% of parent container */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+    }
+    .btn:hover {
+        background-color: #0056b3; /* Button background color on hover */
+        color: #ffffff; /* Button text color on hover */
+    }
+</style>
+
 </head>
-<body class="">
-    <div id="containermt-5" class="container mt-5">
+<body>
+    <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-            <?php  
-            $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
-            echo "<h2 class='text-center mb-4'>Book this to: $img</h2>";
-           ?>
-                <h2 class="text-center mb-4">1. Fill The Credentials</h2>
+            <div class="col-md-12">
+                <!-- Form -->
+                
                 <form action="placesbooking.php" method="POST">
-                    <div class="mb-3">
+                    <?php
+                    if (isset($_GET["choice"]) && isset($_GET["price"])) {
+                        $choice = $_GET["choice"];
+                        $price = $_GET["price"];
+                        echo "<h2 class='text-center mb-4'>Book this to: $choice With PHP $price</h2>";
+                    }
+                    ?>
+                    <div class="mb-3 form-group">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="hotel" class="form-label">Book this to</label>
-                        <input type="text" class="form-control" id="hotel" name="hotel" value= <?php  
-                        $choice = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
-                        $price = isset($_GET["price"])? $_GET["price"] :"";
-                        echo $choice, ' With PHP ';?><?php echo $price;?> required>
-                        
-                    </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="phone" class="form-label">Phone number</label>
                         <input type="tel" class="form-control" id="phone" name="phone" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="arrival_date" class="form-label">Arrival Date</label>
                         <input type="date" class="form-control" id="arrival_date" name="adate" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="departure_date" class="form-label">Departure Date</label>
                         <input type="date" class="form-control" id="departure_date" name="ddate" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="departure_date" class="form-label">Book type</label>
+                    <div class="mb-3 form-group">
+                        <label for="booktype" class="form-label">Book type</label>
                         <select class="form-select" id="booktype" name="book_type" required>
                             <option value="">Select</option>
-                            <option value="hotel">hotel</option>
-                            <option value="flight">flight</option>
-                            <!-- Add more options as needed -->
+                            <option value="hotel">Hotel</option>
+                            <option value="flight">Flight</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="adults" class="form-label">Number of Adults</label>
                         <select class="form-select" id="adults" name="adults" required>
                             <option value="">Select</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
-                            <!-- Add more options as needed -->
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 form-group">
                         <label for="children" class="form-label">Number of Children</label>
                         <select class="form-select" id="children" name="children" required>
                             <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
-                            <!-- Add more options as needed -->
                         </select>
                     </div>
-                     <!-- PayPal SDK Script -->
-                    <div id="paypal-button-container"></div>
+                    <div class="mb-3 form-group">
+                        <label for="hotel" class="form-label">Book this to</label>
+                        <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo isset($_GET["choice"]) ? $_GET["choice"] : ''; ?>" required>
+                    </div>
                     <button type="submit" class="btn btn-primary" name="submit">Next</button>
-                    <input type="hidden" name="voucher_code" value="<?php echo $voucherCode;?>">
-                    <p id="result-message"></p>
                 </form>
-               
+            </div>
         </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
-
-
 </body>
 </html>

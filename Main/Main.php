@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +34,13 @@
     <header>
     
     <nav class="navigation" id="navbar">
+<<<<<<< HEAD
            
     <ul class="myul">
+=======
+          
+            <ul class="myul">
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
            
                 
                 
@@ -44,11 +50,13 @@
             
                 <li class="lis"><a href="#container"class="" id="a">Attractions</a></li>
 
-                <li class="lis"><a href="#container2"class="" id="a">Promo</a></li>
-
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
+<<<<<<< HEAD
                 <li class="lis"><a href="travel.php" class="" id="" title="See my bookings">My Bookings</a></li>
+=======
+                <li class="lis"><a href="travel.php" class="" id="ewan" title="See my bookings">My Bookings</a></li>
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
 
                
 
@@ -63,6 +71,68 @@
                     header("Location: /login_page.php");
                 }
                 
+
+                function fetchDataFromAPI($postData) {
+                    $curl = curl_init();
+                
+                    // Set cURL options
+                    curl_setopt_array($curl, [
+                        CURLOPT_URL => "https://booking-com13.p.rapidapi.com/flights/multi-city?adult_number={$postData['adults']}&page=1&country_flag=us&min_price=1312&max_price=2",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 30,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_POSTFIELDS => json_encode([
+                            [
+                                'location_from' => $postData['flying_from'],
+                                'location_to' => $postData['flying_to'],
+                                'departure_date' => $postData['departure_date'],
+                                'filter_time_type' => '',
+                                'time_from' => '',
+                                'time_to' => ''
+                            ],
+                            [
+                                'location_from' => $postData['flying_from'],
+                                'location_to' => $postData['flying_to'],
+                                'departure_date' => $postData['arrival_date'],
+                                'filter_time_type' => '',
+                                'time_from' => '',
+                                'time_to' => ''
+                            ]
+                        ]),
+                        CURLOPT_HTTPHEADER => [
+                            "X-RapidAPI-Host: booking-com13.p.rapidapi.com",
+                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271",
+                            "content-type: application/json"
+                        ],
+                    ]);
+                
+                    // Execute cURL request
+                    $response = curl_exec($curl);
+                    $err = curl_error($curl);
+                
+                    // Close cURL session
+                    curl_close($curl);
+                
+                    // Check for errors and return response
+                    if ($err) {
+                        return "cURL Error #: " . $err;
+                    } else {
+                        return $response;
+                    }
+                }
+                
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                    // Fetch data from API based on form input
+                    $apiData = fetchDataFromAPI($_POST);
+                    
+                    // Redirect user to another page to display fetched data
+                    header("Location: results.php?api_data=" . urlencode(json_encode($apiResponse)));
+                    exit();
+                }
                 
                 ?>
 
@@ -75,6 +145,7 @@
         
         <p class="travel-2" data-aos="fade-up"
      data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
+<<<<<<< HEAD
         <form action="" class="flightsearch">
     <div class="flightsearch">
         <h1>Book your flight now</h1>
@@ -132,6 +203,67 @@
 </form>
         
         
+=======
+     <form id="flightSearchForm" class="flightsearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <div class="flightsearch" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+            <h1 class="book_your_flight_now">Book your flight now</h1>
+            <ul class="ul4">
+                <li class="inline">
+                    <input type="radio" name="trip_type" id="round_trip" class="rad" value="Round Trip">
+                    <label for="round_trip">Round Trip</label>
+                </li>
+                <li class="inline">
+                    <input type="radio" name="trip_type" id="one_way" class="rad" value="One Way">
+                    <label for="one_way">One Way</label>
+                </li>
+                <li class="inline">
+                    <input type="radio" name="trip_type" id="multi_city" class="rad" value="Multi-City">
+                    <label for="multi_city">Multi-City</label>
+                </li>
+            </ul>
+            <ul class="ul3">
+                <li class="inlinee">
+                    <label for="flyingFrom" class="for_text">Flying From: <br><input type="text" name="flying_from" id="flyingFrom" class="text"></label>
+                </li>
+                <li class="inlinee">
+                    <label for="flyingTo" class="for_text">Flying to: <br><input type="text" name="flying_to" id="flyingTo" class="text"></label>
+                </li>
+            </ul>
+            <br>
+            <ul class="ul3">
+                <li class="inlineee">
+                    <label for="departureDate">Departing to: <br><input type="datetime-local" name="departure_date" id="departureDate" class="text"></label>
+                </li>
+                <li class="inlineee">
+                    <label for="arrivalDate">Arriving to: <br><input type="datetime-local" name="arrival_date" id="arrivalDate" class="text"></label>
+                </li>
+            </ul>
+            <br>
+            <ul class="ul3">
+                <li class="inlineeee">
+                    <label for="adults">Adults: <br><input type="number" name="adults" id="adults" class="textt"></label>
+                </li>
+                <li class="inlineee">
+                    <label for="children">Children: <br><input type="number" name="children" id="children" class="textt"></label>
+                </li>
+                <li class="inlineee">
+                    <label for="travelClass">Travel Class: <br><input type="text" name="travel_class" id="travelClass" class="textt"></label>
+                </li>
+            </ul>
+            <br>
+            <ul class="ul3">
+                <li class="inlineeee">
+                    <br> <button type="submit" class="button1" name="submit">Search</button>
+                    
+                   
+                    
+                </li>
+            </ul>
+        </div>
+    </form>
+        
+
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
         
         
 
@@ -143,8 +275,10 @@
         </div>
            
 
+
     </nav>
     
+   
    
 </header>
 
@@ -159,6 +293,7 @@
 
 
 
+<<<<<<< HEAD
   <!--====================================================================================== NUMBER 2 CONTAINER================================================================================ -->
   <div class="container2" id="container2">
     <h1 class="promos">Promos</h1>
@@ -173,13 +308,20 @@
         <img src="/AirAsia B1G Sale drums up 2023 travel with Php 1 fare Promo.jpg">
     </div>
 </div>
+=======
+ 
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
 
     
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     <div class="container" id="container">
         <h1 class="for">Popular Attractions</h1>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
         <?php
     $conn = new mysqli("localhost:3307", "root", "admin", "sample");
 
@@ -190,7 +332,11 @@
     // SQL query to retrieve image data
     $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
     $result = $conn->query($sql);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
     if ($result->num_rows > 0) {
         // Output data of each row
         while($row = $result->fetch_assoc()) {
@@ -198,14 +344,23 @@
             $imageData = base64_encode($row['image']);
             $price = $row['price'];
             $textData = $row['place'];
+<<<<<<< HEAD
 
+=======
+            
+            
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
             echo '<h2 class="textdata">'.$textData.'</h2>';
             echo '<div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>';
             echo '<hr class="solidblack"></hr>';
             echo '<a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
+<<<<<<< HEAD
             echo '<a href="/hotelsearch.php" class="see_details" data-place="' . urlencode($textData) . '">See Details</a>';
+=======
+            echo '<a href="results.php?choice=' . urlencode($textData) .'" class="see_details">See Details</a>';
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
             echo '</div>';
         }
         } else {
@@ -273,7 +428,7 @@
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="/login_page.php" class="book_hotel">Book now</a>';
+                            echo '<a href="/placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
                             echo '</div>';
                             echo '</li>';
                         }
@@ -297,7 +452,11 @@
                         CURLOPT_CUSTOMREQUEST => "GET",
                         CURLOPT_HTTPHEADER => [
                             "X-RapidAPI-Host: booking-com.p.rapidapi.com",
+<<<<<<< HEAD
                             "X-RapidAPI-Key: fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d"
+=======
+                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271"
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                         ],
                     ]);
 
@@ -313,6 +472,10 @@
 
                         if ($hotelLocations) {
                             foreach ($hotelLocations as $location) {
+<<<<<<< HEAD
+=======
+                                
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                                 echo "<li class='splide__slide'>";
                                 echo "<div class='hotels' id='hotels'>";
                                 echo "<div class='in'>";
@@ -320,7 +483,11 @@
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
                                 
+<<<<<<< HEAD
                                 echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
+=======
+                                echo "<a href='/placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                                 echo "</div>";
                                 echo "</li>";
                             }
@@ -369,7 +536,7 @@
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="/login_page.php" class="book_hotel">Book now</a>';
+                            echo '<a href="/placesbooking.php?choice= '.urlencode($textdata).'" class="book_hotel">Book now</a>';
                             echo '</div>';
                             echo '</li>';
                         }
@@ -393,7 +560,11 @@
                         CURLOPT_CUSTOMREQUEST => "GET",
                         CURLOPT_HTTPHEADER => [
                             "X-RapidAPI-Host: booking-com.p.rapidapi.com",
+<<<<<<< HEAD
                             "X-RapidAPI-Key: fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d"
+=======
+                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271"
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                         ],
                     ]);
 
@@ -415,6 +586,10 @@
                                 echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
+<<<<<<< HEAD
+=======
+                                echo '<h1 class="h2">Starting  '.$location['price'].'</h1>';
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                                 
                                 echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
                                 echo "</div>";
@@ -652,7 +827,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<<<<<<< HEAD
    
+=======
+    
+>>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
 <script>
   AOS.init();
 </script>

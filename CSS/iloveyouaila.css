@@ -1,0 +1,640 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito Sans", sans-serif;
+   
+}
+
+body{
+    scroll-behavior: smooth;
+}
+
+
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+   
+}
+
+.nav2 {
+    background-color: rgba(0, 0, 0, 0.5);
+    list-style: none;
+    height: 180px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    position: relative;
+   
+   
+   
+}
+
+
+
+.nav2 .fas.fa-calendar{
+    color: #ffffff;
+    transform: translateX(-70%);
+}
+
+.nav2 .liko {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: white;
+    text-decoration: none;
+    height: 15%;
+    width: 8%;
+    background-color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+    border: 2px solid #efefef;
+    position: relative;
+    transform: translate(1000%);
+}
+
+
+
+
+.navigation .myul {
+    background-color: rgb(49, 49, 49);
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    z-index: 999999;
+    position: fixed; /* Fixed position to stick to top */
+    width: 100%; /* Take full width */
+    transition: top 0.3s; /* Smooth transition when affixed */
+    top: 0;
+    transform: translateY(-10%);
+}
+
+.navigation .myul.sticky {
+    transform: translateY(0%);
+    top: 0; /* Stick to top when scrolled */
+}
+
+.li, .lis {
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    list-style: none;
+    display: inline-block;
+    transition: text-decoration-color, 0.7s;
+    transform: translate(10%);
+    margin: 0 20px;
+}
+
+.lis {
+    margin: 0 20px;
+    transform: translateX(  0%);
+}
+
+#a {
+    color: azure;
+    text-decoration: none;
+    transition: all, 0.1s;
+    padding: 10px;
+}
+
+#a:hover {
+    border-bottom: solid 1px #e20000;
+}
+
+
+.active{
+    border-bottom: solid 1px #e20000;
+
+}
+
+.list .button {
+    background: transparent;
+    display: inline-block;
+    color: #fadddd;
+    width: 100px;
+    font-size: 100%;
+    height: 35px;
+    border: none;
+    margin-right: 50px;
+    border: solid  1px #d3bdbd;
+    border-radius: 10px;
+    transition: all, 0.7s;
+}
+
+.list .button:hover {
+    background-color: #000000;
+    cursor: pointer;
+}
+.input .para {
+    color: #c9c4c4;
+    margin-top: 8%;
+}
+
+.input .h {
+    color: rgb(37, 25, 209);
+    display: inline-block;
+    margin: 1%;
+}
+
+
+
+
+
+.navigation .list .button {
+   transform: translateX(550%);
+}
+
+.input .forgot-pass {
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.input .parag {
+    color: #fdfdfd;
+    margin-top: 10px;
+}
+
+
+
+
+.divko{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Start with a lower z-index */
+    transition: 0.7s all ease-in-out;
+    display: static; /* Initially hidden */
+}
+
+.divko.visible{
+    z-index: 9999; /* Ensure it's above other content */
+    display: none; /* Show when it has the visible class */
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+
+}
+
+
+
+.input .h{
+    color: #c9c4c4;
+    transition: all 0.3s;
+}
+
+.input .h:hover{
+    color: rgb(0, 255, 136);
+    
+}
+.nav2 .wrapper{
+    transform: translate(-77%, 60%);
+    max-width: 450px;
+    margin: 150px auto;
+    position: relative;
+    background-color: white;
+    align-self: center;
+    border-top: 1px solid black;
+    border-radius: 5px;
+    z-index: 9999999;
+}
+
+
+
+
+
+.nav2 .wrapper .searchbar{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    outline: none;
+    overflow: hidden;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12);
+
+    
+    
+}
+
+
+
+
+.nav2 .wrapper .searchbar + .fas.fa-search {
+    position: absolute; 
+    transform: translateX(500%);
+    top: 0%;
+    left: 350px; /* Adjust as needed */
+    cursor: pointer;
+    transform: translateY(0%);
+    color: #000000;
+}
+
+.my-ul + .nav-divider{
+    position: absolute; 
+    transform: translateX(500%);
+    top: 70%;
+    left: 350px; /* Adjust as needed */
+    cursor: pointer;
+    transform: translateY(-50%);
+    color: #000000;
+    
+}
+
+
+#my-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+ #my-box{
+    width: 450px;
+    max-height: 250px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12);
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+
+  
+   
+
+}
+
+
+
+#my-box li{
+    list-style: none;
+    padding:8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+    
+
+}
+
+.my-box li:hover{
+    background: #efefef;
+}
+
+ .s {
+    list-style: none;
+    position: relative;
+    width: 50px;
+    margin: 20px;
+    text-align: center;
+}
+
+.my-a{
+    text-decoration: none;
+    color: white;
+}
+.banner .travel-2 {
+    font-size: 400%;
+    color: #ffffff;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    margin-top: 200px;
+}
+
+
+/*====================================================================================================user information================================================================*/
+
+.nav2 .box_container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    height: 15%;
+    width:300px;
+    background-color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+    border: 2px solid #efefef;
+    position: relative;
+    transform: translate(450%, -150%);
+}
+
+.nav2 .box_container .myh3 {
+    color: rgb(252, 233, 233);
+    text-align: center;
+    transform: translateX(-4%);
+    
+  
+}
+
+.nav2 .box_container .fas.fa-user {
+    color: white;
+    transform: translate(5%);
+}
+
+
+.banner .con{
+    background-color: rgba(209, 185, 185);
+    height: 50%;
+}
+
+/*========================================================================================================BOOKING BUTTONS=============================================================*/
+ 
+
+.details{
+    color: #000000;
+    background-color: white;
+    border: none;
+    margin: 20px;
+    }
+
+    
+
+
+/* END*/
+
+.input .x{
+    position: absolute;
+    top: -41px; /* Adjust as needed */
+    right: -1px; /* Adjust as needed */
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 50px;
+    width: 50px;
+    background-color: #1b1b1b;
+    font-size: 20px;
+    font-style: bold;
+    cursor: pointer;
+    z-index: 10000; /* Ensure it's above other content */
+ }
+
+ .input .x:hover{
+    color: #fff9f9;
+    background-color: #000000;
+ }
+
+
+
+ @media (max-width: 600px) {
+    .banner .travel-2 {
+        transform: translate(2%, 650%);
+       
+        
+    }
+
+    .nav2 .searchbar {
+        width: 350px; /* Adjust width as needed */
+    }
+
+    .nav2 .travel {
+        transform: translate(180%, -250%); /* Adjust transform as needed */
+    }
+
+    .input .h {
+        font-size: 14px; /* Adjust font size as needed */
+    }
+}
+    
+@media (max-width: 1550px) {
+
+    .navigation .list .button {
+        transform: translate(420%);
+        font-size: 90%;
+        margin: 0 20px;
+    }
+
+    .navigation .li{
+        transform: translateX(100%);
+    }
+
+   
+   .signinbutton{
+    border: none;
+   }
+
+    
+
+}
+
+   
+
+@media (max-width: 1269px) {
+    .navigation .list .button {
+        transform: translate(280%);
+        font-size: 90%;
+        margin: 0 20px;
+    }
+
+}
+
+
+@media (max-width: 1011px) {
+    .navigation .list .button {
+        transform: translate(150%);
+        font-size: 90%;
+        margin: 0 20px;
+    }
+
+
+}
+
+@media (max-height: 624px) {
+    .banner .travel-2 {
+        transform: translate(40%,250%);
+       
+        
+    }
+    
+}
+
+ 
+
+
+
+hr{
+    width: 800px;
+    margin-top: 40px;
+    transform: translate(-0%, -150%);
+    height: 5px; /* Adjust the height to make the line thicker */
+    background-color: #d9ff00;
+    border: none;
+}
+
+
+.box2 {
+    display: inline-block;
+    background-color: rgb(199, 73, 73);
+    height: auto;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 50px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 80px;
+    margin-left: 50px;
+    margin-top: 100px;
+    transition: 1s;
+    cursor: pointer;
+}
+
+
+
+
+.for{
+    padding: 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 35px;
+    transform: translateX(-39%);
+    color: rgb(12, 12, 12);
+}
+.data{
+    color: #000;
+    text-align: justify;
+    margin-left: 370px;
+    margin-top: -19%;
+    top: 50%;
+}
+
+
+.textdata{
+    color: #000;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 15px;
+    
+   
+}
+
+
+.amenties{
+    margin-top: 10px;
+}
+
+
+.outer{
+    width: 20%;
+    transform: translate(390%, -120%);
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.outer .price{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    color: rgb(22, 22, 22);
+    font-weight: 500;
+    margin-top: 42px;
+   
+}
+
+.book{
+    background-color: greenyellow;
+    color: #000;
+    display: inline-block; /* Ensure the button takes only the necessary width */
+    padding: 10px 20px; /* Add padding to the button */
+    text-decoration: none; /* Remove default underline */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s; /* Add smooth transition for background color */
+    transform: translate(-15%, -200%);
+    margin-left: 20px;
+}
+
+.book:hover {
+    background-color: lightgreen; /* Change background color on hover */
+}
+
+.checked {
+    color: orange; /* Or any other color you prefer for filled stars */
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
+
+
+
+
+ #map {
+    height: 632px; /* Adjust the height as needed */
+    width: 100%; /* Ensure the map takes the full width of its container */
+    transform: translateX(2%);
+}
+
+.container #map-container {
+    position: absolute; /* Position the map container relative to the page */
+    height: 700px;
+    overflow: hidden;
+    width: 700px; /* Set the width of the map */
+    transform: translate(126%, -100%);
+    text-align: center;
+    border-left: 1px solid black;
+    
+
+}
+
+.container #map-container h1 {
+    margin-bottom: 20px;
+
+}
+
+
+.container{
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    transform: translateY(12%);
+}
+
+
+
+
+
+.container .inner-box .box {
+    height: 400px;
+    width: 500px;
+}
+
+
+.container .inner-box{
+    background-color: hsl(0, 0%, 100%);
+    height: 1000px;
+    width: 100%;
+    overflow: hidden;
+}
+.container .content {
+    text-indent: 0px;
+    line-height: 1.5;
+    text-align: justify;
+    
+    position: fixed;
+    height: 800px;
+    max-height: auto;
+    width: 800px;
+    margin-left: 420px;
+    transform: translateY(-53%);
+    
+}
+
+
+.container .content h2 {
+    margin-top: 20px;
+
+}
+
+.container .content p {
+    margin-bottom: 50;
+
+}
+
+ 
+.container .box  img{
+    height: 450px;
+    width: 400px;
+}
