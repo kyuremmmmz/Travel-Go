@@ -14,7 +14,6 @@ if (isset($_POST["submit"])) {
     $adult = $_POST["adults"];
     $arrival = $_POST["adate"];
     $departure = $_POST["ddate"];
-    $payment = $_POST["payment_method"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
@@ -22,9 +21,9 @@ if (isset($_POST["submit"])) {
 
 
 
-        if ($arrival == $departure) {
+        if ($departure == $arrival) {
         echo "Cannot match arrival and departure dates.";
-    } elseif ($arrival > $departure) {
+    } elseif ($departure > $arrival) {
         echo "<script>alert('Invalid departure')</script>";
     } else {
         // Generate a voucher code
@@ -37,8 +36,8 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, payment, contact_number, email, hotel, voucher_code, booked) 
-                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$payment', '$phone', '$email', '$hotel', '$voucherCode', $book)";
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, booked) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', $book)";
 
         // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
@@ -63,7 +62,7 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: Main/travel.php");
+                    header("Location: travel.php");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";

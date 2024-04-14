@@ -86,7 +86,7 @@
                                 </div>';
                                 echo '<div class="rates">
                                 <p class="price"> Starting PHP '.$price.'</p>
-                                <a href="" class="now">Book now</a>
+                                <a href="placesbooking.php?choice='.urlencode($specific_place).'&price='.urlencode($price).'" class="now">Book now</a>
                                 
                                 </div>
                                

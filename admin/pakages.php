@@ -25,33 +25,56 @@
             padding: 0;
         }
         .sidebar-menu li {
-            padding: 10px;
-            border-bottom: 1px solid #4e555b;
-        }
-        .sidebar-menu li a {
-            color: #fff;
-            text-decoration: none;
-        }
+    padding: 10px;
+    border-bottom: 1px solid #4e555b;
+}
+
+.sidebar-menu li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s; /* Add transition for smoother color change */
+}
+
+.sidebar-menu li:hover a,
+.sidebar-menu li:focus a,
+.sidebar-menu li:active a {
+    color: #fff; /* Change text color on hover, focus, and active */
+}
+
+.sidebar-menu li:hover {
+    background-color: #4e555b; /* Change background color on hover */
+}
     </style>
 </head>
 <body>
+    <?php 
+    $conn = mysqli_connect("localhost:3307","root","admin","sample");
+
+    if ($conn-> connect_error) {
+        die("". $conn->connect_error);
+        # code...
+    }
+    
+    ?>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
-                <div class="sidebar-logo">Admin Panel</div>
+                <div class="sidebar-logo">Travel Go Ph Admin</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#packages"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="#booking-list"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="system.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="pakages.php"><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking-list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="inquiries.php"><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
             <!-- Content -->
             <div class="col-md-9">
                 <!-- Content goes here -->
                 <h1>Welcome to Admin Dashboard</h1>
-                <p>This is the main content area.</p>
+                <hr>
+                <p>Tite.</p>
             </div>
         </div>
     </div>

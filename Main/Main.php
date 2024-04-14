@@ -255,7 +255,7 @@
             echo '<h2 class="textdata">'.$textData.'</h2>';
             echo '<div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>';
             echo '<hr class="solidblack"></hr>';
-            echo '<a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
+            echo '<a href="placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
             echo '<a href="results.php?choice=' . urlencode($textData) .'" class="see_details">See Details</a>';
             echo '</div>';
         }
@@ -324,7 +324,7 @@
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="/placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
+                            echo '<a href="placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
                             echo '</div>';
                             echo '</li>';
                         }
@@ -373,7 +373,7 @@
                                 echo "<h1>{$location['name']}</h1>";
                                 
                                 
-                                echo "<a href='/placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
+                                echo "<a href='placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
                                 echo "</div>";
                                 echo "</li>";
                             }

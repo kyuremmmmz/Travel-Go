@@ -47,7 +47,6 @@
                 <th>EMAIL</th>
                 <th>ARRIVAL</th>
                 <th>DEPARTURE</th>
-                <th>PAYMENT METHOD</th>
                 <th>CONTACT NUMBER</th>
                 <th>ACTION</th> <!-- Add new column for action buttons -->
             </tr>
@@ -82,7 +81,7 @@
                 echo "<td>".$row['email']."</td>";
                 echo "<td>".$row['arrival']."</td>";
                 echo "<td>".$row['departure']."</td>";
-                echo "<td>".$row['payment']."</td>";
+                
                 echo "<td>".$row['contact_number']."</td>";
 
                 // Add action buttons for delete and update

@@ -157,7 +157,7 @@
             echo '</div>';
 
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
-            echo '<a href="/placesbooking.php?choice='.urlencode($textData).'" class="book" >Book now</a>';
+            echo '<a href="/placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
             echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
      
 
