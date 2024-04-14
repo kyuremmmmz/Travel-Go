@@ -372,6 +372,7 @@
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
                                 
+                                
                                 echo "<a href='/placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
                                 echo "</div>";
                                 echo "</li>";
@@ -467,7 +468,7 @@
                                 echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
-                                echo '<h1 class="h2">Starting  '.$location['price'].'</h1>';
+                                
                                 
                                 echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
                                 echo "</div>";

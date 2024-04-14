@@ -146,7 +146,7 @@
             echo '<h3 class="textdata">' . $textData . '</h3>';
             echo '<p class="amenties"> ' . $amenities . '</p>';
             echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
-            for ($i = 1; $i <= $rating; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i <= $rating) {
                     echo '<span class="fa fa-star checked"></span>';
                 } else {

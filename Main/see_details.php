@@ -58,29 +58,34 @@
                             $rating = $row['rating'];
                             $specific_place = $row['specific_place'];
                             $imageData = base64_encode($row['image']);
-                            echo '
-                            <div class="inner-box">
-                                <div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>
-                                
-                                
-                             
-                               
-                                <div class="content">
-                                <h2 class="textdata">'.$specific_place.'</h2>
-                                <hr>
-                                <h2 class="textdata2">Details</h2>
-                                <p>'.$description.'</p>
-                                
-                                </div>
-                                
-                                <div class="outer">
-                                <p class="price"> Starting PHP '.$price.'</p>
-                                
-                                </div>
+                            echo '<div class="inner-box">
+                                    <div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>
+
+                                    <div class="content">
+                                        <h2 class="textdata">'.$specific_place.'</h2>
+                                        <hr>
+                                        <h2 class="textdata2">Details</h2>
+                                        <p>'.$description.'</p>
+                                    </div>
+
+                                    <div class="outer">
+                                        <p class="price"> Starting PHP '.$price.'</p>';
+
+                                        // Star Ratings
+                                        echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $rating) {
+                                                echo '<span class="fa fa-star checked"></span>';
+                                            } else {
+                                                echo '<span class="fa fa-star"></span>';
+                                            }
+                                        }
+                                        
+                                echo '</div>
                                 </div>';
-                            }
                             
-                            }?>
+                            }
+                        }?>
                             </div>
                         </form>
                     </nav>
