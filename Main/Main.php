@@ -204,10 +204,10 @@
 
         
         </div>
-
+           
 
     </nav>
-   
+    
    
 </header>
 
@@ -222,7 +222,7 @@
 
 
 
- 
+
 
     
    
@@ -240,7 +240,7 @@
     // SQL query to retrieve image data
     $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
     $result = $conn->query($sql);
-
+    
     if ($result->num_rows > 0) {
         // Output data of each row
         while($row = $result->fetch_assoc()) {
@@ -249,7 +249,7 @@
             $price = $row['price'];
             $textData = $row['place'];
             
-            
+
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
             echo '<h2 class="textdata">'.$textData.'</h2>';
