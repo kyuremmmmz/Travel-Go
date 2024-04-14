@@ -483,6 +483,7 @@
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
                                 
+                                
 <<<<<<< HEAD
                                 echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
 =======
@@ -586,10 +587,7 @@
                                 echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
                                 echo "</div>";
                                 echo "<h1>{$location['name']}</h1>";
-<<<<<<< HEAD
-=======
                                 echo '<h1 class="h2">Starting  '.$location['price'].'</h1>';
->>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                                 
                                 echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
                                 echo "</div>";

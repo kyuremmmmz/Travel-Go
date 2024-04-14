@@ -566,7 +566,10 @@ hr{
     margin-left: 5px;
 }
 
-
+.fa.fa-star{
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
 
 
  #map {
