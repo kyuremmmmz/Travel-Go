@@ -273,11 +273,9 @@
 
         
         </div>
-           
 
 
     </nav>
-    
    
    
 </header>
@@ -293,33 +291,13 @@
 
 
 
-<<<<<<< HEAD
-  <!--====================================================================================== NUMBER 2 CONTAINER================================================================================ -->
-  <div class="container2" id="container2">
-    <h1 class="promos">Promos</h1>
-
-    <div class="box3" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom">
-        <img src="/Book your Hotels Stay now with a Discount of up to 30% with Savings24x7.jpg">
-    </div>
-    
-    <div class="box3" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom">
-        <img src="/AirAsia B1G Sale drums up 2023 travel with Php 1 fare Promo.jpg">
-    </div>
-</div>
-=======
  
->>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
 
     
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     <div class="container" id="container">
         <h1 class="for">Popular Attractions</h1>
-<<<<<<< HEAD
-
-=======
         
 >>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
         <?php
@@ -332,11 +310,7 @@
     // SQL query to retrieve image data
     $sql = "SELECT place, price, image FROM for_creating_a_place"; // Adjust the query according to your database schema
     $result = $conn->query($sql);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
     if ($result->num_rows > 0) {
         // Output data of each row
         while($row = $result->fetch_assoc()) {
@@ -349,16 +323,12 @@
 =======
             
             
->>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
             echo '<div class="inner-box">';
             echo '<div class="box"><img src="/img/' . $row["image"] . '" alt="Image" /></div>';
             echo '<h2 class="textdata">'.$textData.'</h2>';
             echo '<div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>';
             echo '<hr class="solidblack"></hr>';
             echo '<a href="/placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
-<<<<<<< HEAD
-            echo '<a href="/hotelsearch.php" class="see_details" data-place="' . urlencode($textData) . '">See Details</a>';
-=======
             echo '<a href="results.php?choice=' . urlencode($textData) .'" class="see_details">See Details</a>';
 >>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
             echo '</div>';
@@ -428,7 +398,7 @@
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="/placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
+                            echo '<a href="placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
                             echo '</div>';
                             echo '</li>';
                         }
@@ -484,11 +454,7 @@
                                 echo "<h1>{$location['name']}</h1>";
                                 
                                 
-<<<<<<< HEAD
-                                echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
-=======
                                 echo "<a href='/placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
->>>>>>> 6838c27f2843842d2eb6486a58e0dd7f9abc6bf4
                                 echo "</div>";
                                 echo "</li>";
                             }

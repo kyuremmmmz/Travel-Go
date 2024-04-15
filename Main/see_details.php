@@ -68,10 +68,10 @@
                                         <p>'.$description.'</p>
                                     </div>
 
-                                    <div class="outer">
-                                        <p class="price"> Starting PHP '.$price.'</p>';
+                                    <div class="outer">';
 
-                                        // Star Ratings
+                                        
+
                                         echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
                                         for ($i = 1; $i <= 5; $i++) {
                                             if ($i <= $rating) {
@@ -81,8 +81,16 @@
                                             }
                                         }
                                         
-                                echo '</div>
+                                echo '
+                                </div>
                                 </div>';
+                                echo '<div class="rates">
+                                <p class="price"> Starting PHP '.$price.'</p>
+                                <a href="placesbooking.php?choice='.urlencode($specific_place).'&price='.urlencode($price).'" class="now">Book now</a>
+                                
+                                </div>
+                               
+                                ';
                             
                             }
                         }?>
