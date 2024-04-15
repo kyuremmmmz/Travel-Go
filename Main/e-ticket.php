@@ -3,141 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel E-Ticket</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .ticket-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .ticket {
-            width: 600px;
-            background-color: #fff;
-            padding: 20px;
-            border: 2px solid #007bff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .ticket-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .ticket-header h1 {
-            margin-top: 0;
-            color: #007bff;
-        }
-        .ticket-body {
-            padding: 20px;
-        }
-        .ticket-details {
-            margin-bottom: 20px;
-        }
-        .ticket-details h3 {
-            margin-top: 0;
-            color: #007bff;
-        }
-        .ticket-details p {
-            margin-bottom: 5px;
-        }
-        .barcode {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .barcode img {
-            width: 80%;
-            max-width: 200px;
-            margin-top: 10px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    <title>Travel Go Hotel E-Ticket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="ticket-container">
-        <div class="ticket">
-            <div class="ticket-header">
-                <h1>Travel E-Ticket</h1>
-            </div>
-            <div class="ticket-body">
-                <div class="ticket-details">
-                    <h3>Flight Information</h3>
-                    <p><strong>Airline:</strong> XYZ Airlines</p>
-                    <p><strong>Flight Number:</strong> XYZ123</p>
-                    <p><strong>Departure:</strong> New York (JFK) - 10:00 AM</p>
-                    <p><strong>Arrival:</strong> London (LHR) - 2:00 PM</p>
-                    <p><strong>Date:</strong> April 15, 2024</p>
-                    <p><strong>Seat:</strong> 23A</p>
-                </div>
-                <div class="ticket-details">
-                    <h3>Passenger Information</h3>
-                    <p><strong>Name:</strong> John Doe</p>
-                    <p><strong>Email:</strong> john.doe@example.com</p>
-                    <p><strong>Phone:</strong> +1234567890</p>
-                </div>
-                <div class="barcode">
-                <?php
-                        // Establish MySQL connection
-                        $servername = "localhost:3307"; // Change this to your MySQL server hostname
-                        $username = "root"; // Change this to your MySQL username
-                        $password = "admin"; // Change this to your MySQL password
-                        $dbname = "sample"; // Change this to your MySQL database name
+    <?php
+    session_start();
+    // Establish MySQL connection
+    $servername = "localhost:3307"; 
+    $username = "root"; 
+    $password = "admin"; 
+    $dbname = "sample";
 
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-                        // SQL query to fetch voucher or barcode data
-                        $sql = "SELECT voucher_code FROM booking_tracker WHERE id = 34"; // Change this query according to your database schema
+    $session = $_SESSION['email'];
 
-                        $result = $conn->query($sql);
+    // SQL query to fetch voucher or barcode data
+    $stmt = $conn->prepare("SELECT * FROM booking_tracker WHERE email = ?"); 
+    $stmt->bind_param("s", $session);
+    $stmt->execute();
 
-                        if ($result->num_rows > 0) {
-                            // Output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                $barcodeData = $row["voucher_code"];
-                            }
-                        } else {
-                            echo "0 results";
-                        }
+    $result = $stmt->get_result();
 
-                        // Close MySQL connection
-                        $conn->close();
+    if ($result->num_rows > 0) {
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            $barcodeData = $row["voucher_code"];
+            $email = $row['email'];
+            $fullname = $row['full_name'];
+            $phone = $row['contact_number'];
+            $specific_place = $row['hotel'];
+            $voucherCode = $row['voucher_code'];
+            $departure = $row['departure'];
+            $arrival = $row['arrival'];
+            $adult = $row['adult'];
+            $children  = $row['children'];
 
-                        // Generate barcode image
-                        require 'vendor/autoload.php'; // Load Composer's autoloader
-                        use Picqer\Barcode\BarcodeGeneratorPNG;
+            // Generate barcode image
+            require 'C:\xampp\htdocs\Website\vendor\autoload.php';// Load Composer's autoloader
+            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+            $barcodeImage = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
 
-                        $generator = new BarcodeGeneratorPNG();
-                        $barcodeImage = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
+            echo '<div class="container mt-5">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h1>Travel Go Hotel E-Ticket</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>Hotel Booking Information</h3>
+                                    <p><strong>Hotel:</strong> '.$specific_place.'</p>
+                                    <p><strong>Hotel ID:</strong> '.$voucherCode.'</p>
+                                    <p><strong>Departure Date:</strong> '.$departure.'</p>
+                                    <p><strong>Arrival Date:</strong> '.$arrival.'</p>
+                                    <p><strong>Adult No:</strong> '.$adult.'</p>
+                                    <p><strong>Children No:</strong> '.$children.'</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Passenger Information</h3>
+                                    <p><strong>Name:</strong> '.$fullname.'</p>
+                                    <p><strong>Email:</strong> '.$email.'</p>
+                                    <p><strong>Phone:</strong> '.$phone.'</p>
+                                    <div class="barcode">
+                                        <p><strong>Your Bar code</strong> </p>
+                                        <img src="data:image/png;base64,'.base64_encode($barcodeImage).'" alt="Barcode">
 
-                        // Output HTML with barcode image
-                        echo '<img src="data:image/png;base64,' . base64_encode($barcodeImage) . '" alt="Barcode">';
-                        ?>
-                </div>
-            </div>
-            <div class="footer">
-                <p>&copy; 2024 Travel E-Ticket. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
+                                        <div class="footer">
+                                            <p>&copy; 2024 Travel E-Ticket. All rights reserved.</p>
+                                            <button type="button" class="btn btn-primary">Back</button>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+        }
+    } else {
+        echo "0 results";
+    }
+
+    // Close MySQL connection
+    $conn->close();
+    ?>
 </body>
 </html>

@@ -1,3 +1,44 @@
+<?php
+// Include database connection file
+include("connection.php");
+
+// Check if the form is submitted
+if (isset($_POST["submit"])) {
+    // Get form data
+    $id = $_POST["id"];
+    $fullname = $_POST["name"];
+    $children = $_POST["children"];
+    $adult = $_POST["adults"];
+    $arrival = $_POST["adate"];
+    $departure = $_POST["ddate"];
+    $contact_number = $_POST["phone"];
+    $email = $_POST["email"];
+    $hotel = $_POST["hotel"];
+
+    // Prepare the SQL statement using prepared statements to prevent SQL injection
+    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=?, hotel=? WHERE id=?";
+
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bind_param("siississi", $fullname, $children, $adult, $arrival, $departure, $contact_number, $email, $hotel, $id);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
+        header("Location: booking_list.php");
+        exit();
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the statement
+    $stmt->close();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +136,7 @@
                             <th>ARRIVAL</th>
                             <th>DEPARTURE</th>
                             <th>CONTACT NUMBER</th>
+                            <th>HOTEL</th>
                             <th>ACTION</th>
                         </tr>
                         <?php
@@ -120,21 +162,22 @@
 
                         while($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
+                            $idhaha = $row['id'];
                             echo "<td>".$row['id']."</td>";
                             echo "<td>".$row['full_name']."</td>";
                             echo "<td>".$row['email']."</td>";
                             echo "<td>".$row['arrival']."</td>";
                             echo "<td>".$row['departure']."</td>";
                             echo "<td>".$row['contact_number']."</td>";
+                            echo "<td>".$row['hotel']."</td>";
                             echo "<td>
-                            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Update</button>
-                                <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
+                            <button type='button' class='btn btn-primary update-btn' data-bs-toggle='modal' data-bs-target='#myModal".urlencode($row['id'])."'>Update</button>
+                            <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
                               </td>";
                         echo "</tr>";
                     }
 
-                        mysqli_free_result($result);
-                        mysqli_close($conn);
+                       
                         ?>
                     </table>
                 </div>
@@ -147,55 +190,7 @@
 
 
  <!-- The Modal -->
-<?php
- // Check if the form is submitted
-if (isset($_POST["submit"])) {
-    // Get form data
-    $fullname = $_POST["name"];
-    $children = $_POST["children"];
-    $adult = $_POST["adults"];
-    $arrival = $_POST["adate"];
-    $departure = $_POST["ddate"];
-    $payment = $_POST["payment_method"];
-    $phone = $_POST["phone"];
-    $email = $_POST["email"];
-
-
-
-
-
-
-
-
-
-
-    // Prepare the SQL statement using prepared statements to prevent SQL injection
-    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=? WHERE id=?";
-
-    // Prepare the statement
-    $stmt = $conn->prepare($sql);
-
-    // Bind parameters
-    $stmt->bind_param("siisssss", $fullname, $children, $adult, $arrival, $departure, $phone, $email, $id);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
-        header("Location: system.php");
-
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close the statement
-    $stmt->close();
-}
-?>
-
-
-
-
-<div class="modal fade" id="myModal">
+ <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -205,7 +200,17 @@ if (isset($_POST["submit"])) {
             </div>
             <!-- Modal body -->
             <div class="modal-body">
+                
                 <form id="updateBookingForm" method="POST">
+                <?php
+                    $query = "SELECT * FROM booking_tracker";
+                    $result = mysqli_query($conn, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['id']; ?>" required>
+                    </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -216,7 +221,7 @@ if (isset($_POST["submit"])) {
                     </div>
                     <div class="mb-3">
                         <label for="hotel" class="form-label">Hotel</label>
-                        <input type="text" class="form-control" id="hotel" name="hotel" required>
+                        <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo  $row['hotel'] ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone number</label>
@@ -262,6 +267,12 @@ if (isset($_POST["submit"])) {
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
+                <?php
+                    }
+                
+                    mysqli_free_result($result);
+                    mysqli_close($conn);
+                    ?>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -273,93 +284,74 @@ if (isset($_POST["submit"])) {
 
     <script>
         jQuery(document).ready(function($){
-            $(".delete-btn").click(function(){
-                var bookingId = $(this).data("id");
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this booking!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((willDelete) => {
-                    
+        // Update Button Click Event
+        $(".update-btn").click(function(){
+            // Get the row corresponding to the clicked button
+             // Get the ID from the data-id attribute of the clicked button
+            var id = $(this).data("id");
+            
+            // Log the ID to the console for testing
+            console.log("Clicked ID: " + id);
+             // Set the value of the hidden input field in the modal
+        $("#updateBookingForm input[name='id']").val(id);
+            var row = $(this).closest("tr");
 
-                    if (willDelete.isConfirmed) {
-                        $.ajax({
-                            url: "booking_list.php",
-                            type: "POST",
-                            data: {delete_id: bookingId},
-                            success: function(response) {
-                                location.reload();
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your booking has been deleted.",
-                            icon: "success",
-                            confirmButtonText: "Ok"
-                        })
-                    }
-                });
-            });
+            // Extract values from the row
+            var id = row.find("td:eq(0)").text();
+            var name = row.find("td:eq(1)").text();
+            var email = row.find("td:eq(2)").text();
+            var arrival = row.find("td:eq(3)").text();
+            var departure = row.find("td:eq(4)").text();
+            var contact_number = row.find("td:eq(5)").text();
+            var hotel = row.find("td:eq(6)").text();
+
+            // Set values to the modal form fields
+            $("#id").val(id);
+            $("#name").val(name);
+            $("#email").val(email);
+            $("#arrival_date").val(arrival);
+            $("#departure_date").val(departure);
+            $("#phone").val(contact_number);
+            $("#hotel").val(hotel);
+
+            // Show the modal
+            $("#myModal").modal("show");
         });
 
-
-        $(document).ready(function() {
-        $('.btn-primary').on('click', function() {
-            var row = $(this).closest('tr');
-            var cols = row.find('td');
-
-            // Populate form fields with row data
-            $('#booking_id').val(cols.eq(0).text()); // Booking ID
-            $('#name').val(cols.eq(1).text());
-            $('#email').val(cols.eq(2).text());
-            $('#arrival_date').val(cols.eq(3).text());
-            $('#departure_date').val(cols.eq(4).text());
-            $('#phone').val(cols.eq(5).text());
-
-            // Set selected options for Adults and Children
-            var adults = parseInt(cols.eq(6).text()); // Number of Adults
-            var children = parseInt(cols.eq(7).text()); // Number of Children
-            $('#adults').val(adults);
-            $('#children').val(children);
-
-            $('#payment_method').val(cols.eq(8).text());
-            $('#hotel').val(cols.eq(9).text());
-
-            // Display modal
-            $('#myModal').modal('show');
-        });
-
-        // Form submission handling
-        $('#updateBookingForm').on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Get form data
-            var formData = $(this).serialize();
-
-            // Submit form using AJAX
-            $.ajax({
-                url: 'update_booking.php', // Adjust the URL according to your file structure
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    // Handle success response
-                    console.log(response);
-                    // Reload page or update UI as needed
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error(xhr.responseText);
+        // Delete Button Click Event
+        $(".delete-btn").click(function(){
+            var bookingId = $(this).data("id");
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this booking!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    $.ajax({
+                        url: "booking_list.php",
+                        type: "POST",
+                        data: {delete_id: bookingId},
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your booking has been deleted.",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    })
                 }
             });
         });
     });
-    </script>
+</script>
 </body>
 </html>

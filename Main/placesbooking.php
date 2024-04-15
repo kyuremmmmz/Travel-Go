@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
-    $book  = $_POST["book_type"];
+
 
 
 
@@ -36,8 +36,8 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, booked) 
-                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', $book)";
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode')";
 
         // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
@@ -62,7 +62,7 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: travel.php");
+                    header("Location: travel.php?choice= ".urlencode($email)."");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";
