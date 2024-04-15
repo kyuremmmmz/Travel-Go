@@ -231,6 +231,8 @@
                     }
                     $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
                     $sql = "SELECT hotels, price_for_hotel, image3 FROM `create_see_details.php` WHERE place ='$img'";
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'";
+                    $result = $conn->query($sql);
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {

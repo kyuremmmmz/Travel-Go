@@ -228,7 +228,7 @@
    
     <!-- ==========================================================================number 1 container ===============================================================================-->
     <div class="container" id="container">
-        <h1 class="for">Popular Attractions</h1>
+        <h1 class="for">Popular Places</h1>
         
         <?php
     $conn = new mysqli("localhost:3307", "root", "admin", "sample");

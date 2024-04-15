@@ -45,7 +45,7 @@
             $arrival = $row['arrival'];
             $adult = $row['adult'];
             $children  = $row['children'];
-
+            
             // Generate barcode image
             require 'C:\xampp\htdocs\Website\vendor\autoload.php';// Load Composer's autoloader
             $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
@@ -75,15 +75,14 @@
                                     <div class="barcode">
                                         <p><strong>Your Bar code</strong> </p>
                                         <img src="data:image/png;base64,'.base64_encode($barcodeImage).'" alt="Barcode">
-
-                                        <div class="footer">
-                                            <p>&copy; 2024 Travel E-Ticket. All rights reserved.</p>
-                                            <button type="button" class="btn btn-primary">Back</button>
-                                        </div>
-    
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <form action="Main.php" method="post">
+                                <button type="submit" class="btn btn-primary" name="back">Back</button>
+                            </form>
                         </div>
                     </div>
                 </div>';

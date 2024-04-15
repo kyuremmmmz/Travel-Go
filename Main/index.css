@@ -554,6 +554,8 @@ body{
     display: block;
     background-color: rgb(255, 255, 255);
     height: 250px;
+    width: 320px;
+    max-width: 320px;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -573,7 +575,7 @@ body{
     position: relative;
     transition: all 0.7s ease;
     cursor: pointer;
-    transform: translate(50%, 5%);
+    transform: translate(20%, 5%);
     margin-top: 40px;
     box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.5);
     grid-template-columns: repeat(auto-fill);
@@ -593,7 +595,7 @@ body{
 .container .inner-box .box img {
     display: block;
     height: 250px;
-    width: 300px;
+    width: 100%;
     right: 50%;
     bottom: 50%;
     transform: translate(0%, 0%);
