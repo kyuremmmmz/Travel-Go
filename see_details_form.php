@@ -1,3 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar-logo {
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .sidebar-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar-menu li {
+    padding: 10px;
+    border-bottom: 1px solid #4e555b;
+}
+
+.sidebar-menu li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s; /* Add transition for smoother color change */
+}
+
+.sidebar-menu li:hover a,
+.sidebar-menu li:focus a,
+.sidebar-menu li:active a {
+    color: #fff; /* Change text color on hover, focus, and active */
+    background-color: #343a40;
+}
+
+.sidebar-menu li:hover {
+    background-color: #4e555b; /* Change background color on hover */
+}
+    </style>
+</head>
+<body>
 <?php
 $DB_HOST = "localhost:3307";
 $DB_USER = "root";
@@ -76,69 +127,26 @@ if (isset($_POST["submit"])) {
                     move_uploaded_file($file3['tmp_name'], $uploadPath3);
                 }
 
-                // Insert data into the database
-                    $query = "INSERT INTO `create_see_details.php`(price, 
-                    price_for_hotel, 
-                    
-                    price_for_flights, 
-                    
-                    hotels, 
-                    
-                    image, 
-                    
-                    image2, 
-                    
-                    image3, 
-                    
-                    place, 
-                    
-                    specific_place, 
-                    
-                    description, 
-                    
-                    departure, 
-                    
-                    flights, 
-                    
-                    amenities, 
-                    
-                    arrival ) 
-                    
-                    VALUES('$name', 
-                    
-                    '$hotelsPrices', 
-                    
-                    '$flight_price', 
-                    
-                    '$hotel', 
-                    
-                    '$newImageName', 
-                    
-                    '$newImageName2', 
-                    
-                    '$newImageName3',
-                    
-                    '$place', 
-                    
-                    '$placee' ,
-                    
-                    '$description', 
-                    
-                    '$departure', 
-                    
-                    '$flights', 
-                    
-                    '$amenities',
-                    
-                    '$arrival')";
-                    
-                    
-                    if ($conn->query($query) === TRUE) {
+               
+                                // Insert data into the database
+                    $query = "INSERT INTO `create_see_details.php` (price, price_for_hotel, price_for_flights, hotels, image, image2, image3, place, specific_place, description, departure, flights, amenities, arrival) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                    // Prepare the statement
+                    $stmt = $conn->prepare($query);
+
+                    // Bind parameters
+                    $stmt->bind_param("ssssssssssssss", $name, $hotelsPrices, $flight_price, $hotel, $newImageName, $newImageName2, $newImageName3, $place, $placee, $description, $departure, $flights, $amenities, $arrival);
+
+                    // Execute the statement
+                    if ($stmt->execute()) {
                         echo '<script>sweetAlert("Invalid", "Wrong Password or Email try again", "error");</script>';
                     } else {
-                        echo "Error: " . $query . "<br>" . $conn->error;
+                        echo "Error: " . $stmt->error;
                     }
-                
+
+                    // Close the statement
+                    $stmt->close();
+                                    
                 }
                 
     }
@@ -146,80 +154,26 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelGoPH Admin</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="icon" href="icon.ico" type="image/x-icon">
-    <!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <style>
-        body {
-            background-color: #343a40; /* Dark background color */
-            color: white; /* Text color */
-        }
-
-        .container {
-            margin-top: 50px;
-            width: auto;
-            max-width: 700px; /* Adjusted maximum width */
-            padding: 20px; /* Added padding */
-            border: 2px solid #ffffff; /* Added border */
-            border-radius: 10px; /* Added border-radius for rounded corners */
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Added box shadow */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            margin-left: auto; /* Center horizontally */
-            margin-right: auto; /* Center horizontally */
-        }
-
-        .form-group {
-            padding-top: 15px; /* Adjusted padding */
-        }
-
-        /* Style for form inputs */
-        input[type="text"],
-        input[type="file"] {
-            background-color: #ffffff; /* Background color */
-            color: #343a40; /* Text color */
-            border-color: #ffffff; /* Border color */
-        }
-
-        /* Style for form inputs on focus */
-        input[type="text"]:focus,
-        input[type="file"]:focus {
-            background-color: #ffffff; /* Background color */
-            color: #343a40; /* Text color */
-            border-color: #ffffff; /* Border color */
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Added box shadow */
-        }
-
-        /* Style for buttons */
-        .btn {
-            margin-top: 20px; /* Adjusted margin */
-            width: 100%; /* Button width */
-        }
-
-        /* Style for back button */
-        .btn-secondary {
-            margin-top: 10px; /* Adjusted margin */
-            width: 100%; /* Button width */
-        }
-
-        /* Style for error message */
-        .error-message {
-            color: #ff0000; /* Red color */
-            font-size: 14px; /* Font size */
-            margin-top: 10px; /* Adjusted margin */
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="sidebar-logo">Travel Go Ph Admin</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#packages"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="/admin/pakages.php"><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking_list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+            <!-- Content -->
+            <div class="col-md-9">
+                <!-- Content goes here -->
+                
+                <h1>Welcome to Admin Dashboard</h1>
+                <hr>
+                <div class="container">
     <form action="see_details_form.php" method="post" autocomplete="off" enctype="multipart/form-data">
         <h1 class="mb-4 text-center">Post Details in TravelGoPH</h1>
 
@@ -243,16 +197,6 @@ if (isset($_POST["submit"])) {
                 <div class="form-group">
                     <label for="arrival">Arrival</label>
                     <input type="date" class="form-control" name="arrival" placeholder="Price...">
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Price Flights</label>
-                    <input type="text" class="form-control" name="priceFlights" placeholder="Price...">
-                </div>
-
-                <div class="form-group">
-                    <label for="place">Flights</label>
-                    <input type="text" class="form-control" name="flights" placeholder="Place...">
                 </div>
 
                 <div class="form-group">
@@ -286,12 +230,6 @@ if (isset($_POST["submit"])) {
                     <label for="image">Attraction Url</label>
                     <input type="file" class="form-control-file" name="file" accept=".jpg, .jpeg, .gif, .png, .webp" required  multiple>
                 </div>
-
-                <div class="form-group">
-                    <label for="image2">Flights URL</label>
-                    <input type="file" class="form-control-file" name="file2" accept=".jpg, .jpeg, .gif, .png, .webp" required multiple>
-                </div>
-
                 <div class="form-group">
                     <label for="image3">Hotels URL</label>
                     <input type="file" class="form-control-file" name="file3" accept=".jpg, .jpeg, .gif, .png, .webp" required multiple>
@@ -303,13 +241,13 @@ if (isset($_POST["submit"])) {
         <a href="system.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
-
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- SweetAlert JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
+                
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

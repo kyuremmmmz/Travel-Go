@@ -25,25 +25,22 @@
             padding: 0;
         }
         .sidebar-menu li {
-    padding: 10px;
-    border-bottom: 1px solid #4e555b;
-}
-
-.sidebar-menu li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s; /* Add transition for smoother color change */
-}
-
-.sidebar-menu li:hover a,
-.sidebar-menu li:focus a,
-.sidebar-menu li:active a {
-    color: #fff; /* Change text color on hover, focus, and active */
-}
-
-.sidebar-menu li:hover {
-    background-color: #4e555b; /* Change background color on hover */
-}
+            padding: 10px;
+            border-bottom: 1px solid #4e555b;
+        }
+        .sidebar-menu li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s; /* Add transition for smoother color change */
+        }
+        .sidebar-menu li:hover a,
+        .sidebar-menu li:focus a,
+        .sidebar-menu li:active a {
+            color: #fff; /* Change text color on hover, focus, and active */
+        }
+        .sidebar-menu li:hover {
+            background-color: #4e555b; /* Change background color on hover */
+        }
     </style>
 </head>
 <body>
@@ -52,7 +49,6 @@
 
     if ($conn-> connect_error) {
         die("". $conn->connect_error);
-        # code...
     }
     
     ?>
@@ -64,7 +60,7 @@
                 <ul class="sidebar-menu">
                     <li><a href="system.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking-list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="booking_list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
                     <li><a href="inquiries.php"><i class="fas fa-envelope"></i> Inquiries</a></li>
                     <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
@@ -72,9 +68,30 @@
             <!-- Content -->
             <div class="col-md-9">
                 <!-- Content goes here -->
-                <h1>Welcome to Admin Dashboard</h1>
+                <h1>Welcome to Admin Dashboard Packages</h1>
                 <hr>
-                <p>Tite.</p>
+                <!-- Table with "Create New" button -->
+                <div class="d-flex justify-content-between mb-3">
+                    <h2>Packages</h2>
+                    <a href="see_details_form.php" class="btn btn-primary">Create New</a>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Arrival</th>
+                            <th>Departure</th>
+                            <th>Contact Number</th>
+                            <th>Hotel</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be added dynamically here -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

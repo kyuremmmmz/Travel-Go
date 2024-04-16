@@ -157,7 +157,7 @@
             echo '</div>';
 
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
-            echo '<a href="/placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
+            echo '<a href="placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
             echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
      
 
@@ -231,8 +231,10 @@
                     }
                     $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
                     $sql = "SELECT hotels, price_for_hotel, image3 FROM `create_see_details.php` WHERE place ='$img'";
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'";
+                    
                     $result = $conn->query($sql);
+
+                    
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {

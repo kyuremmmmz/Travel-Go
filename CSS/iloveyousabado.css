@@ -581,11 +581,13 @@ hr{
 .container #map-container {
     position: absolute; /* Position the map container relative to the page */
     height: 700px;
+    max-height: 700px;
     overflow: hidden;
     width: 700px; /* Set the width of the map */
-    transform: translate(126%, -100%);
+    transform: translate(126%, -140%);
     text-align: center;
     border-left: 1px solid black;
+    border-bottom: 1px solid black;
     
 
 }

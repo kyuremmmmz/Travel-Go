@@ -171,12 +171,13 @@ if (isset($_POST["submit"])) {
                             echo "<td>".$row['contact_number']."</td>";
                             echo "<td>".$row['hotel']."</td>";
                             echo "<td>
-                            <button type='button' class='btn btn-primary update-btn' data-bs-toggle='modal' data-bs-target='#myModal".urlencode($row['id'])."'>Update</button>
+                            <a href='update_form.php?choice=".urlencode($row['id'])."' class='btn btn-primary update-link'>Update</a>
                             <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
                               </td>";
                         echo "</tr>";
                     }
 
+                    
                        
                         ?>
                     </table>
@@ -185,138 +186,7 @@ if (isset($_POST["submit"])) {
         </div>
     </div>
 
-
-
-
-
- <!-- The Modal -->
- <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Update Booking</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                
-                <form id="updateBookingForm" method="POST">
-                <?php
-                    $query = "SELECT * FROM booking_tracker";
-                    $result = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <div class="mb-3">
-                        <label for="id" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['id']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="hotel" class="form-label">Hotel</label>
-                        <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo  $row['hotel'] ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone number</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="arrival_date" class="form-label">Arrival Date</label>
-                            <input type="date" class="form-control" id="arrival_date" name="adate" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="departure_date" class="form-label">Departure Date</label>
-                            <input type="date" class="form-control" id="departure_date" name="ddate" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="adults" class="form-label">Number of Adults</label>
-                            <select class="form-select" id="adults" name="adults" required>
-                                <option value="">Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="children" class="form-label">Number of Children</label>
-                            <select class="form-select" id="children" name="children" required>
-                                <option value="">Select</option>
-                                <option value="0">None</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="payment_method" class="form-label">Payment Method</label>
-                        <select class="form-select" id="payment_method" name="payment_method" required>
-                            <option value="">Select</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="debit_card">Debit Card</option>
-                            <option value="paypal">PayPal</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                </form>
-                <?php
-                    }
-                
-                    mysqli_free_result($result);
-                    mysqli_close($conn);
-                    ?>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
     <script>
-        jQuery(document).ready(function($){
-        // Update Button Click Event
-        $(".update-btn").click(function(){
-            // Get the row corresponding to the clicked button
-             // Get the ID from the data-id attribute of the clicked button
-            var id = $(this).data("id");
-            
-            // Log the ID to the console for testing
-            console.log("Clicked ID: " + id);
-             // Set the value of the hidden input field in the modal
-        $("#updateBookingForm input[name='id']").val(id);
-            var row = $(this).closest("tr");
-
-            // Extract values from the row
-            var id = row.find("td:eq(0)").text();
-            var name = row.find("td:eq(1)").text();
-            var email = row.find("td:eq(2)").text();
-            var arrival = row.find("td:eq(3)").text();
-            var departure = row.find("td:eq(4)").text();
-            var contact_number = row.find("td:eq(5)").text();
-            var hotel = row.find("td:eq(6)").text();
-
-            // Set values to the modal form fields
-            $("#id").val(id);
-            $("#name").val(name);
-            $("#email").val(email);
-            $("#arrival_date").val(arrival);
-            $("#departure_date").val(departure);
-            $("#phone").val(contact_number);
-            $("#hotel").val(hotel);
-
-            // Show the modal
-            $("#myModal").modal("show");
-        });
 
         // Delete Button Click Event
         $(".delete-btn").click(function(){
@@ -351,7 +221,7 @@ if (isset($_POST["submit"])) {
                 }
             });
         });
-    });
+
 </script>
 </body>
 </html>
