@@ -9,4 +9,4 @@ session_destroy();
 ?>
 
         <h1 class="error">Your PayPal Transaction has been Canceled</h1>
-    <a href="index2.php" class="btn-link">Back to Home</a>
+    <a href="index.php" class="btn-link">Back to Home</a>

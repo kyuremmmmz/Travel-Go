@@ -6,6 +6,9 @@ require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 
+include_once 'config.php';
+
+
 
 
 if (isset($_POST["submit"])) {
@@ -17,6 +20,7 @@ if (isset($_POST["submit"])) {
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
+    $amount = $_POST["amount"];
 
 
 
@@ -36,8 +40,8 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code) 
-                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode')";
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, amount) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', '$amount')";
 
         // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
@@ -149,7 +153,7 @@ function generateVoucher() {
             <div class="col-md-12">
                 <!-- Form -->
                 
-                <form action="placesbooking.php" method="POST">
+                <form action="<?php echo PAYPAL_URL; ?>" method="post" id="paypal_form" onSubmit="return validateForm();">
                     <?php
                     if (isset($_GET["choice"]) && isset($_GET["price"])) {
                         $choice = $_GET["choice"];
@@ -157,6 +161,8 @@ function generateVoucher() {
                         echo "<h2 class='text-center mb-4'>Book this to: $choice With PHP $price</h2>";
                     }
                     ?>
+                    <input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
+                    <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
                     <div class="mb-3 form-group">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -178,12 +184,8 @@ function generateVoucher() {
                         <input type="date" class="form-control" id="departure_date" name="ddate" required>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="booktype" class="form-label">Book type</label>
-                        <select class="form-select" id="booktype" name="book_type" required>
-                            <option value="">Select</option>
-                            <option value="hotel">Hotel</option>
-                            <option value="flight">Flight</option>
-                        </select>
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $price ?>" required>
                     </div>
                     <div class="mb-3 form-group">
                         <label for="adults" class="form-label">Number of Adults</label>
@@ -206,6 +208,10 @@ function generateVoucher() {
                         <label for="hotel" class="form-label">Book this to</label>
                         <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo isset($_GET["choice"]) ? $_GET["choice"] : ''; ?>" required>
                     </div>
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <!-- Specify URLs -->
+                    <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
+                    <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
                     <button type="submit" class="btn btn-primary" name="submit">Next</button>
                 </form>
             </div>
