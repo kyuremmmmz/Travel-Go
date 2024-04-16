@@ -572,27 +572,29 @@ hr{
 }
 
 
- #map {
-    height: 632px; /* Adjust the height as needed */
-    width: 100%; /* Ensure the map takes the full width of its container */
-    transform: translateX(2%);
+.sec2 {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.container #map-container {
-    position: absolute; /* Position the map container relative to the page */
-    height: 700px;
-    max-height: 700px;
+#map-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 750px; 
+    height: 72%;
     overflow: hidden;
-    width: 700px; /* Set the width of the map */
-    transform: translate(126%, -140%);
     text-align: center;
     border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    
-
 }
 
-.container #map-container h1 {
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+ #map-container h1 {
     margin-bottom: 20px;
 
 }

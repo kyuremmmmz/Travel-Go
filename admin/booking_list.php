@@ -96,6 +96,26 @@ if (isset($_POST["submit"])) {
             background-color: #343a40;
             color: aliceblue;
         }
+        /* Avatar */
+        .avatar {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+        
     </style>
 </head>
 <body>
@@ -112,6 +132,22 @@ if (isset($_POST["submit"])) {
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
+             <!-- Content goes here -->
+             <div class="avatar">
+                    <img src="avatar.jpg" alt="Avatar">
+                    <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle drop" data-bs-toggle="dropdown">
+                    Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+
+                </div>
+                </div>
             <!-- Content -->
             <div class="col-md-9 content">
                 <!-- Content goes here -->

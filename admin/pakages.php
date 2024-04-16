@@ -41,6 +41,31 @@
         .sidebar-menu li:hover {
             background-color: #4e555b; /* Change background color on hover */
         }
+
+        .content{
+            max-height: calc(150vh - 70px);
+            overflow-y: auto;
+            
+        }
+        /* Avatar */
+        .avatar {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
     </style>
 </head>
 <body>
@@ -65,15 +90,31 @@
                     <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
+             <!-- Content goes here -->
+             <div class="avatar">
+                    <img src="avatar.jpg" alt="Avatar">
+                    <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+
+                </div>
+                </div>
             <!-- Content -->
-            <div class="col-md-9">
+            <div class="col-md-9 content">
                 <!-- Content goes here -->
                 <h1>Welcome to Admin Dashboard Packages</h1>
                 <hr>
                 <!-- Table with "Create New" button -->
                 <div class="d-flex justify-content-between mb-3">
                     <h2>Packages</h2>
-                    <a href="see_details_form.php" class="btn btn-primary">Create New</a>
+                    <a href="/see_details_form.php" class="btn btn-primary">Create New</a>
                 </div>
                 <table class="table table-hover">
                     <thead>

@@ -193,7 +193,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js" async defer></script>
 
- 
+</section>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
@@ -382,7 +382,7 @@
         
        
     
-</section>
+
 
  
 
