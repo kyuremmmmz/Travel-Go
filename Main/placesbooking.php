@@ -6,9 +6,6 @@ require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 
-include_once 'config.php';
-
-
 
 
 if (isset($_POST["submit"])) {
@@ -21,6 +18,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $hotel = $_POST["hotel"];
     $amount = $_POST["amount"];
+    $status = "pending";
 
 
 
@@ -40,8 +38,8 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, amount) 
-                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', '$amount')";
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, amount, status) 
+                VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', '$amount', '$status')";
 
         // Execute the SQL query
         if ($conn->query($sql) === TRUE) {
@@ -66,7 +64,9 @@ if (isset($_POST["submit"])) {
                     // Send email
                     $mail->send();
                     echo "<script>alert('Email sent successfully')</script>";
-                    header("Location: travel.php?choice= ".urlencode($email)."");
+
+                    $url = "payment.php?choice=" . urlencode($amount);
+                    header("Location: $url");
                     exit;
                 } catch (Exception $e) {
                     echo "Error sending email: {$mail->ErrorInfo}";
@@ -153,7 +153,7 @@ function generateVoucher() {
             <div class="col-md-12">
                 <!-- Form -->
                 
-                <form action="<?php echo PAYPAL_URL; ?>" method="post" id="paypal_form" onSubmit="return validateForm();">
+                <form action="placesbooking.php" method="POST">
                     <?php
                     if (isset($_GET["choice"]) && isset($_GET["price"])) {
                         $choice = $_GET["choice"];
@@ -161,8 +161,6 @@ function generateVoucher() {
                         echo "<h2 class='text-center mb-4'>Book this to: $choice With PHP $price</h2>";
                     }
                     ?>
-                    <input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
-                    <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
                     <div class="mb-3 form-group">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -208,10 +206,6 @@ function generateVoucher() {
                         <label for="hotel" class="form-label">Book this to</label>
                         <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo isset($_GET["choice"]) ? $_GET["choice"] : ''; ?>" required>
                     </div>
-                    <input type="hidden" name="cmd" value="_xclick">
-                    <!-- Specify URLs -->
-                    <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
-                    <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
                     <button type="submit" class="btn btn-primary" name="submit">Next</button>
                 </form>
             </div>

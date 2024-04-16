@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signin TravelGoPH</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@ if (isset($_POST['Submit'])) {
     // If email and password match, store email in session
     if (is_array($row) && !empty($row)) {
         $_SESSION['email'] = $email;
-        header("Location: Main/Main.php"); // Redirect to Main.php after successful login
+        header("Location: Main.php"); // Redirect to Main.php after successful login
         exit();
     } else {
         echo '<script>alert("Invalid email or password. Please try again.");</script>';
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         // Assuming the response contains the email
                         var email = response.email;
                         // Redirect to another page and pass the email as a parameter
-                        window.location.href = 'Main/Main.php?email=' + email;
+                        window.location.href = 'Main.php?email=' + email;
                     },
                     error: function () {
                         // Handle errors

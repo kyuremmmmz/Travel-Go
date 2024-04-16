@@ -1,10 +1,10 @@
 <?php 
 session_start();
-include_once 'dbConnect.php';
+include_once 'con2.php';
 
-$pid = $_SESSION['user_id'];
+$pid = $_SESSION['email'];
 
-$insert = $db->query("UPDATE product SET status='cancelled' where id='".$pid."'");
+$insert = $db->query("UPDATE hotel SET status='cancelled' where id='".$pid."'");
 session_destroy();
 ?>
 

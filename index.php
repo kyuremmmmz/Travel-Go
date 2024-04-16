@@ -93,7 +93,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -126,7 +126,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -148,7 +148,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -171,7 +171,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -194,7 +194,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -217,7 +217,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -241,7 +241,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 
@@ -263,7 +263,7 @@
                 
                 
                 if (isset($_POST["button"])) {
-                    header("Location: login_page.php");
+                    header("Location: Main/login_page.php");
                 }
                 
                 

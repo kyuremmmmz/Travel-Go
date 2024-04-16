@@ -1,19 +1,13 @@
 <?php
 session_start();
-$email = $_SESSION['email'];
+$email = $_SESSION['email']; 
 
-// Establish database connection
-$conn = mysqli_connect("localhost:3307", "root", "admin", "sample");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include_once 'config.php'; 
+include_once 'con2.php';
 
 // Fetch booking information from the database
-$stmt = $conn->prepare("SELECT hotel, full_name, departure, arrival FROM booking_tracker WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT hotel, full_name, departure, arrival FROM booking_tracker WHERE email = '$email'";
+$result = $conn->query($sql);
 
 ?>
 
