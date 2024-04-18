@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
         }
 
         // Construct the SQL query
-        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, contact_number, email, hotel, voucher_code, amount, status) 
+        $sql = "INSERT INTO booking_tracker(full_name, children, adult, arrival, departure, phone, email, hotel, voucher_code, amount, status) 
                 VALUES ('$fullname', '$children', '$adult', '$arrival', '$departure', '$phone', '$email', '$hotel', '$voucherCode', '$amount', '$status')";
 
         // Execute the SQL query
