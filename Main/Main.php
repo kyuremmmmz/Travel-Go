@@ -83,13 +83,13 @@
 
         
                     <p class="travel-2" data-aos="fade-up"
-                data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
+                 data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
 
-                <div class="autocomplete">
-                    <input type="text" id="search" name="search" placeholder="Search for places">
-                    <ul id="my-box"></ul>
-                    <button class="search" name="submit"><i class="fas fa-search"></i>SEARCH</button>
-                </div>
+                    <div class="autocomplete">
+                        <input type="text" id="search" name="search" placeholder="Search for places" style="display: inline-block;">
+                        <button class="search" name="submit"><i class="fas fa-search"></i>SEARCH</button>
+                        <ul id="my-box"></ul>
+                    </div>
                </li>
             </ul>
         </div>

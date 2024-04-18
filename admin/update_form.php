@@ -5,101 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         /* Custom styles */
         .sidebar {
             background-color: #343a40;
             color: #fff;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            z-index: 1;
+            padding-top: 20px;
         }
         .sidebar-logo {
-            padding: 20px;
             text-align: center;
             font-size: 24px;
         }
         .sidebar-menu {
             list-style-type: none;
             padding: 0;
+            margin-top: 20px;
         }
         .sidebar-menu li {
-    padding: 10px;
-    border-bottom: 1px solid #4e555b;
-}
-
-.sidebar-menu li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s; /* Add transition for smoother color change */
-}
-
-.sidebar-menu li:hover a,
-.sidebar-menu li:focus a,
-.sidebar-menu li:active a {
-    color: #fff; /* Change text color on hover, focus, and active */
-    background-color: #343a40;
-}
-
-.sidebar-menu li:hover {
-    background-color: #4e555b; /* Change background color on hover */
-}
-
-.container {
-            margin-top: 50px;
-            width: auto;
-            max-width: 700px; 
-            padding: 20px; 
-            border: 2px solid #ffffff; 
-            border-radius: 10px; 
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); 
-            background-color: rgba(0, 0, 0, 0.5);
-            margin-left: auto; 
-            margin-right: auto; 
+            padding: 10px;
+            border-bottom: 1px solid #4e555b;
         }
-
-        .form-group {
-            padding-top: 15px; 
+        .sidebar-menu li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
         }
-
-        
-        input[type="text"],
-        input[type="file"] {
-            background-color: #ffffff; 
-            color: #343a40; /* Text color */
-            border-color: #ffffff; /* Border color */
+        .sidebar-menu li:hover a,
+        .sidebar-menu li:focus a,
+        .sidebar-menu li:active a {
+            color: #fff;
+            background-color: #343a40;
         }
-
-        /* Style for form inputs on focus */
-        input[type="text"]:focus,
-        input[type="file"]:focus {
-            background-color: #ffffff; /* Background color */
-            color: #343a40; /* Text color */
-            border-color: #ffffff; /* Border color */
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Added box shadow */
-        }
-
-        /* Style for buttons */
-        .btn {
-            margin-top: 20px; /* Adjusted margin */
-            width: 100%; /* Button width */
-        }
-
-        /* Style for back button */
-        .btn-secondary {
-            margin-top: 10px; /* Adjusted margin */
-            width: 100%; /* Button width */
-        }
-
-        /* Style for error message */
-        .error-message {
-            color: #ff0000; /* Red color */
-            font-size: 14px; /* Font size */
-            margin-top: 10px; /* Adjusted margin */
-        }
-        /* Avatar */
         .avatar {
             position: absolute;
             top: 10px;
@@ -118,96 +64,93 @@
             right: 0;
             left: auto;
         }
+        .content {
+            margin-left: 250px; /* Adjusted for the sidebar width */
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <?php 
-
-
-
-   // Include database connection file
-include("connection.php");
-
-// Check if the form is submitted
-if (isset($_POST["submit"])) {
-    // Get form data
-    $id = $_POST["id"];
-    $fullname = $_POST["name"];
-    $children = $_POST["children"];
-    $adult = $_POST["adults"];
-    $arrival = $_POST["adate"];
-    $departure = $_POST["ddate"];
-    $contact_number = $_POST["phone"];
-    $email = $_POST["email"];
-    $hotel = $_POST["hotel"];
-
-    // Prepare the SQL statement using prepared statements to prevent SQL injection
-    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=?, hotel=? WHERE id=?";
-
-    // Prepare the statement
-    $stmt = $conn->prepare($sql);
-
-    // Bind parameters
-    $stmt->bind_param("siississi", $fullname, $children, $adult, $arrival, $departure, $contact_number, $email, $hotel, $id);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
-        header("Location: booking_list.php");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close the statement
-    $stmt->close();
-}
-?>
-
-    
- 
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
-                <div class="sidebar-logo">Travel Go Ph Admin</div>
+                <div class="sidebar-logo">Admin Dashboard</div>
                 <ul class="sidebar-menu">
-                    <li><a href="system.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="/admin/pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking_list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
             <!-- Content -->
-             <!-- Content goes here -->
-             <div class="avatar">
+            <div class="col-md-9 content">
+                <div class="avatar">
                     <img src="avatar.jpg" alt="Avatar">
                     <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                    Dropdown button
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
-                    </ul>
-
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 2</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
-                </div>
-            <div class="col-md-9">
-                <!-- Content goes here -->
-                
-                <h1>Update Booking</h1>
+                <h1 class="mt-5">Update Booking</h1>
                 <hr>
                 <form id="updateBookingForm" method="POST">
                 <?php
+                    // Include database connection file
+                    include("connection.php");
+
+                    // Check if the form is submitted
+                    if (isset($_POST["submit"])) {
+                        // Get form data
+                        $id = $_POST["id"];
+                        $fullname = $_POST["name"];
+                        $children = $_POST["children"];
+                        $adult = $_POST["adults"];
+                        $arrival = $_POST["adate"];
+                        $departure = $_POST["ddate"];
+                        $contact_number = $_POST["phone"];
+                        $email = $_POST["email"];
+                        $hotel = $_POST["hotel"];
+
+                        // Prepare the SQL statement using prepared statements to prevent SQL injection
+                        $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=?, hotel=? WHERE id=?";
+
+                        // Prepare the statement
+                        $stmt = $conn->prepare($sql);
+
+                        // Bind parameters
+                        $stmt->bind_param("siississi", $fullname, $children, $adult, $arrival, $departure, $contact_number, $email, $hotel, $id);
+
+                        // Execute the statement
+                        if ($stmt->execute()) {
+                            echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
+                            header("Location: booking_list.php");
+                            exit();
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
+
+                        // Close the statement
+                        $stmt->close();
+                    }
+
                     $get = $_GET["choice"];
                     $query = "SELECT * FROM booking_tracker WHERE id = $get ";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
+                ?>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
                         <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['id']; ?>" required>
@@ -273,11 +216,13 @@ if (isset($_POST["submit"])) {
                 
                     mysqli_free_result($result);
                     mysqli_close($conn);
-                    ?>
+                ?>
             </div>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

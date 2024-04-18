@@ -251,7 +251,7 @@ if (!empty($_FILES['file3']['name']) && is_array($_FILES['file3']['name'])) {
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit" data-bs-toggle="modal" data-bs-target="#myModal">SUBMIT</button>
-                    <a href="admin/system.php" class="btn btn-secondary">Back</a>
+                    <a href="pakages.php" class="btn btn-secondary">Back</a>
                 </form>
             </div>
         </div>

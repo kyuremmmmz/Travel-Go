@@ -37,8 +37,6 @@ if (isset($_POST["submit"])) {
     $stmt->close();
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,7 +130,12 @@ if (isset($_POST["submit"])) {
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
-             <!-- Content goes here -->
+    
+            <!-- Content -->
+            <div class="col-md-9 content">
+                <!-- Content goes here -->
+                <h1>Welcome to Admin Dashboard</h1>
+                <!-- Content goes here -->
              <div class="avatar">
                     <img src="avatar.jpg" alt="Avatar">
                     <div class="dropdown">
@@ -148,10 +151,6 @@ if (isset($_POST["submit"])) {
 
                 </div>
                 </div>
-            <!-- Content -->
-            <div class="col-md-9 content">
-                <!-- Content goes here -->
-                <h1>Welcome to Admin Dashboard</h1>
                 <hr>
                 <div class="container mt-5">
                     <h2>Booking Tracker</h2>

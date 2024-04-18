@@ -134,7 +134,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
                     </ul>
 
