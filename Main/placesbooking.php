@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
                     $mail->Port = 587; // TCP port to connect to
     
                     // Set email recipients and content
-                    $mail->setFrom('kurosawataki84@gmail.com', 'Your Name');
+                    $mail->setFrom('kurosawataki84@gmail.com', 'Travel Go Ph');
                     $mail->addAddress($email, $fullname); // Recipient email address
                     $mail->isHTML(true);
                     $mail->Subject = 'Your Booking Confirmation and Voucher';
