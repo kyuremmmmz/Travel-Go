@@ -50,7 +50,7 @@
                 </ul>
                 <div class="container">
                     <?php 
-                    include_once("config.php");
+                    include_once("con2.php");
                     $dataget = $_GET['details'];
                     $sql = "SELECT * FROM `create_see_details.php` WHERE specific_place = '$dataget'";
                     $result = $conn->query($sql);

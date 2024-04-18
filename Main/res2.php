@@ -56,8 +56,6 @@
       More
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Link 1</a></li>
-      <li><a class="dropdown-item" href="#">Link 2</a></li>
       <li><a class="dropdown-item" href="travel.php">My Bookings</a></li>
       <li class="list"><button class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">Signout</button></li>
     </ul>
@@ -140,7 +138,45 @@
             $rating = $row['rating'];
 
             echo '<div class="inner-box">';
-            echo '<div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>';
+            echo '<div class="box">'; // Open .box
+            
+            // Bootstrap 5 Carousel
+            echo '<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">';
+            echo '<div class="carousel-indicators">';
+            $images = explode(',', $row['image']);
+            foreach ($images as $index => $image) {
+                echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $index . '"';
+                if ($index === 0) {
+                    echo ' class="active"';
+                }
+                echo ' aria-current="true" aria-label="Slide ' . ($index + 1) . '"></button>';
+            }
+            echo '</div>';
+            
+            echo '<div class="carousel-inner">';
+            foreach ($images as $index => $image) {
+                echo '<div class="carousel-item';
+                if ($index === 0) {
+                    echo ' active';
+                }
+                echo '">';
+                echo '<img src="/details/' . $image . '" class="d-block w-100" alt="Image">';
+                echo '</div>';
+            }
+            echo '</div>';
+            
+            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">';
+            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Previous</span>';
+            echo '</button>';
+            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">';
+            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Next</span>';
+            echo '</button>';
+            
+            echo '</div>'; // Close .carousel
+            
+            echo '</div>'; // Close .box
             echo '<div class="data">';
             echo '<p class="text2">Budget Places in ' . $text . '</p>';
             echo '<h3 class="textdata">' . $textData . '</h3>';
@@ -153,19 +189,14 @@
                     echo '<span class="fa fa-star"></span>';
                 }
             }
-
             echo '</div>';
-
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
             echo '<a href="placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
             echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
      
+            echo '</div>'; // Close .inner-box
 
-            echo '</div>
-
-            <hr>';
-
-
+            echo '<hr>';
         }
     } else {
         echo "0 results";
@@ -178,6 +209,8 @@
         <div id="map"></div>
     </div>
 </div>
+
+
 
 <script>
     var map;
