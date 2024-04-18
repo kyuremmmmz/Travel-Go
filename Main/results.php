@@ -134,6 +134,7 @@
             // Display the image
             $imageData = base64_encode($row['image']);
             $price = number_format($row['price']);
+            $price2 = $row['price'];
             $textData = $row['specific_place'];
             $text = $row['place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
@@ -193,7 +194,7 @@
             }
             echo '</div>';
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
-            echo '<a href="placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
+            echo '<a href="placesbooking.php?choice='.urlencode($textData).'&price='.urlencode($price2).'" class="book" >Book now</a>';
             echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
      
             echo '</div>'; // Close .inner-box
