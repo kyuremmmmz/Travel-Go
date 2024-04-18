@@ -63,65 +63,13 @@
                 }
                 
 
-                function fetchDataFromAPI($postData) {
-                    $curl = curl_init();
-                
-                    // Set cURL options
-                    curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://booking-com13.p.rapidapi.com/flights/multi-city?adult_number={$postData['adults']}&page=1&country_flag=us&min_price=1312&max_price=2",
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => "",
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 30,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => "POST",
-                        CURLOPT_POSTFIELDS => json_encode([
-                            [
-                                'location_from' => $postData['flying_from'],
-                                'location_to' => $postData['flying_to'],
-                                'departure_date' => $postData['departure_date'],
-                                'filter_time_type' => '',
-                                'time_from' => '',
-                                'time_to' => ''
-                            ],
-                            [
-                                'location_from' => $postData['flying_from'],
-                                'location_to' => $postData['flying_to'],
-                                'departure_date' => $postData['arrival_date'],
-                                'filter_time_type' => '',
-                                'time_from' => '',
-                                'time_to' => ''
-                            ]
-                        ]),
-                        CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: booking-com13.p.rapidapi.com",
-                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271",
-                            "content-type: application/json"
-                        ],
-                    ]);
-                
-                    // Execute cURL request
-                    $response = curl_exec($curl);
-                    $err = curl_error($curl);
-                
-                    // Close cURL session
-                    curl_close($curl);
-                
-                    // Check for errors and return response
-                    if ($err) {
-                        return "cURL Error #: " . $err;
-                    } else {
-                        return $response;
-                    }
-                }
-                
+               
                 // Check if the form is submitted
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     // Fetch data from API based on form input
-                    $apiData = fetchDataFromAPI($_POST);
-                    
+                    $get = $_POST['search'];
                     // Redirect user to another page to display fetched data
-                    header("Location: results.php?api_data=" . urlencode(json_encode($apiResponse)));
+                    header("Location: res2.php?data=" . urlencode($get));
                     exit();
                 }
                 
@@ -134,62 +82,15 @@
 
 
         
-        <p class="travel-2" data-aos="fade-up"
-     data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
-     <form id="flightSearchForm" class="flightsearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-        <div class="flightsearch" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
-            <h1 class="book_your_flight_now">Book your flight now</h1>
-            <ul class="ul4">
-                <li class="inline">
-                    <input type="radio" name="trip_type" id="round_trip" class="rad" value="Round Trip">
-                    <label for="round_trip">Round Trip</label>
-                </li>
-                <li class="inline">
-                    <input type="radio" name="trip_type" id="one_way" class="rad" value="One Way">
-                    <label for="one_way">One Way</label>
-                </li>
-                <li class="inline">
-                    <input type="radio" name="trip_type" id="multi_city" class="rad" value="Multi-City">
-                    <label for="multi_city">Multi-City</label>
-                </li>
-            </ul>
-            <ul class="ul3">
-                <li class="inlinee">
-                    <label for="flyingFrom" class="for_text">Flying From: <br><input type="text" name="flying_from" id="flyingFrom" class="text"></label>
-                </li>
-                <li class="inlinee">
-                    <label for="flyingTo" class="for_text">Flying to: <br><input type="text" name="flying_to" id="flyingTo" class="text"></label>
-                </li>
-            </ul>
-            <br>
-            <ul class="ul3">
-                <li class="inlineee">
-                    <label for="departureDate">Departing to: <br><input type="datetime-local" name="departure_date" id="departureDate" class="text"></label>
-                </li>
-                <li class="inlineee">
-                    <label for="arrivalDate">Arriving to: <br><input type="datetime-local" name="arrival_date" id="arrivalDate" class="text"></label>
-                </li>
-            </ul>
-            <br>
-            <ul class="ul3">
-                <li class="inlineeee">
-                    <label for="adults">Adults: <br><input type="number" name="adults" id="adults" class="textt"></label>
-                </li>
-                <li class="inlineee">
-                    <label for="children">Children: <br><input type="number" name="children" id="children" class="textt"></label>
-                </li>
-                <li class="inlineee">
-                    <label for="travelClass">Travel Class: <br><input type="text" name="travel_class" id="travelClass" class="textt"></label>
-                </li>
-            </ul>
-            <br>
-            <ul class="ul3">
-                <li class="inlineeee">
-                    <br> <button type="submit" class="button1" name="submit">Search</button>
-                    
-                   
-                    
-                </li>
+                    <p class="travel-2" data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
+
+                <div class="autocomplete">
+                    <input type="text" id="search" name="search" placeholder="Search for places">
+                    <ul id="my-box"></ul>
+                    <button class="search" name="submit"><i class="fas fa-search"></i>SEARCH</button>
+                </div>
+               </li>
             </ul>
         </div>
     </form>
@@ -333,55 +234,6 @@
                     }
                     $conn->close();
                     ?>
-                     <?php 
-                    // cURL request for fetching hotels in Cebu
-                    $searchValue = 'Manila'; // Adjust the search value as needed
-                    $curl = curl_init();
-
-                    curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://booking-com.p.rapidapi.com/v1/hotels/locations?name={$searchValue}&locale=en-gb",
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => "",
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 30,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => "GET",
-                        CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: booking-com.p.rapidapi.com",
-                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271"
-                        ],
-                    ]);
-
-                    $response = curl_exec($curl);
-                    $err = curl_error($curl);
-
-                    curl_close($curl);
-
-                    if ($err) {
-                        echo "cURL Error #:" . $err;
-                    } else {
-                        $hotelLocations = json_decode($response, true);
-
-                        if ($hotelLocations) {
-                            foreach ($hotelLocations as $location) {
-                                
-                                echo "<li class='splide__slide'>";
-                                echo "<div class='hotels' id='hotels'>";
-                                echo "<div class='in'>";
-                                echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
-                                echo "</div>";
-                                echo "<h1>{$location['name']}</h1>";
-                                
-                                
-                                echo "<a href='placesbooking.php?choice= '".urlencode($textdata)."'' class='book_hotel'>Book now</a>";
-                                echo "</div>";
-                                echo "</li>";
-                            }
-                        } else {
-                            echo "No hotel locations found.";
-                        }
-                    }
-                    ?>
                 </ul>
             </div>
         </div>
@@ -431,54 +283,7 @@
                     }
                     $conn->close();
                     ?>
-                    <?php 
-                    // cURL request for fetching hotels in Cebu
-                    $searchValue = 'Cebu'; // Adjust the search value as needed
-                    $curl = curl_init();
-
-                    curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://booking-com.p.rapidapi.com/v1/hotels/locations?name={$searchValue}&locale=en-gb",
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => "",
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 30,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => "GET",
-                        CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: booking-com.p.rapidapi.com",
-                            "X-RapidAPI-Key: f3dad16952msh1d1e3f5ec1c08a0p183d44jsn421f62419271"
-                        ],
-                    ]);
-
-                    $response = curl_exec($curl);
-                    $err = curl_error($curl);
-
-                    curl_close($curl);
-
-                    if ($err) {
-                        echo "cURL Error #:" . $err;
-                    } else {
-                        $hotelLocations = json_decode($response, true);
-
-                        if ($hotelLocations) {
-                            foreach ($hotelLocations as $location) {
-                                echo "<li class='splide__slide2'>";
-                                echo "<div class='hotels' id='hotels'>";
-                                echo "<div class='in'>";
-                                echo "<img src='{$location['image_url']}' alt='Hotel Image'>";
-                                echo "</div>";
-                                echo "<h1>{$location['name']}</h1>";
-                                
-                                
-                                echo "<a href='/login_page.php' class='book_hotel'>Book now</a>";
-                                echo "</div>";
-                                echo "</li>";
-                            }
-                        } else {
-                            echo "No hotel locations found.";
-                        }
-                    }
-                    ?>
+                    
                 </ul>
             </div>
         </div>
@@ -710,6 +515,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
   AOS.init();
 </script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>
 

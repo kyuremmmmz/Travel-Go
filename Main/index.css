@@ -239,15 +239,6 @@ body{
 
 
 
-.nav2 .wrapper .searchbar + .fas.fa-search {
-    position: absolute; 
-    transform: translateX(500%);
-    top: 0%;
-    left: 350px; /* Adjust as needed */
-    cursor: pointer;
-    transform: translateY(0%);
-    color: #000000;
-}
 
 .my-ul + .nav-divider{
     position: absolute; 
@@ -280,7 +271,6 @@ body{
    
 
 }
-
 
 
 #my-box li{
@@ -548,6 +538,75 @@ body{
     cursor: pointer;
 }
 
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    transform: translate(110%, 20%);
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.autocomplete input{
+    outline: none;
+    border: none;
+    width: 400px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: auto;
+}
+
+.autocomplete button{
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: auto;
+}
+
+#my-box {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1000;
+    width: 60%;
+    border-radius: 10px;
+    max-height: 200px;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+    display: none;
+}
+#my-box li {
+    padding: 10px;
+    cursor: pointer;
+}
+#my-box li:hover {
+    background-color: #ddd;
+}
+
+
+.search {
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    /* Adjust padding to position the icon */
+    padding-left: 10px;
+}
+/* Adjust icon position */
+.search i {
+    transform: translateX(-12%);
+    color: #ffffff;
+    font-size: large;
+
+}
 
 
 .container .box {

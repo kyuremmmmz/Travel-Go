@@ -42,7 +42,7 @@
     <section class="banner" id="banner">
         <div class="background"></div>
         <video autoplay loop class="video" muted plays-inline>
-            <source src="WelcomeBacktothePhilippines!.mp4" type="video/mp4">
+            <source src="128052-740186610_small.mp4" type="video/mp4">
         </video>
         
         
