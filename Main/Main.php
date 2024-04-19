@@ -87,7 +87,7 @@
 
                     <div class="autocomplete">
                         <input type="text" id="search" name="search" placeholder="Search for places" style="display: inline-block;" required>
-                        <button class="search" name="submit"><i class="fas fa-search"></i>SEARCH</button>
+                        <button class="search" name="submit"><i class="fas fa-search"></i></button>
                         <ul id="my-box"></ul>
                     </div>
                </li>
@@ -216,7 +216,7 @@
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $imagedata = base64_encode($row['image']);
-                            $prices = number_format($row['price']);
+                            $prices = $row['price'];
                             $textdata = $row['hotel'];
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
@@ -225,7 +225,7 @@
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                            echo '<a href="placesbooking.php?choice='. urlencode($textdata) .'" class="book_hotel">Book now</a>';
+                            echo '<a href="hotelbooking.php?choice='. urlencode($textdata) .' &price='.urlencode($prices).'" class="book_hotel">Book now</a>';
                             echo '</div>';
                             echo '</li>';
                         }

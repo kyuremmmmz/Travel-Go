@@ -132,7 +132,7 @@
                 </div>
                 <h1 class="mt-5">Update Booking</h1>
                 <hr>
-                <form id="updateBookingForm" method="POST">
+                <form id="updateBookingForm" action="booking_list.php" method="POST">
                 <?php
                     // Include database connection file
                     include("connection.php");
@@ -162,7 +162,8 @@
                         // Execute the statement
                         if ($stmt->execute()) {
                             echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
-                            header("Location: booking_list.php");
+                            echo "<script>window.location.href='booking_list.php'</script>";
+                            
                             exit();
                         } else {
                             echo "Error: " . $sql . "<br>" . $conn->error;

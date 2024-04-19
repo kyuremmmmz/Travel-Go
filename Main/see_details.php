@@ -49,49 +49,51 @@
                     </div>
                 </ul>
                 <div class="container">
-                    <?php 
-                    include_once("con2.php");
-                    $dataget = $_GET['details'];
-                    $sql = "SELECT * FROM `create_see_details.php` WHERE specific_place = '$dataget'";
-                    $result = $conn->query($sql);
-                    
-                    if ($result->num_rows > 0) {
-                        // Output data of each row
-                        while ($row = $result->fetch_assoc()) {
-                            $description = $row['description'];
-                            $price = number_format($row['price']);
-                            $amenities = $row['amenities'];
-                            $rating = $row['rating'];
-                            $specific_place = $row['specific_place'];
-                            $imageData = base64_encode($row['image']);
-                            echo '<div class="inner-box">
-                                    <div class="box">
-                                        <img src="/details/' . $row["image"] . '" alt="Image" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    </div>
-                                    <div class="content">
-                                        <h2 class="textdata">'.$specific_place.'</h2>
-                                        <hr>
-                                        <h2 class="textdata">Details</h2>
-                                        <p>'.$description.'</p>
-                                    </div>
-                                    <div class="outer">';
-                            echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
-                            for ($i = 1; $i <= 5; $i++) {
-                                if ($i <= $rating) {
-                                    echo '<span class="fa fa-star checked"></span>';
-                                } else {
-                                    echo '<span class="fa fa-star"></span>';
-                                }
+                <?php 
+                include_once("con2.php");
+                $dataget = $_GET['details'];
+                $sql = "SELECT * FROM `create_see_details.php` WHERE specific_place = '$dataget'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    //TODO: Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $description = $row['description'];
+                        $price = number_format($row['price']);
+                        $price2 = $row['price'];
+                        $amenities = $row['amenities'];
+                        $rating = $row['rating'];
+                        $specific_place = $row['specific_place'];
+                        $images = explode(',', $row['image']); //TODO: Split the list of images into an array of strings and remove duplicates
+                        $firstImage = reset($images); //TODO: Get the first image from the array para mag fetch first image sa db
+                        echo '<div class="inner-box">
+                                <div class="box">
+                                    <img src="/details/' . $firstImage . '" alt="Image" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                </div>
+                                <div class="content">
+                                    <h2 class="textdata">'.$specific_place.'</h2>
+                                    <hr>
+                                    <h2 class="textdata">Details</h2>
+                                    <p>'.$description.'</p>
+                                </div>
+                                <div class="outer">';
+                        echo '<p class="ratings">Ratings (' . $rating . ' / 5)</p>';
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $rating) {
+                                echo '<span class="fa fa-star checked"></span>';
+                            } else {
+                                echo '<span class="fa fa-star"></span>';
                             }
-                            echo '</div>
-                                  </div>';
-                            echo '<div class="rates">
-                                    <p class="price"> Starting PHP '.$price.'</p>
-                                    <a href="placesbooking.php?choice='.urlencode($specific_place).'&price='.urlencode($price).'" class="now">Book now</a>
-                                  </div>';
                         }
+                        echo '</div>
+                            </div>';
+                        echo '<div class="rates">
+                                <p class="price"> Starting PHP '.$price.'</p>
+                                <a href="placesbooking.php?choice='.urlencode($specific_place).'&price='.urlencode($price2).'" class="now">Book now</a>
+                            </div>';
                     }
-                    ?>
+                }
+                ?>
                 </div>
             </nav>
         </header>
