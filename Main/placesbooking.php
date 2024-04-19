@@ -158,6 +158,7 @@ function generateVoucher() {
                     if (isset($_GET["choice"]) && isset($_GET["price"])) {
                         $choice = $_GET["choice"];
                         $price = $_GET["price"];
+                        $price2 = $_GET["price"];
                         echo "<h2 class='text-center mb-4'>Book this to: $choice With PHP $price</h2>";
                     }
                     ?>

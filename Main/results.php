@@ -176,9 +176,7 @@
         echo "0 results";
     }
     
-    $conn->close();
-
-    $conn->close();
+   
     ?>
     <div id="map-container">
         <h1>View on Maps</h1>
@@ -247,13 +245,15 @@
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            $imagedata = base64_encode($row['image3']);
                             $prices = number_format($row['price_for_hotel']);
                             $textdata = $row['hotels'];
+                            $images = explode(',', $row['image3']); // Split the list of images into an array
+                            $firstImage = reset($images); // Get the first image from the array
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
-                            echo '<img src="/details/'.$row["image3"].'" alt="" srcset="">';
+                            
+                            echo '<img src="/details/'.$firstImage.'" alt="'.$textdata.'" srcset="">';
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
@@ -287,7 +287,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
     new Splide('.splide', {
-    type:Infinity,
     perPage: 4,
     perMove: '1',
     nextPage: true,
