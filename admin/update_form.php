@@ -135,7 +135,7 @@
                 <form id="updateBookingForm" action="booking_list.php" method="POST">
                 <?php
                     // Include database connection file
-                    include("connection.php");
+                    include("C:/xampp/htdocs/Website/user_connection..php");
 
                     // Check if the form is submitted
                     if (isset($_POST["submit"])) {
@@ -177,6 +177,12 @@
                     $query = "SELECT * FROM booking_tracker WHERE id = $get ";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
+                     
+                    }
+                
+                    mysqli_free_result($result);
+                    mysqli_close($conn);
+                
                 ?>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
@@ -238,12 +244,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
-                <?php
-                    }
                 
-                    mysqli_free_result($result);
-                    mysqli_close($conn);
-                ?>
             </div>
         </div>
     </div>

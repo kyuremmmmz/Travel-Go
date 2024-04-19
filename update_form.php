@@ -10,18 +10,17 @@ if (isset($_POST["submit"])) {
     $adult = $_POST["adults"];
     $arrival = $_POST["adate"];
     $departure = $_POST["ddate"];
-    $payment = $_POST["payment_method"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
 
     // Prepare the SQL statement using prepared statements to prevent SQL injection
-    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, payment=?, contact_number=?, email=? WHERE id=?";
+    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=? WHERE id=?";
 
     // Prepare the statement
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
-    $stmt->bind_param("siisssssi", $fullname, $children, $adult, $arrival, $departure, $payment, $phone, $email, $id);
+    $stmt->bind_param("siissssi", $fullname, $children, $adult, $arrival, $departure,  $phone, $email, $id);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -100,16 +99,7 @@ if (isset($_POST["submit"])) {
                             <!-- Add more options as needed -->
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="payment_method" class="form-label">Payment Method</label>
-                        <select class="form-select" id="payment_method" name="payment_method" required>
-                            <option value="">Select</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="debit_card">Debit Card</option>
-                            <option value="paypal">PayPal</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
             </div>
