@@ -112,9 +112,10 @@
                 <h1>Welcome to Admin Dashboard Packages</h1>
                 <hr>
                 <!-- Table with "Create New" button -->
-                <div class="d-flex justify-content-between mb-3">
+                <div class="btn-group d-flex justify-content-between mb-3">
                     <h2>Packages</h2>
-                    <a href="see_details_form.php" class="btn btn-primary">Create New</a>
+                    <a href="/see_details_form.php" class="btn btn-primary">Create Specific places</a>
+                    <a href="/see_details_form.php" class="btn btn-primary">Create Places</a>
                 </div>
                 <table class="table table-hover">
                     <thead>

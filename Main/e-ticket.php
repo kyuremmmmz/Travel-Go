@@ -73,7 +73,7 @@
                                     <p><strong>Email:</strong> '.$email.'</p>
                                     <p><strong>Phone:</strong> '.$phone.'</p>
                                     <div class="barcode">
-                                        <p><strong>Your Bar code</strong> </p>
+                                        <p><strong>Unique Code</strong> </p>
                                         <img src="data:image/png;base64,'.base64_encode($barcodeImage).'" alt="Barcode">
                                     </div>
                                 </div>
