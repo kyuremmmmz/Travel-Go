@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
     $status = "pending";
 
 
-   
+
 
         if ($departure == $arrival) {
         echo "Cannot match arrival and departure dates.";
@@ -77,14 +77,15 @@ if (isset($_POST["submit"])) {
     }
 }
 
-function generateVoucher($length) {
+function generateVoucher($haba) {
     //TODO: Generate a unique voucher code 
-    $id = '';
-    for ($i = 0; $i < $length; $i++) {
-        $id.= mt_rand(0, 9); // Generate a random digit (0-9)
+    $id =  '';
+    for($i = 0 ; $i < $haba ; $i++) {
+        $id.= rand(0,9);
+    
     }
     return $id;
- }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,15 +180,15 @@ function generateVoucher($length) {
                         <input type="tel" class="form-control" id="phone" name="phone" required>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="arrival_date" class="form-label">Arrival Date</label>
+                        <label for="arrival_date" class="form-label">Check in</label>
                         <input type="date" class="form-control" id="arrival_date" name="adate" required>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="departure_date" class="form-label">Departure Date</label>
+                        <label for="departure_date" class="form-label">Checkout</label>
                         <input type="date" class="form-control" id="departure_date" name="ddate" required>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="amount" class="form-label">Amount</label>
+                        <label for="amount" class="form-label" >Amount</label>
                         <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $price ?>" required>
                     </div>
                     <div class="mb-3 form-group">
