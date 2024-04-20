@@ -62,46 +62,46 @@ $result = $conn->query($sql);
         }
         .progress-container {
             position: relative;
-            width: 100%; /* Width of the progress bar container */
+            width: 100%; 
             background-color: #f3f3f3;
             border-radius: 5px;
-            height: 20px; /* Increased height for better visibility */
+            height: 20px; 
             overflow: hidden;
             margin-bottom: 10px;
         }
         .progress-bar {
             height: 100%;
-            background-color: #4caf50; /* Green color for completed progress */
-            transition: width 0.5s ease; /* Transition effect for smooth width change */
+            background-color: #4caf50; 
+            transition: width 0.5s ease; 
         }
         .progress-start {
             position: absolute;
-            width: 20px; /* Increased width for better visibility */
-            height: 20px; /* Increased height for better visibility */
+            width: 20px; 
+            height: 20px; 
             background-color: #4caf50;
             border-radius: 50%;
             left: 0;
             top: 0;
-            display: flex; /* Added to center the icon */
-            justify-content: center; /* Added to center the icon */
-            align-items: center; /* Added to center the icon */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
         }
         .plane-icon {
-            width: 20px; /* Increased width for better visibility */
-            height: 20px; /* Increased height for better visibility */
+            width: 20px; 
+            height: 20px; 
             background-color: #FFFFFF;
             border-radius: 50%;
             left: 0;
             top: 0;
-            display: flex; /* Added to center the icon */
-            justify-content: center; /* Added to center the icon */
-            align-items: center; /* Added to center the icon */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
         }
         .cancel-btn {
             position: absolute;
             right: 20px;
             top: 20px;
-            background-color: #dc3545; /* Red color for cancel button */
+            background-color: #dc3545; 
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -113,7 +113,7 @@ $result = $conn->query($sql);
             position: absolute;
             right: 20px;
             top: 20px;
-            background-color: #35DC4B; /* Red color for cancel button */
+            background-color: #35DC4B;
             color: #fff;
             border: none;
             border-radius: 5px;

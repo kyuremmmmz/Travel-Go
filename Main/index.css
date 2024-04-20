@@ -476,10 +476,11 @@ body{
 
 
 .for{
-    padding: 20px;
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 65px;
+    color: #fff;
 }
 
 .textdata{
@@ -607,33 +608,23 @@ body{
 
 
 .container .box {
-    display: block;
-    background-color: rgb(255, 255, 255);
-    height: 250px;
-    width: 320px;
-    max-width: 320px;
-    text-align: center;
+    background-color: #8adeec;
+    height: 70%;
     overflow: hidden;
-    position: relative;
-    transition: 1s;
-    cursor: pointer;
-    z-index: 999999999999999999999999999;
 }
 
 .container .inner-box {
+    background-color: #ffffff;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
-    height: 350px; 
-    border-radius: 30px; 
-    margin-right: 40px;
-    text-align: center;
-    overflow: hidden;
+    width: 270px;
+    height: 350px;
+    margin: 0px 10px;
+    border-radius: 10px;
     position: relative;
-    transition: all 0.7s ease;
+    transform: translate(25%, 20%);
+    overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
-    transform: translate(20%, 5%);
-    margin-top: 40px;
-    box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.5);
     grid-template-columns: repeat(auto-fill);
     }
 
@@ -661,7 +652,9 @@ body{
 .container .inner-box .box:hover img {
     transform: scale(1.1);
 }
-
+.container .splide__slide {
+    padding: 0 10px; /* Adjust the padding as needed */
+}
 
 .container .inner-box .box h1 {
     right: 50%;
@@ -700,7 +693,7 @@ body{
     border-radius: 50px;
     width: 200px;
     height: 50px;
-    margin: 30px;
+    
     transition: background-color, 1s;
     transform: translate(-0%, -600%);
     cursor: pointer;
@@ -713,19 +706,33 @@ body{
 .container .inner-box .input-wrapper input:focus ~ .input2 {
     border-bottom: 1px solid #000000;
 }
+.container .splide__track{
+    height: 500px;
+}
+
+.container .splide{
+    transform: translateY(20%);
+
+}
+
+.container .splide__track{
+    height: 500px;
+}
+
 
 .container{
-    height: 100vh;
-    width: 100%;
+    position: relative;
+    padding: 20px;
     max-height: 100vh;
+    height:100vh;
     max-width: 100%;
-    background-color: rgb(14, 44, 85);
+    width: 100%;
     background-position: center;
-    overflow: auto;
+    background-size: cover;
     justify-content: center;
-    align-content: center;
-    background-attachment: fixed;
-    display: table;
+    align-self: center;
+    overflow: auto;
+    background-color: rgb(35, 71, 122);
     
     }
 
