@@ -200,14 +200,23 @@
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
-<h1>Flights</h1>
-<div class="outer-flights">
-<div class="inner-flight">
-    <img src="/images/65f9dbbe20835.jpg" alt="" srcset="">
-</div>
-
-</div>
- 
+    <h1>Flights</h1>
+    <div class="outer-flights">
+        <div class="inner-flight">
+            <div class="flight-card">
+                <img src="/images/65f9dbbe20835.jpg" alt="Flight Image">
+                
+            </div>
+            <div class="flight-details">
+                    <h2>Flight Details</h2>
+                    <p>Flight Name: Example Airlines</p>
+                    <p>Departure Time: 10:00 AM</p>
+                    <p>Arrival Time: 12:00 PM</p>
+                    <p>Price: $200</p>
+                    <button class="book-flight-btn">Book Now</button>
+                </div>
+        </div>
+    </div>
 </div>
 
 
