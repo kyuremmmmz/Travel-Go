@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/CSS/iloveyousabado.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,17 @@
           
             <ul class="myul">
            
-                
+                <li class="lis"><img src="/2024-03-29-removebg-preview.png" class="travel" alt="" srcset=""></li>
+
+                <li class="lis">
+                <div class="autocomplete">
+                    <input type="search" id="search" name="search" placeholder="Search for places" required>
+                    <button class="search" name="submit"><i class="fas fa-search"></i></button>
+                    <ul id="my-box"></ul>
+                </div>
+                </li>
+
+
                 
                 <li class="li"><a href="#ewan" class="active" id="a">Home</a> </li>
           
@@ -49,26 +59,65 @@
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
-                
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
+                // Database connection
+                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
 
-                <div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-      More
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="travel.php">My Bookings</a></li>
-      <li class="list"><button class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">Signout</button></li>
-    </ul>
-  </div>
-</div>
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $email = $_SESSION['email']; 
+               
+
+                $sql = "SELECT user_name FROM registration WHERE email='$email'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $User = $row['user_name'];
+                        echo $User;
+                    }
+                }
+                
+                
+                
+                
+                ?></button>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                        <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
+                        <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
+                    </ul>
+
+            
+                </li>
 
                
 
                 
-
-                 
             
+                </li><?php
                 
+                
+                if (isset($_POST["button"])) {
+                    header("Location: /login_page.php");
+                }
+                
+
+               
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                    // Fetch data from API based on form input
+                    $get = $_POST['search'];
+                    // Redirect user to another page to display fetched data
+                    header("Location: res2.php?data=" . urlencode($get));
+                    exit();
+                }
+                
+                ?>
+
+
 
              
             </ul>
@@ -86,13 +135,12 @@
 
         
         </div>
-
+           
 
     </nav>
-   
+    
    
 </header>
-
 
 
     
@@ -129,54 +177,26 @@
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
-            // Display the image
             $imageData = base64_encode($row['image']);
             $price = number_format($row['price']);
+            $price2 = $row['price'];
             $textData = $row['specific_place'];
             $text = $row['place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
             $rating = $row['rating'];
-
+    
             echo '<div class="inner-box">';
             echo '<div class="box">'; // Open .box
-            
-            // Bootstrap 5 Carousel
-            echo '<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">';
-            echo '<div class="carousel-indicators">';
+    
+            // Display only the first image
             $images = explode(',', $row['image']);
-            foreach ($images as $index => $image) {
-                echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $index . '"';
-                if ($index === 0) {
-                    echo ' class="active"';
-                }
-                echo ' aria-current="true" aria-label="Slide ' . ($index + 1) . '"></button>';
-            }
-            echo '</div>';
-            
-            echo '<div class="carousel-inner">';
-            foreach ($images as $index => $image) {
-                echo '<div class="carousel-item';
-                if ($index === 0) {
-                    echo ' active';
-                }
-                echo '">';
-                echo '<img src="/details/' . $image . '" class="d-block w-100" alt="Image">';
-                echo '</div>';
-            }
-            echo '</div>';
-            
-            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">';
-            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Previous</span>';
-            echo '</button>';
-            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">';
-            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Next</span>';
-            echo '</button>';
-            
-            echo '</div>'; // Close .carousel
-            
+            $firstImage = reset($images); // Get the first image from the array
+    
+            echo '<img src="/details/' . $firstImage . '" class="d-block w-100" alt="Image">';
+    
             echo '</div>'; // Close .box
+    
+            // Output other information
             echo '<div class="data">';
             echo '<p class="text2">Budget Places in ' . $text . '</p>';
             echo '<h3 class="textdata">' . $textData . '</h3>';
@@ -191,18 +211,18 @@
             }
             echo '</div>';
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
-            echo '<a href="placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
-            echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
-     
+            echo '<a href="placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price2) . '" class="book" >Book now</a>';
+            echo '<a href="see_details.php?details=' . urlencode($textData) . '" class="book">See Details</a>';
+    
             echo '</div>'; // Close .inner-box
-
+    
             echo '<hr>';
         }
     } else {
         echo "0 results";
     }
-
-    $conn->close();
+    
+   
     ?>
     <div id="map-container">
         <h1>View on Maps</h1>
@@ -262,7 +282,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
-                    $img = isset($_GET["data"])? $_GET["data"] : 'No choice selected';
+                    $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
                     $sql = "SELECT hotels, price_for_hotel, image3 FROM `create_see_details.php` WHERE place ='$img'";
                     
                     $result = $conn->query($sql);
@@ -271,13 +291,15 @@
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            $imagedata = base64_encode($row['image3']);
                             $prices = number_format($row['price_for_hotel']);
                             $textdata = $row['hotels'];
+                            $images = explode(',', $row['image3']); // Split the list of images into an array
+                            $firstImage = reset($images); // Get the first image from the array
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
-                            echo '<img src="/details/'.$row["image3"].'" alt="" srcset="">';
+                            
+                            echo '<img src="/details/'.$firstImage.'" alt="'.$textdata.'" srcset="">';
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
@@ -311,7 +333,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
     new Splide('.splide', {
-    type:Infinity,
     perPage: 4,
     perMove: '1',
     nextPage: true,

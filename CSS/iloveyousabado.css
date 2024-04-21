@@ -648,6 +648,7 @@ hr{
 
 .autocomplete {
     position: relative;
+    transform: translate(-110%);
     
     
 }
@@ -655,7 +656,7 @@ hr{
 
 
 .autocomplete input{
-    margin-top: 30px;
+    
     outline: none;
     border: none;
     width: 300px;

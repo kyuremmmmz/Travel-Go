@@ -124,6 +124,38 @@ body{
 
 }
 
+
+.button2{
+   position: absolute;
+   margin-left: 45%;
+   transform: translateY(50%);
+   display: flex;
+   align-content: center;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   width: 10%;
+   height: 50px;
+   border: none;
+   border-radius: 50px;
+   transition: all ease-in-out 0.5s;
+   background-color: rgb(71, 109, 14);
+   color: white;
+   text-decoration: none;
+   font-size: 20px;
+   cursor: pointer;
+   z-index: 100;
+}
+
+
+.button2:hover {
+    background-color: #1cdd5c;
+    box-shadow: 10px 10px 15px 0px rgba(17, 145, 45, 0.5), inset 0px 0px 0px 10px rgba(93, 255, 18, 0.2);
+  }
+
+
+
+
 .list .button {
     background: transparent;
     display: inline-block;
@@ -308,6 +340,18 @@ body{
     text-align: center;
     margin-top: 200px;
    
+    
+}
+
+.discover {
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+    border-radius: 5px;
+    z-index: 100;
     
 }
 
@@ -544,6 +588,7 @@ body{
 
 .lis .autocomplete {
     position: relative;
+    transform: translate(-110%);
     
     
 }
@@ -551,7 +596,7 @@ body{
 
 
 .lis .autocomplete input{
-    margin-top: 30px;
+    
     outline: none;
     border: none;
     width: 300px;
@@ -560,6 +605,7 @@ body{
 }
 
 .lis .autocomplete button{
+    
     outline: none;
     border: none;
     width: 100px;
@@ -1063,7 +1109,7 @@ body{
     color: #000;
     display: block;
     position: absolute;
-    transform: translate(20%, 40%);
+    transform: translate(20%, 20%);
     background: none;
     transition: all 0.3s ease-in-out;
  

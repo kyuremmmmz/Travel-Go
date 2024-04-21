@@ -148,8 +148,9 @@
 
 
         
-                    <p class="travel-2" data-aos="fade-up"
-                 data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
+            <h1 class="travel-2">YOUR TRAVEL STARTS HERE</h1>
+            <p class="discover">Welcome to TravelGo Philippines, your ultimate companion for unforgettable journeys across the stunning landscapes and vibrant cultures of the archipelago. <br> We are your one-stop destination for seamless travel experiences, offering a range of services designed to make exploring the Philippines as convenient and enjoyable as possible.</p>
+                <a href="#container" class="button2" name="button" data-bs-toggle="tooltip" data-bs-placement="top">START BOOKING</a>
 
                  
                </li>
