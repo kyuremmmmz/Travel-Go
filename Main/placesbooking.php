@@ -213,44 +213,47 @@ function generateVoucher($length) {
 
 
     <script>
-        var amount = document.getElementById("amount");
-            var adultsInput = document.getElementById("adults");
-            var childrenInput = document.getElementById("children");
-            
+   var amount = document.getElementById("amount");
+var adultsInput = document.getElementById("adults");
+var childrenInput = document.getElementById("children");
+var returna = document.getElementById("arrival_date");
 
-            var adultPrice = 500; // Set the price for each adult
+var adultPrice = 500; // Set the price for each adult
+var childrenP = 100;
 
-            var childrenP =   100;
+// Event listener for children input
+childrenInput.addEventListener('input', function() {
+    var children = parseInt(childrenInput.value);
+    var totalC = children * childrenP;
+    amount.value = parseInt(amount.value) + totalC;
+});
 
-            
+// Event listener for adults input
+adultsInput.addEventListener('input', function() {
+    var adults = parseInt(adultsInput.value);
+    var children = parseInt(childrenInput.value);
+    var additionalAmount = adults * adultPrice;
+    amount.value = parseInt(amount.value) + additionalAmount;
+});
 
-            //FOR CHILDREN
-            childrenInput.addEventListener('input', function(){
-                var children = parseInt(childrenInput.value);
+// Event listener for arrival date input
+returna.addEventListener('change', function() {
+    var arrivalDate = new Date(returna.value);
+    var currentDate = new Date();
+    var daysDifference = Math.ceil((arrivalDate - currentDate) / (1000 * 60 * 60 * 24));
 
-                var totalC = children * childrenP;
+    var totalAmount = 0;
+    if (daysDifference <= 7) {
+        var adults = parseInt(adultsInput.value);
+        var children = parseInt(childrenInput.value);
+        totalAmount = (adults * adultPrice) + (children * childrenP);
+    } else {
+        totalAmount = parseInt(amount.value) / 2;
+    }
 
-                amount.value = parseInt(amount.value) + totalC;
-            })
+    amount.value = totalAmount;
+});
 
-
-
-            adultsInput.addEventListener('input', function() {
-                // Get the number of adults
-                var adults = parseInt(adultsInput.value);
-
-                var children = parseInt(childrenInput.value);
-
-                
-                
-                // Calculate the additional amount based on the number of adults
-                var additionalAmount = adults * adultPrice;
-                
-                // Update the total amount
-                amount.value = parseInt(amount.value) + additionalAmount;
-            });
-
-            // Similar event listener for children, if needed
 
 
     </script>
