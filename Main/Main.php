@@ -263,24 +263,32 @@
 </script>   
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
-<div class="flights" id="flights">
-    <h1>Flights</h1>
-    <div class="outer-flights">
-        <div class="inner-flight">
-            <div class="flight-card">
-                <img src="/images/65f9dbbe20835.jpg" alt="Flight Image">
-                
+
+<div class="flights">
+<div class="flight-card">
+    <div class="flight-info">
+        <div class="flight-number">Flight Number: PR123</div>
+        <div class="airline">Philippine Airlines</div>
+        <div class="route">
+            <div class="departure">
+                <i class="fas fa-plane-departure"></i>
+                <span class="airport">NAIA</span>
             </div>
-            
-                    <h2>Flight Details</h2>
-                    <p>Flight Name: Example Airlines</p>
-                    <p>Departure Time: 10:00 AM</p>
-                    <p>Arrival Time: 12:00 PM</p>
-                    <p>Price: $200</p>
-                    <button class="book-flight-btn">Book Now</button>
-              
+            <div class="arrival">
+                <i class="fas fa-plane-arrival"></i>
+                <span class="airport">JFK</span>
+            </div>
+        </div>
+        <div class="departure-date-time">
+            <div class="date">Departure Date: 2024-04-30</div>
+            <div class="time">Departure Time: 08:00 AM</div>
         </div>
     </div>
+    <div class="actions">
+        <button class="btn-book">Book Now</button>
+    </div>
+</div>
+
 </div>
 
 
