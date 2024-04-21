@@ -1301,19 +1301,20 @@ i{
 }
 
 /* Outer flights container */
-.outer-flights {
+.flights .outer-flights {
     width: 100%;
     max-width: 800px; /* Adjust the maximum width as needed */
     margin-top: 20px;
 }
 
 /* Inner flight container */
-.inner-flight {
+.flights .inner-flight {
     background-color: #ffffff;
     display: inline-block;
     width: 270px;
     height: 350px;
     margin: 0px 10px;
+    color: #000;
     border-radius: 10px;
     position: relative;
     transform: translate(25%, 20%);
@@ -1322,17 +1323,16 @@ i{
     cursor: pointer;
     grid-template-columns: repeat(auto-fill);
 }
-.travel{
+
+/* Text "Travel" */
+.travel {
     color: #fff;
     transform: translateX(-150%);
     font-size: 30px;
-    
 }
 
-
-
 /* Flight card container */
-.flight-card {
+.flights .flight-card {
     border: 1px solid #ccc;
     overflow: hidden;
     width: 100%;
@@ -1342,7 +1342,7 @@ i{
 }
 
 /* Flight image */
-.flight-card img {
+.flights .flight-card img {
     width: 100%;
     height: 100%; /* Adjust the height as needed */
     object-fit: cover;
@@ -1350,31 +1350,30 @@ i{
     transition: all ease-in-out  0.4s;
 }
 
-
-.flight-card img:hover{
+/* Hover effect on flight image */
+.flights .flight-card img:hover {
     transform: scale(1.2);
 }
 
 /* Flight details */
-.flight-details {
+.flights .flight-details {
     padding: 20px;
 }
 
 /* Flight details heading */
-.flight-details h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.flights .flight2 {
+    font-size: 20px; /* Adjust the font size here */
     color: #000;
 }
 
 /* Flight details text */
-.flight-details p {
-    font-size: 14px;
+.flights  p {
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
 /* Book flight button */
-.book-flight-btn {
+.flights .book-flight-btn {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -1386,9 +1385,10 @@ i{
 }
 
 /* Hover effect on book flight button */
-.book-flight-btn:hover {
+.flights .book-flight-btn:hover {
     background-color: #0056b3;
 }
+
 
 
 

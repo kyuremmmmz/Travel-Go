@@ -213,10 +213,10 @@ function generateVoucher($length) {
 
 
     <script>
-   var amount = document.getElementById("amount");
+var amount = document.getElementById("amount");
 var adultsInput = document.getElementById("adults");
 var childrenInput = document.getElementById("children");
-var returna = document.getElementById("arrival_date");
+
 
 var adultPrice = 500; // Set the price for each adult
 var childrenP = 100;
@@ -236,23 +236,6 @@ adultsInput.addEventListener('input', function() {
     amount.value = parseInt(amount.value) + additionalAmount;
 });
 
-// Event listener for arrival date input
-returna.addEventListener('change', function() {
-    var arrivalDate = new Date(returna.value);
-    var currentDate = new Date();
-    var daysDifference = Math.ceil((arrivalDate - currentDate) / (1000 * 60 * 60 * 24));
-
-    var totalAmount = 0;
-    if (daysDifference <= 7) {
-        var adults = parseInt(adultsInput.value);
-        var children = parseInt(childrenInput.value);
-        totalAmount = (adults * adultPrice) + (children * childrenP);
-    } else {
-        totalAmount = parseInt(amount.value) / 2;
-    }
-
-    amount.value = totalAmount;
-});
 
 
 
