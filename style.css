@@ -18,6 +18,8 @@ body{
     overflow: hidden;
 
 }
+
+
 .background{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);

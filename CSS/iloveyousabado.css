@@ -99,13 +99,13 @@ body{
     list-style: none;
     display: inline-block;
     transition: text-decoration-color, 0.7s;
-    transform: translate(10%);
+    transform: translate(50%);
     margin: 0 20px;
 }
 
 .lis {
     margin: 0 20px;
-    transform: translateX(  0%);
+    transform: translateX(40%);
 }
 
 #a {
@@ -153,6 +153,52 @@ body{
     display: inline-block;
     margin: 1%;
 }
+
+
+
+
+
+.navigation .list .button {
+   transform: translateX(550%);
+}
+
+.input .forgot-pass {
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.input .parag {
+    color: #fdfdfd;
+    margin-top: 10px;
+}
+
+.travel{
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+    
+}
+
+
+.divko{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Start with a lower z-index */
+    transition: 0.7s all ease-in-out;
+    display: static; /* Initially hidden */
+}
+
+.divko.visible{
+    z-index: 9999; /* Ensure it's above other content */
+    display: none; /* Show when it has the visible class */
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+
+}
+
+
 
 
 
@@ -599,6 +645,73 @@ hr{
 
 }
 
+
+.autocomplete {
+    position: relative;
+    
+    
+}
+
+
+
+.autocomplete input{
+    margin-top: 30px;
+    outline: none;
+    border: none;
+    width: 300px;
+    height: 40px;
+    font-size: auto;
+}
+
+.autocomplete button{
+    outline: none;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: auto;
+}
+
+#my-box {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1000;
+    width: 60%;
+    max-height: 200px;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+    display: none;
+}
+#my-box li {
+    padding: 10px;
+    cursor: pointer;
+}
+#my-box li:hover {
+    background-color: #ddd;
+}
+
+
+.search {
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    /* Adjust padding to position the icon */
+    padding-left: 10px;
+}
+/* Adjust icon position */
+.search i {
+    transform: translateX(-12%);
+    color: #ffffff;
+    font-size: large;
+
+}
 
 .container .inner-box {
     display: block;

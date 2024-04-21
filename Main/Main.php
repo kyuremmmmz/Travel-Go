@@ -12,10 +12,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" href="icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="icon" href="/icon.ico" type="image/x-icon">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!--============================================================================================== SPLIDE ===================================================== -->
     
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
@@ -24,7 +29,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
     
     <title>Travel go ph</title>
+<style>
+  
+  .container {
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    overflow: hidden;
+    background-color: rgb(35, 71, 122);
+}
 
+
+
+
+
+</style>
 </head>
 
 <body>
@@ -37,7 +63,17 @@
           
             <ul class="myul">
            
-                
+                <li class="lis"><img src="/2024-03-29-removebg-preview.png" class="travel" alt="" srcset=""></li>
+
+                <li class="lis">
+                <div class="autocomplete">
+                    <input type="search" id="search" name="search" placeholder="Search for places" required>
+                    <button class="search" name="submit"><i class="fas fa-search"></i></button>
+                    <ul id="my-box"></ul>
+                </div>
+                </li>
+
+
                 
                 <li class="li"><a href="#ewan" class="active" id="a">Home</a> </li>
           
@@ -47,15 +83,45 @@
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
-                <li class="lis"><a href="travel.php" class="" id="ewan" title="See my bookings">My Bookings</a></li>
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
+                // Database connection
+                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
+
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $email = $_SESSION['email']; 
+               
+
+                $sql = "SELECT user_name FROM registration WHERE email='$email'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $User = $row['user_name'];
+                        echo $User;
+                    }
+                }
+                
+                
+                
+                
+                ?></button>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                        <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
+                        <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
+                    </ul>
+
+            
+                </li>
 
                
 
                 
-
-                 
             
-                <li class="list"><button class="button" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">Signout</button></li><?php
+                </li><?php
                 
                 
                 if (isset($_POST["button"])) {
@@ -85,11 +151,7 @@
                     <p class="travel-2" data-aos="fade-up"
                  data-aos-anchor-placement="bottom-bottom">YOUR TRAVEL STARTS HERE</p>
 
-                    <div class="autocomplete">
-                        <input type="search" id="search" name="search" placeholder="Search for places" style="display: inline-block;" required>
-                        <button class="search" name="submit"><i class="fas fa-search"></i></button>
-                        <ul id="my-box"></ul>
-                    </div>
+                 
                </li>
             </ul>
         </div>
@@ -150,7 +212,8 @@
                     while($row = $result->fetch_assoc()) {
                         // Display the image
                         $imageData = base64_encode($row['image']);
-                        $price = $row['price'];
+                        $price = number_format($row['price']);
+                        $price2 = $row['price'];
                         $textData = $row['place'];
 
                         echo '<li class="splide__slide">';
@@ -161,7 +224,7 @@
                         echo '<h2 class="textdata">'.$textData.'</h2>';
                         echo '<div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>';
                         echo '<hr class="solidblack"></hr>';
-                        echo '<a href="placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price) . '" class="book">Book now</a>';
+                        echo '<a href="placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price2) . '" class="book">Book now</a>';
                         echo '<a href="results.php?choice=' . urlencode($textData) .'" class="see_details">See Details</a>';
                         echo '</div>';
                         echo '</li>';
@@ -181,7 +244,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         new Splide('#popular-places-slider', {
             type: 'slide',
-            perPage: 4,
+            perPage: 6,
             perMove: 1,
             pagination: false,
             autoplay: true,
@@ -207,14 +270,14 @@
                 <img src="/images/65f9dbbe20835.jpg" alt="Flight Image">
                 
             </div>
-            <div class="flight-details">
+            
                     <h2>Flight Details</h2>
                     <p>Flight Name: Example Airlines</p>
                     <p>Departure Time: 10:00 AM</p>
                     <p>Arrival Time: 12:00 PM</p>
                     <p>Price: $200</p>
                     <button class="book-flight-btn">Book Now</button>
-                </div>
+              
         </div>
     </div>
 </div>
@@ -432,7 +495,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         new Splide('#splide1', {
             type: 'slide',
-            perPage: 4,
+            perPage: 6,
             perMove: 1,
             pagination: false,
             autoplay: true,
@@ -449,13 +512,13 @@
 
         new Splide('#splide2', {
             type: 'slide',
-            perPage: 4,
+            perPage: 6,
             perMove: 1,
             pagination: false,
             autoplay: true,
             breakpoints: {
                 640: {
-                    perPage: 5,
+                    perPage: 6,
                 },
                 480: {
                     perPage: 1,
@@ -467,7 +530,7 @@
 
         new Splide('#splide3', {
             type: 'slide',
-            perPage: 4,
+            perPage: 6,
             perMove: 1,
             pagination: false,
             autoplay: true,
@@ -484,7 +547,7 @@
 
         new Splide('#splide4', {
             type: 'slide',
-            perPage: 4,
+            perPage: 5,
             perMove: 1,
             pagination: false,
             autoplay: true,

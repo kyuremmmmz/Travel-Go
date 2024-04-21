@@ -23,11 +23,13 @@ if (isset($_POST["submit"])) {
 
    
 
+   
+
         if ($departure == $arrival) {
         echo "Cannot match arrival and departure dates.";
-    } elseif ($departure > $arrival) {
-        echo "<script>alert('Invalid departure')</script>";
-    } else {
+            } elseif ($departure > $arrival) {
+                echo "<script>alert('Invalid departure')</script>";
+            } else {
         // Generate a voucher code
         $voucherCode = generateVoucher(16);
 
@@ -165,6 +167,9 @@ function generateVoucher($length) {
                         $price2 = number_format($_GET["price"]);
                         echo "<h2 class='text-center mb-4'>Book this to: $choice With PHP $price2</h2>";
                     }
+
+
+                    
                     ?>
                     <div class="mb-3 form-group">
                         <label for="name" class="form-label">Name</label>
@@ -208,6 +213,50 @@ function generateVoucher($length) {
         </div>
     </div>
     <!-- Bootstrap JS -->
+
+
+    <script>
+        var amount = document.getElementById("amount");
+            var adultsInput = document.getElementById("adults");
+            var childrenInput = document.getElementById("children");
+            
+
+            var adultPrice = 500; // Set the price for each adult
+
+            var childrenP =   100;
+
+            
+
+            //FOR CHILDREN
+            childrenInput.addEventListener('input', function(){
+                var children = parseInt(childrenInput.value);
+
+                var totalC = children * childrenP;
+
+                amount.value = parseInt(amount.value) + totalC;
+            })
+
+
+
+            adultsInput.addEventListener('input', function() {
+                // Get the number of adults
+                var adults = parseInt(adultsInput.value);
+
+                var children = parseInt(childrenInput.value);
+
+                
+                
+                // Calculate the additional amount based on the number of adults
+                var additionalAmount = adults * adultPrice;
+                
+                // Update the total amount
+                amount.value = parseInt(amount.value) + additionalAmount;
+            });
+
+            // Similar event listener for children, if needed
+
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

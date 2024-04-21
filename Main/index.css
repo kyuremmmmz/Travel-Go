@@ -354,6 +354,8 @@ body{
     background-color: white;
     border: none;
     margin: 20px;
+    transform: translateY(-50%);
+    margin-top: -400%;
     display: inline-block;
     transition: all 0.4s;
     text-decoration: none;
@@ -366,11 +368,16 @@ body{
     cursor: pointer;
 }
 
-.details{
-    color: #000000;
+.see_details{
+    color: rgb(0, 0, 0);
     background-color: white;
     border: none;
     margin: 20px;
+    transform: translateY(-50%);
+    margin-top: -400%;
+    display: inline-block;
+    transition: all 0.4s;
+    text-decoration: none;
     }
 
     
@@ -510,11 +517,7 @@ body{
    
 }
 
-.see_details{
-    text-decoration: none;
-    color: #000;
-    transition: all 0.2s ease-in-out;
-}
+
 
 .see_details:hover{
     color: rgb(27, 131, 228);
@@ -539,27 +542,27 @@ body{
     cursor: pointer;
 }
 
-.autocomplete {
+.lis .autocomplete {
     position: relative;
-    display: inline-block;
-    transform: translate(110%, 20%);
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.12);
+    
+    
 }
 
-.autocomplete input{
+
+
+.lis .autocomplete input{
     margin-top: 30px;
     outline: none;
     border: none;
-    width: 400px;
+    width: 300px;
     height: 40px;
     font-size: auto;
 }
 
-.autocomplete button{
+.lis .autocomplete button{
     outline: none;
     border: none;
-    width: 200px;
+    width: 100px;
     height: 40px;
     font-size: auto;
 }
@@ -568,6 +571,7 @@ body{
     position: absolute;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
+    color: #000;
     border-top: none;
     z-index: 1000;
     width: 60%;
@@ -607,7 +611,20 @@ body{
 }
 
 
-
+.container {
+    position: relative;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    
+    background-color: rgb(35, 71, 122);
+}
 
 .container .box {
     background-color: #8adeec;
@@ -623,12 +640,12 @@ body{
     margin: 0px 10px;
     border-radius: 10px;
     position: relative;
-    transform: translate(25%, 20%);
+    transform: translate(1%, 20%);
     overflow: hidden;
     box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
     grid-template-columns: repeat(auto-fill);
-    }
+}
 
 
 .container ul{
@@ -654,9 +671,7 @@ body{
 .container .inner-box .box:hover img {
     transform: scale(1.1);
 }
-.container .splide__slide {
-    padding: 0 10px; /* Adjust the padding as needed */
-}
+
 
 .container .inner-box .box h1 {
     right: 50%;
@@ -712,30 +727,29 @@ body{
 }
 
 .container .splide{
-    transform: translateY(20%);
+    transform: translate(1%,20%);
+    width: 1840px;
 
 }
+
+.container .splide__list{
+    transform: translateX(-20%);
+}
+
+.container .splide__arrow--prev {
+    transform: translateX(-170%);
+  }
+  
+  /* Select the right arrow */
+ .container .splide__arrow--next {
+    transform: translateX(130%);
+  }
 
 .container .splide__track{
     height: 500px;
 }
 
 
-.container{
-    position: relative;
-    padding: 20px;
-    max-height: 100vh;
-    height:100vh;
-    max-width: 100%;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    justify-content: center;
-    align-self: center;
-    overflow: auto;
-    background-color: rgb(35, 71, 122);
-    
-    }
 
 .container2 .promos {
     position: absolute;
@@ -1049,7 +1063,7 @@ body{
     color: #000;
     display: block;
     position: absolute;
-    transform: translate(20%, 129%);
+    transform: translate(20%, 40%);
     background: none;
     transition: all 0.3s ease-in-out;
  
@@ -1185,16 +1199,34 @@ i{
 
 /* Inner flight container */
 .inner-flight {
-    width: 40%;
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 10px;
+    border-radius: 10px;
+    position: relative;
+    transform: translate(25%, 20%);
+    overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
 }
+.travel{
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+    
+}
+
+
 
 /* Flight card container */
 .flight-card {
     border: 1px solid #ccc;
-    border-radius: 10px;
     overflow: hidden;
     width: 100%;
-    height: 250px; /* Adjust the height as needed */
+    height: 210px; /* Adjust the height as needed */
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
