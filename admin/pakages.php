@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         /* Custom styles */
+        body{
+            overflow: hidden;
+        }
         .sidebar {
             background-color: #343a40;
             color: #fff;
@@ -45,7 +51,6 @@
         .content{
             max-height: calc(150vh - 70px);
             overflow-y: auto;
-            
         }
         /* Avatar */
         .avatar {
@@ -55,6 +60,7 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            z-index: 999; /* Ensure the avatar is above other elements */
         }
         .avatar img {
             width: 40px;
@@ -65,6 +71,30 @@
         .dropdown-menu {
             right: 0;
             left: auto;
+            z-index: 999; /* Ensure the dropdown menu is above other elements */
+        }
+
+        .drop{
+            border-radius: 50px;
+            height: 25px;
+            justify-content: center;
+            
+        }
+
+        .drop:hover{
+            
+            color: #000;
+        }
+
+        .list-group-item{
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            width: 100%;
+        }
+
+        .list-group-item:hover{
+            background-color: #0088FF;
         }
     </style>
 </head>
@@ -90,22 +120,7 @@
                     <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
-             <!-- Content goes here -->
-             <div class="avatar">
-                    <img src="avatar.jpg" alt="Avatar">
-                    <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                    Dropdown button
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
-                    </ul>
-
-                </div>
-                </div>
+            
             <!-- Content -->
             <div class="col-md-9 content">
                 <!-- Content goes here -->
@@ -114,38 +129,110 @@
                 <!-- Table with "Create New" button -->
                 <div class="d-flex justify-content-between mb-3">
                     <h2>Packages</h2>
-                    <div class="d-flex justify-content-between mb-3">
-                   
                     <div class="btn-group" role="group" aria-label="Create New">
                         <a href="/see_details_form.php" class="btn btn-primary">Create New</a>
-                        <a href="posthotelsadmin.php" type="button" class="btn btn-primary">Create hotel</a>
-                        <button type="button" class="btn btn-primary">And Another</button>
+                        <a href="posthotelsadmin.php" class="btn btn-primary">Create hotel</a>
+                        <a href="" class="btn btn-primary">Create places</a>
                     </div>
                 </div>
-                </div>
-                <table class="table table-hover">
+                <table class="table table-striped table-striped table-hover">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Place</th>
+                            <th>Specific Place</th>
+                            <th>Hotels</th>
                             <th>Arrival</th>
                             <th>Departure</th>
-                            <th>Contact Number</th>
-                            <th>Hotel</th>
+                            <th>Amenities</th>
+                            <th>Description</th>
+                            <th>Hotel Price</th>
+                            <th>Attraction Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Table rows will be added dynamically here -->
+                        <?php
+                        include_once("connection.php");
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
+                            $delete_id = $_POST['delete_id'];
+                            $sql = "DELETE FROM `create_see_details.php` WHERE id = $delete_id";
+                            if ($conn->query($sql) !== TRUE) {
+                                echo "Error deleting    booking: " . $conn->error;
+                            }
+                            exit();
+                        }
+                        // Fetch data from database
+                        $query = "SELECT * FROM `create_see_details.php`";
+                        $result = mysqli_query($conn, $query);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            // Output data of each row
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $row['id'] . "</td>";
+                                echo "<td>" . $row['place'] . "</td>";
+                                echo "<td>" . $row['specific_place'] . "</td>";
+                                echo "<td>" . $row['hotels'] . "</td>";
+                                echo "<td>" . $row['arrival'] . "</td>";
+                                echo "<td>" . $row['departure'] . "</td>";
+                                echo "<td>" . $row['amenities'] . "</td>";
+                                echo "<td>" . $row['description'] . "</td>";
+                                echo "<td>" . number_format($row['price_for_hotel']) . "</td>";
+                                echo "<td>" . number_format($row['price']) . "</td>";
+                                echo "<td><button class='btn btn-primary'>Edit</button>
+                                <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>";
+                                echo "</tr>";
+                               
+                            }
+                        } else {
+                            echo "<tr><td colspan='8'>No data found</td></tr>";
+                        }
+
+                       
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script>
+
+        // Delete Button Click Event
+        $(".delete-btn").click(function(){
+            var bookingId = $(this).data("id");
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    $.ajax({
+                        url: "pakages.php",
+                        type: "POST",
+                        data: {delete_id: bookingId},
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your booking has been deleted.",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    })
+                }
+            });
+        });
+</script>
+        
