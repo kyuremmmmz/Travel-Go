@@ -157,8 +157,38 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
         $confirm_password = $_POST['confirm_password'];
 
         if ($confirm_password != $password) {
-            echo'<script>swal("Wrong password", "Password dont match", "error");</script>';
-            return ;
+            echo'<script>swal("Wrong password", "Password dont match", "error");</script>
+            <div class="login-box">
+            <h2>Signup Travel Go</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="user-box">
+                    <input type="text" name="username" id="username" class="username" required>
+                    <label for="">Username</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="email" name="email" id="email" class="email" required>
+                    <label for="">Email</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="password" name="password" id="password" class="password" required>
+                    <label for="">Password</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="password" name="confirm_password" id="confirm_password" class="confirm-password" required>
+                    <label for="">Confirm Password</label>
+                </div>
+                
+                <input type="submit" name="submit" id="Submit" class="submit" onclick="signup()" value="SUBMIT">
+                <p class="p">Already have an account? <a href="login_page.php" class="a">Signin</a></p>
+            </form>
+            
+        </div>
+            
+            ';
+            return;
                 }
                 else {
                     $sql = "INSERT INTO registration (user_name, email, password, confirm_password) 
