@@ -132,10 +132,10 @@
                 </div>
                 <h1 class="mt-5">Update Booking</h1>
                 <hr>
-                <form id="updateBookingForm" action="booking_list.php" method="POST">
+                <form id="updateBookingForm" action="update_form.php" method="POST">
                 <?php
                     // Include database connection file
-                    include("C:/xampp/htdocs/Website/user_connection..php");
+                    include("connection.php");
 
                     // Check if the form is submitted
                     if (isset($_POST["submit"])) {
@@ -161,7 +161,7 @@
 
                         // Execute the statement
                         if ($stmt->execute()) {
-                            echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
+                            echo "<script>swal('Success', 'Updated Successfully.', 'success')</script>";
                             echo "<script>window.location.href='booking_list.php'</script>";
                             
                             exit();
@@ -169,20 +169,13 @@
                             echo "Error: " . $sql . "<br>" . $conn->error;
                         }
 
-                        // Close the statement
-                        $stmt->close();
+                        
                     }
 
                     $get = $_GET["choice"];
                     $query = "SELECT * FROM booking_tracker WHERE id = $get ";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
-                     
-                    }
-                
-                    mysqli_free_result($result);
-                    mysqli_close($conn);
-                
                 ?>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
@@ -244,7 +237,12 @@
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
+                <?php
+                    }
                 
+                    mysqli_free_result($result);
+                    mysqli_close($conn);
+                ?>
             </div>
         </div>
     </div>
