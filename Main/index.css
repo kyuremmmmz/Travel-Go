@@ -881,7 +881,7 @@ body{
 .container .splide__track{
     height: 500px;
 }
-
+s
 
 
 .container2 .promos {
@@ -1312,7 +1312,7 @@ i{
 
 /*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
-/* Flights container */
+
 .flights {
     display: block ;
     flex-direction: column;
@@ -1323,15 +1323,14 @@ i{
     min-height: 100vh;
 }
 
-/* Outer flights container */
+
 .flights .outer-flights {
     display: inline;
     width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
+    max-width: 800px; 
     margin-top: 20px;
 }
 
-/* Inner flight container */
 .flights .inner-flight {
     background-color: #ffffff;
     display: inline-block;
@@ -1341,7 +1340,7 @@ i{
     color: #000;
     border-radius: 10px;
     position: relative;
-    transform: translate(25%, 20%);
+    transform: translate(1%, 20%);
     overflow: hidden;
     box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
@@ -1383,6 +1382,32 @@ i{
 .flights .flight-details {
     padding: 20px;
 }
+.flights .splide__track{
+    height: 500px;
+}
+
+.flights .splide{
+    transform: translate(1%,20%);
+    width: 1840px;
+
+}
+
+.flights .splide__list{
+    transform: translateX(-20%);
+}
+
+.flights .splide__arrow--prev {
+    transform: translateX(-170%);
+  }
+  
+  /* Select the right arrow */
+ .flights .splide__arrow--next {
+    transform: translateX(130%);
+  }
+
+.flights .splide__track{
+    height: 500px;
+}
 
 /* Flight details heading */
 .flights .flight2 {
@@ -1420,7 +1445,7 @@ i{
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    transform: translate(140%, -50%);
+    transform: translate(140%, -150%);
     transition: background-color 0.3s ease;
 }
 
