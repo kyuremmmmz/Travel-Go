@@ -21,7 +21,20 @@ body{
 
 }
 
+.dropdown-toggle{
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    
+}
 
+.travel {
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+}
 
 
 .header {

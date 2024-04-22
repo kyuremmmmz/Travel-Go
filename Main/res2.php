@@ -39,7 +39,16 @@
           
             <ul class="myul">
            
-                
+            <li class="lis"><img src="/2024-03-29-removebg-preview.png" class="travel" alt="" srcset=""></li>
+
+            <li class="lis">
+            <div class="autocomplete">
+                <input type="search" id="search" name="search" placeholder="Search for places" required>
+                <button class="search" name="submit"><i class="fas fa-search"></i></button>
+                <ul id="my-box"></ul>
+            </div>
+            </li>
+
                 
                 <li class="li"><a href="#ewan" class="active" id="a">Home</a> </li>
           
@@ -51,16 +60,39 @@
 
                 
 
-                <div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-      More
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="travel.php">My Bookings</a></li>
-      <li class="list"><button class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">Signout</button></li>
-    </ul>
-  </div>
-</div>
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
+                // Database connection
+                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
+
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $email = $_SESSION['email']; 
+               
+
+                $sql = "SELECT user_name FROM registration WHERE email='$email'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $User = $row['user_name'];
+                        echo $User;
+                    }
+                }
+                
+                
+                
+                
+                ?></button>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                        <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
+                        <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
+                    </ul>
+
+            
+                </li>
 
                
 
