@@ -264,19 +264,51 @@
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
-    <h1>Flights</h1>
+    <h1>All Flights</h1>
     <div class="outer-flights">
+    <?php
+    // Establish connection to the database
+    $servername = "localhost:3307";
+    $username = "root"; // Your MySQL username
+    $password = "admin"; // Your MySQL password
+    $database = "sample"; // Your MySQL database name
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // SQL query to fetch all flights
+    $sql = "SELECT * FROM flights";
+
+    // Execute the query
+    $result = $conn->query($sql);
+
+    // Check if there are any rows returned
+    if ($result->num_rows > 0) {
+        
+    while ($row = $result->fetch_assoc()) {
+       
+    ?>
         <div class="inner-flight">
             <div class="flight-card">
-                <img src="/images/65f9dbbe20835.jpg" alt="Flight Image">
-                </div>
-                <h2 class="flight2">Flight Details</h2>
-                <p>Flight Name: Example Airlines</p>
-                <p>Departure Time: 10:00 AM</p>
-                <p>Arrival Time: 12:00 PM</p>
-                <p>Price: $200</p>
-                <button class="book-flight-btn">Book Now</button>
+                <img src="<?php echo $row['image_url']; ?>" alt="Flight Image">
+            </div>
+            <h2 class="flight2">Flight Details</h2>
+            <p>Departure Time: <?php echo $row['departure_time']; echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; echo'Price: ' .$row['price'];?></p>
+            
+           
+            <button class="book-flight-btn">Book Now</button>
         </div>
+    <?php
+}
+    } else {
+        echo "No flights found";
+    }
+?>
     </div>
 </div>
 
