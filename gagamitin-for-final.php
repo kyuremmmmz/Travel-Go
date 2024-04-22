@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Signup Travel Go ph</title>
     <style>
         html {
@@ -156,8 +157,8 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
         $confirm_password = $_POST['confirm_password'];
 
         if ($confirm_password != $password) {
-            echo'confirm pass inc';
-            return;
+            echo'<script>swal("Wrong password", "Password dont match", "error");</script>';
+            return ;
                 }
                 else {
                     $sql = "INSERT INTO registration (user_name, email, password, confirm_password) 
@@ -178,7 +179,7 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
                 
                 
                 <h2 style='color: #333; font-size: 18px; margin-top: 0;'>Successfully created your account $username</h2>
-                <p style='color: #666; font-size: 16px;'>Register successfully. <a href = 'login_page.php' style = 'color: #252627'>Login your account now </a></p> 
+                <p style='color: #666; font-size: 16px;'>Register successfully. <a href = 'Main/login_page.php' style = 'color: #252627'>Login your account now </a></p> 
             </div>";
 
             exit;
