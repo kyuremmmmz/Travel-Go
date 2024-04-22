@@ -313,6 +313,8 @@
                     } else {
                         echo "No flights found";
                     }
+
+                    
                     ?>
                 </ul>
             </div>
