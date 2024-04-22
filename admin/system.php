@@ -74,62 +74,67 @@
             
             color: #000;
         }
+
+        .list-group-item{
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            width: 100%;
+        }
+
+        .list-group-item:hover{
+            background-color: #0088FF;
+        }
     </style>
 </head>
 <body>
-    <?php 
-    $conn = mysqli_connect("localhost:3307","root","admin","sample");
-
-    if ($conn-> connect_error) {
-        die("". $conn->connect_error);
-        # code...
-    }
-    
-    ?>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
-                <ul class="sidebar-menu">
-                    <li><a href="#packages"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="/admin/pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking_list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                <ul class="list-group">
+                    <li><a href="#packages" class="list-group-item bg-blue active"><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking_list.php" class="list-group-item"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="settings.php" class="list-group-item "><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
+            
             <!-- Content -->
-            <div class="col-md-9">
+            <!-- Content -->
+            <div class="col-md-9 content">
                 <!-- Content goes here -->
-               
-                    
-                    <div class="dropdown">
+                <div class="dropdown">
                     <div class="avatar">
                     <img src="avatar.jpg" alt="Avatar">
-                    <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">
+                   
                     <?php 
-                    session_start();
-                  
-
-                        $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
-                        if ($conn->connect_error) {
-                            die("connection error". $conn->connect_error);
-                        }
-
-                        echo"";
-
-                    $email=$_SESSION['email'];
-                    $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        // Output data of each row
-                        while ($row = $result->fetch_assoc()) {
-                            echo $row['user_name'];
-                        }
-                    }
                     
-                    ?>
+                            session_start();    
+            
+
+                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+                            if ($conn->connect_error) {
+                                die("connection error". $conn->connect_error);
+                            }
+
+                            echo"";
+
+                        $email=$_SESSION['email'];
+                        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            // Output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                echo $row['user_name'];
+                            }
+                        }
+            
+            ?>
+                    
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
@@ -141,9 +146,63 @@
                 </div>
                 </div>
 
+                
                 <h1>Welcome to Admin Dashboard</h1>
+              
                 <hr>
-                <p>This is the main content area.</p>
+                
+                <!-- Card for User Statistics -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Statistics</h5>
+                        <div class="card-text">
+                            <?php
+                            // Include your database connection file
+                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+                            if ($conn->connect_error) {
+                                die("connection error". $conn->connect_error);
+                            }
+
+                            echo"";
+
+                            // Fetch the number of signed-in users
+                            $sql_users = "SELECT COUNT(*) AS total_users FROM registration";
+                            $result_users = $conn->query($sql_users);
+                            $total_users = 0;
+                            if ($result_users->num_rows > 0) {
+                                $row_users = $result_users->fetch_assoc();
+                                $total_users = $row_users['total_users'];
+                            }
+                            ?>
+                            <?php
+                            include("connection.php");
+                            // Fetch the number of booked packages
+                            $sql_bookings = "SELECT COUNT(*) AS total_bookings FROM booking_tracker";
+                            $sql_places =  "SELECT COUNT(*) AS total_places FROM for_creating_a_hotel";
+                            $result_places = $conn->query($sql_places);
+                            $result_bookings = $conn->query($sql_bookings);
+                            $total_bookings = 0;
+                            $total_places = 0;
+                            if ($result_bookings->num_rows > 0) {
+                                $row_bookings = $result_bookings->fetch_assoc();
+                                $total_bookings = $row_bookings['total_bookings'];
+                               
+                            }
+
+                            if ($result_places->num_rows > 0) {
+                                $row_places = $result_places->fetch_assoc();
+                                $total_places = $row_places['total_places'];
+                            }
+                           
+
+                            ?>
+                            <p>Total Signed-in Users: <?php echo $total_users; ?></p>
+                            <p>Total Booked Packages: <?php echo $total_bookings; ?></p>
+                            <p>Total Places Packages: <?php echo $total_places; ?></p>
+                            <!-- You can add more statistics here as needed -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

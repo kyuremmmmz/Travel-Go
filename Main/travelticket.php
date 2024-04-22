@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Go Hotel E-Ticket</title>
+    <title>Travel Go E-Ticket</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
 
     $session = $_SESSION['email'];
 
-    // SQL query to fetch voucher or barcode data
+    // SQL query to fetch travel details
     $stmt = $conn->prepare("SELECT * FROM booking_tracker WHERE email = ?"); 
     $stmt->bind_param("s", $session);
     $stmt->execute();
@@ -47,7 +47,7 @@
             $children  = $row['children'];
             
             // Generate barcode image
-            require 'C:\xampp\htdocs\Website\vendor\autoload.php';// Load Composer's autoloader
+            require 'C:\xampp\htdocs\Website\vendor\autoload.php'; // Adjust the path as per your project structure
             $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
             $barcodeImage = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
 
@@ -59,13 +59,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3>Hotel Booking Information</h3>
-                                    <p><strong>Hotel:</strong> '.$specific_place.'</p>
-                                    <p><strong>Hotel ID:</strong> '.$voucherCode.'</p>
-                                    <p><strong>Check in:</strong> '.$departure.'</p>
-                                    <p><strong>Checkout:</strong> '.$arrival.'</p>
-                                    <p><strong>Adult No:</strong> '.$adult.'</p>
-                                    <p><strong>Children No:</strong> '.$children.'</p>
+                                    <h3>Travel Booking Information</h3>
+                                    <p><strong>Destination:</strong> '.$specific_place.'</p>
+                                    <p><strong>Departure Date:</strong> '.$departure.'</p>
+                                    <p><strong>Return Date:</strong> '.$arrival.'</p>
+                                    <p><strong>Adults:</strong> '.$adult.'</p>
+                                    <p><strong>Children:</strong> '.$children.'</p>
                                 </div>
                                 <div class="col-md-6">
                                     <h3>Passenger Information</h3>
@@ -73,7 +72,7 @@
                                     <p><strong>Email:</strong> '.$email.'</p>
                                     <p><strong>Phone:</strong> +63'.$phone.'</p>
                                     <div class="barcode">
-                                        <p><strong>Unique Code</strong> </p>
+                                        <p><strong>Your Barcode</strong> </p>
                                         <img src="data:image/png;base64,'.base64_encode($barcodeImage).'" alt="Barcode">
                                     </div>
                                 </div>

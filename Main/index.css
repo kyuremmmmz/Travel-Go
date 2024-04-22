@@ -91,6 +91,14 @@ body{
     top: 0; /* Stick to top when scrolled */
 }
 
+.dropdown-toggle{
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    
+}
 .li, .lis {
     font-weight: 500;
     text-align: center;
@@ -123,6 +131,117 @@ body{
     border-bottom: solid 1px #e20000;
 
 }
+
+.flight-card {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex; /* Added for image container */
+  flex-direction: column; /* Added for image container */
+}
+
+.flight-image-container {
+  width: 100%; /* Fills the card width */
+  height: 150px; /* Adjust height as needed */
+  overflow: hidden; /* Ensures image stays within container */
+}
+
+.flight-image {
+  width: 100%; /* Fills the image container */
+  height: 100%; /* Fills the image container */
+  object-fit: cover; /* Scales image to fit container */
+}
+
+.flight-info {
+  padding: 20px;
+  flex: 1; /* Expands to fill remaining space */
+}
+
+.flight-number,
+.airline {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.route i {
+  margin-right: 5px;
+}
+
+.departure,
+.arrival {
+  display: flex;
+  align-items: center;
+}
+
+.departure i,
+.arrival i {
+  font-size: 18px;
+}
+
+.departure .airport {
+  margin-left: 5px;
+}
+
+.actions {
+  text-align: center;
+  padding: 10px;
+}
+
+.btn-book {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-book:hover {
+  background-color: #0056b3;
+}
+  
+.button2{
+   position: absolute;
+   margin-left: 45%;
+   transform: translateY(50%);
+   display: flex;
+   align-content: center;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   width: 10%;
+   height: 50px;
+   border: none;
+   border-radius: 50px;
+   transition: all ease-in-out 0.5s;
+   background-color: rgb(71, 109, 14);
+   color: white;
+   text-decoration: none;
+   font-size: 20px;
+   cursor: pointer;
+   z-index: 100;
+}
+
+
+.button2:hover {
+    background-color: #1cdd5c;
+    box-shadow: 10px 10px 15px 0px rgba(17, 145, 45, 0.5), inset 0px 0px 0px 10px rgba(93, 255, 18, 0.2);
+  }
+
+
+
 
 .list .button {
     background: transparent;
@@ -311,6 +430,18 @@ body{
     
 }
 
+.discover {
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+    border-radius: 5px;
+    z-index: 100;
+    
+}
+
 /*====================================================================================================user information================================================================*/
 
 .nav2 .box_container {
@@ -354,6 +485,8 @@ body{
     background-color: white;
     border: none;
     margin: 20px;
+    transform: translateY(-50%);
+    margin-top: -400%;
     display: inline-block;
     transition: all 0.4s;
     text-decoration: none;
@@ -366,11 +499,16 @@ body{
     cursor: pointer;
 }
 
-.details{
-    color: #000000;
+.see_details{
+    color: rgb(0, 0, 0);
     background-color: white;
     border: none;
     margin: 20px;
+    transform: translateY(-50%);
+    margin-top: -400%;
+    display: inline-block;
+    transition: all 0.4s;
+    text-decoration: none;
     }
 
     
@@ -476,10 +614,11 @@ body{
 
 
 .for{
-    padding: 20px;
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 65px;
+    color: #fff;
 }
 
 .textdata{
@@ -509,11 +648,7 @@ body{
    
 }
 
-.see_details{
-    text-decoration: none;
-    color: #000;
-    transition: all 0.2s ease-in-out;
-}
+
 
 .see_details:hover{
     color: rgb(27, 131, 228);
@@ -538,27 +673,29 @@ body{
     cursor: pointer;
 }
 
-.autocomplete {
+.lis .autocomplete {
     position: relative;
-    display: inline-block;
-    transform: translate(110%, 20%);
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.12);
+    transform: translate(-110%);
+    
+    
 }
 
-.autocomplete input{
-    margin-top: 30px;
+
+
+.lis .autocomplete input{
+    
     outline: none;
     border: none;
-    width: 400px;
+    width: 300px;
     height: 40px;
     font-size: auto;
 }
 
-.autocomplete button{
+.lis .autocomplete button{
+    
     outline: none;
     border: none;
-    width: 200px;
+    width: 100px;
     height: 40px;
     font-size: auto;
 }
@@ -567,6 +704,7 @@ body{
     position: absolute;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
+    color: #000;
     border-top: none;
     z-index: 1000;
     width: 60%;
@@ -606,36 +744,41 @@ body{
 }
 
 
-.container .box {
-    display: block;
-    background-color: rgb(255, 255, 255);
-    height: 250px;
-    width: 320px;
-    max-width: 320px;
-    text-align: center;
-    overflow: hidden;
+.container {
     position: relative;
-    transition: 1s;
-    cursor: pointer;
-    z-index: 999999999999999999999999999;
+    padding: 20px;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-self: center;
+    
+    background-color: rgb(35, 71, 122);
+}
+
+.container .box {
+    background-color: #8adeec;
+    height: 70%;
+    overflow: hidden;
 }
 
 .container .inner-box {
+    background-color: #ffffff;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
-    height: 350px; 
-    border-radius: 30px; 
-    margin-right: 40px;
-    text-align: center;
-    overflow: hidden;
+    width: 270px;
+    height: 350px;
+    margin: 0px 10px;
+    border-radius: 10px;
     position: relative;
-    transition: all 0.7s ease;
+    transform: translate(1%, 20%);
+    overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
-    transform: translate(20%, 5%);
-    margin-top: 40px;
-    box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.5);
     grid-template-columns: repeat(auto-fill);
-    }
+}
 
 
 .container ul{
@@ -700,7 +843,6 @@ body{
     border-radius: 50px;
     width: 200px;
     height: 50px;
-    margin: 30px;
     transition: background-color, 1s;
     transform: translate(-0%, -600%);
     cursor: pointer;
@@ -713,21 +855,34 @@ body{
 .container .inner-box .input-wrapper input:focus ~ .input2 {
     border-bottom: 1px solid #000000;
 }
+.container .splide__track{
+    height: 500px;
+}
 
-.container{
-    height: 100vh;
-    width: 100%;
-    max-height: 100vh;
-    max-width: 100%;
-    background-color: rgb(14, 44, 85);
-    background-position: center;
-    overflow: auto;
-    justify-content: center;
-    align-content: center;
-    background-attachment: fixed;
-    display: table;
-    
-    }
+.container .splide{
+    transform: translate(1%,20%);
+    width: 1840px;
+
+}
+
+.container .splide__list{
+    transform: translateX(-20%);
+}
+
+.container .splide__arrow--prev {
+    transform: translateX(-170%);
+  }
+  
+  /* Select the right arrow */
+ .container .splide__arrow--next {
+    transform: translateX(130%);
+  }
+
+.container .splide__track{
+    height: 500px;
+}
+
+
 
 .container2 .promos {
     position: absolute;
@@ -1041,7 +1196,7 @@ body{
     color: #000;
     display: block;
     position: absolute;
-    transform: translate(20%, 129%);
+    transform: translate(20%, 20%);
     background: none;
     transition: all 0.3s ease-in-out;
  
@@ -1061,81 +1216,7 @@ body{
 
 
 
-/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
-.flights{
-    position: relative;
-    padding: 20px;
-    max-height: 100vh;
-    height: 100vh;
-    max-width: 100%;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    justify-content: center;
-    align-self: center;
-    overflow: auto;
-    background-color: rgb(14, 37, 70);
-}
-
-
- .outer-flights{
-    background-color: #ffffff;
-    display: inline-block;
-    width: 270px;
-    height: 350px;
-    margin: 0px 30px;
-    border-radius: 30px;
-    position: relative;
-    transform: translate(15%, 20%);
-    overflow: hidden;
-    cursor: pointer;
-    grid-template-columns: repeat(auto-fill);
-}
-
-
-.inner-flight{
-    display: inline-block;
-    background-color: #000000;
-    height: 200px;
-    max-height: fit-content; 
-    max-width: fit-content;
-    transform: translate(-12%,-18%);
-    cursor: pointer;
-    overflow: hidden;
-    margin: 30px;
-    transition: all 0.4s ease-in-out;
-}
-
-.flights a{
-    text-decoration: none;
-    color: white;
-    
-}
-
-.inner-flight img{
-    height: 100%;
-    transition: all 0.3s ease-in-out;
-}
-
-
- .inner-flight img:hover{
-    transform: scale(1.1);
-    
-}
-.flights h1{
-    text-align: center;
-}
-
-
-
-
-
-
-
-
-
-/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
 .container3 .hotels .in img{
     height: 100%;
@@ -1231,69 +1312,123 @@ i{
 
 /*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
-.flights{
-    position: relative;
+/* Flights container */
+.flights {
+    display: block ;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    max-height: 100vh;
-    height: 100vh;
-    max-width: 100%;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    justify-content: center;
-    align-self: center;
-    overflow: auto;
     background-color: rgb(14, 37, 70);
+    color: #fff;
+    min-height: 100vh;
 }
 
+/* Outer flights container */
+.flights .outer-flights {
+    display: inline;
+    width: 100%;
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin-top: 20px;
+}
 
- .outer-flights{
+/* Inner flight container */
+.flights .inner-flight {
     background-color: #ffffff;
     display: inline-block;
     width: 270px;
     height: 350px;
-    margin: 0px 30px;
-    border-radius: 30px;
+    margin: 0px 10px;
+    color: #000;
+    border-radius: 10px;
     position: relative;
-    transform: translate(15%, 20%);
+    transform: translate(25%, 20%);
     overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
     grid-template-columns: repeat(auto-fill);
 }
 
+/* Text "Travel" */
+.travel {
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+}
 
-.inner-flight{
-    display: inline-block;
-    background-color: #000000;
-    height: 200px;
-    max-height: fit-content; 
-    max-width: fit-content;
-    transform: translate(-12%,-18%);
-    cursor: pointer;
+/* Flight card container */
+.flights .flight-card {
+    border: 1px solid #ccc;
     overflow: hidden;
-    margin: 30px;
-    transition: all 0.4s ease-in-out;
+    width: 100%;
+    height: 210px; /* Adjust the height as needed */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.flights a{
-    text-decoration: none;
-    color: white;
-    
+/* Flight image */
+.flights .flight-card img {
+    width: 100%;
+    height: 100%; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: all ease-in-out  0.4s;
 }
 
-.inner-flight img{
-    height: 100%;
-    transition: all 0.3s ease-in-out;
+/* Hover effect on flight image */
+.flights .flight-card img:hover {
+    transform: scale(1.2);
 }
 
-
- .inner-flight img:hover{
-    transform: scale(1.1);
-    
+/* Flight details */
+.flights .flight-details {
+    padding: 20px;
 }
+
+/* Flight details heading */
+.flights .flight2 {
+    transform: translateY(-50%);
+    font-size: 20px; /* Adjust the font size here */
+    color: #000;
+}
+
+/* Flight details text */
+.flights p {
+    transform: translateY(-29%);
+    font-size: 14px;
+    display: block; /* Change display to block to ensure each detail appears on a new line */
+    margin-bottom: 5px; /* Add some space between each detail */
+}
+
+/* Adjust the position */
+
+
 .flights h1{
-    text-align: center;
+        text-align: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        font-size: 65px;
+        color: #fff;
+    
 }
+
+/* Book flight button */
+.flights .book-flight-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translate(140%, -50%);
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect on book flight button */
+.flights .book-flight-btn:hover {
+    background-color: #0056b3;
+}
+
 
 
 

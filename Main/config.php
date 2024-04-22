@@ -10,7 +10,7 @@ define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE
  
 define('PAYPAL_RETURN_URL', 'http://localhost:8000/Main/success.php'); 
 define('PAYPAL_CANCEL_URL', 'http://localhost:8000/Main/cancel.php'); 
-define('PAYPAL_CURRENCY', 'USD'); 
+define('PAYPAL_CURRENCY', 'PHP');  
  
 // Database configuration 
 define('DB_HOST', 'localhost:3307'); 

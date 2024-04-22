@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Signup Travel Go ph</title>
     <style>
         html {
@@ -145,9 +146,9 @@
 // ==============================================================================GET THE INPUTS TO INSERT INTO THE DATABASE=========================================================
     
 $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "admin", $DB_NAME = "for_admin");
-    // Include the PHP script to connect to the database
+    
 
-    // Check if the form is submitted
+   
     if (isset($_POST["submit"])) {
         // Retrieve form data
         $username = $_POST['username'];
@@ -156,7 +157,37 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
         $confirm_password = $_POST['confirm_password'];
 
         if ($confirm_password != $password) {
-            echo'confirm pass inc';
+            echo'<script>swal("Wrong password", "Password dont match", "error");</script>
+            <div class="login-box">
+            <h2>Signup Travel Go</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>
+                <div class="user-box">
+                    <input type="text" name="username" id="username" class="username" required>
+                    <label for="">Username</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="email" name="email" id="email" class="email" required>
+                    <label for="">Email</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="password" name="password" id="password" class="password" required>
+                    <label for="">Password</label>
+                </div>
+    
+                <div class="user-box">
+                    <input type="password" name="confirm_password" id="confirm_password" class="confirm-password" required>
+                    <label for="">Confirm Password</label>
+                </div>
+                
+                <input type="submit" name="submit" id="Submit" class="submit" onclick="signup()" value="SUBMIT">
+                <p class="p">Already have an account? <a href="login_page.php" class="a">Signin</a></p>
+            </form>
+            
+        </div>
+            
+            ';
             return;
                 }
                 else {
@@ -178,7 +209,7 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
                 
                 
                 <h2 style='color: #333; font-size: 18px; margin-top: 0;'>Successfully created your account $username</h2>
-                <p style='color: #666; font-size: 16px;'>Register successfully. <a href = 'login_page.php' style = 'color: #252627'>Login your account now </a></p> 
+                <p style='color: #666; font-size: 16px;'>Register successfully. <a href = 'Main/login_page.php' style = 'color: #252627'>Login your account now </a></p> 
             </div>";
 
             exit;
