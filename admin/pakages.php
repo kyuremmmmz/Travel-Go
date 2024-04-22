@@ -96,12 +96,12 @@
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
-                <ul class="sidebar-menu">
-                    <li><a href="system.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking_list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="inquiries.php"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
+                <ul class="list-group">
+                    <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="/admin/pakages.php" class="list-group-item bg-blue active"><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking_list.php" class="list-group-item"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="settings.php" class="list-group-item"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
            
@@ -114,7 +114,7 @@
                    
                     <?php 
                     
-                    session_start();    
+                            session_start();    
             
 
                             $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');

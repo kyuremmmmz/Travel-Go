@@ -1,3 +1,18 @@
+<?php session_start();    
+            
+
+            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+            if ($conn->connect_error) {
+                die("connection error". $conn->connect_error);
+            }
+
+            echo"";
+
+        $email=$_SESSION['email'];
+        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // Output data of each row ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +25,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
+        /* Custom styles */
         .sidebar {
-            background-color: #0080FF;
+            background-color: #343a40;
             color: #fff;
             height: 100vh;
-            overflow-y: auto;
+            overflow: hidden;
         }
         .sidebar-logo {
             padding: 20px;
@@ -32,22 +48,18 @@
         .sidebar-menu li a {
             color: #fff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s; /* Add transition for smoother color change */
         }
         .sidebar-menu li:hover a,
         .sidebar-menu li:focus a,
         .sidebar-menu li:active a {
-            color: #fff;
+            color: #fff; /* Change text color on hover, focus, and active */
+            background-color: #343a40;
         }
         .sidebar-menu li:hover {
-            background-color: #4e555b;
+            background-color: #4e555b; /* Change background color on hover */
         }
-        .content {
-            max-height: calc(150vh - 70px);
-            overflow-y: auto;
-            background-color: #343a40;
-            color: aliceblue;
-        }
+        /* Avatar */
         .avatar {
             position: absolute;
             top: 10px;
@@ -66,6 +78,73 @@
             right: 0;
             left: auto;
         }
+
+        .drop{
+            border-radius: 50px;
+            height: 25px;
+            justify-content: center;
+            
+        }
+
+        .drop:hover{
+            
+            color: #000;
+        }
+
+        .list-group-item{
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            width: 100%;
+        }
+
+        .list-group-item:hover{
+            background-color: #0088FF;
+        }
+
+        /* Styles for the settings panel */
+        .settings-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+        .settings-panel h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
         
     </style>
 </head>
@@ -75,12 +154,12 @@
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
-                <ul class="sidebar-menu">
-                    <li><a href="system.php"><i class="fas fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking-list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                <ul class="list-group">
+                    <li><a href="#packages" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking_list.php" class="list-group-item bg-blue active"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="settings.php" class="list-group-item "><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
     
@@ -92,12 +171,13 @@
              <div class="avatar">
                     <img src="avatar.jpg" alt="Avatar">
                     <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle drop" data-bs-toggle="dropdown">
-                    Dropdown button
-                    </button>
+                    <?php
+                            while ($row = $result->fetch_assoc()) {
+                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                echo $row['user_name'];
+                            }
+                        } ?>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
                     </ul>

@@ -132,7 +132,7 @@
                 </div>
                 <h1 class="mt-5">Update Booking</h1>
                 <hr>
-                <form id="updateBookingForm" action="booking_list.php" method="POST">
+                <form id="updateBookingForm" action="update_form.php" method="POST">
                 <?php
                     // Include database connection file
                     include("connection.php");

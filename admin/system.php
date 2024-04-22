@@ -103,7 +103,50 @@
             </div>
             
             <!-- Content -->
-            <div class="col-md-9">
+            <!-- Content -->
+            <div class="col-md-9 content">
+                <!-- Content goes here -->
+                <div class="dropdown">
+                    <div class="avatar">
+                    <img src="avatar.jpg" alt="Avatar">
+                   
+                    <?php 
+                    
+                            session_start();    
+            
+
+                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+                            if ($conn->connect_error) {
+                                die("connection error". $conn->connect_error);
+                            }
+
+                            echo"";
+
+                        $email=$_SESSION['email'];
+                        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            // Output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                echo $row['user_name'];
+                            }
+                        }
+            
+            ?>
+                    
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+
+                </div>
+                </div>
+
+                
                 <h1>Welcome to Admin Dashboard</h1>
               
                 <hr>
@@ -115,8 +158,12 @@
                         <div class="card-text">
                             <?php
                             // Include your database connection file
-                            include("connection.php");
-                            include("con3.php");
+                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+                            if ($conn->connect_error) {
+                                die("connection error". $conn->connect_error);
+                            }
+
+                            echo"";
 
                             // Fetch the number of signed-in users
                             $sql_users = "SELECT COUNT(*) AS total_users FROM registration";
