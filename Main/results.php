@@ -250,16 +250,82 @@
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
-<h1>Flights</h1>
-<div class="outer-flights">
-<div class="inner-flight">
-    <img src="/images/65f9dbbe20835.jpg" alt="" srcset="">
+    <h1>All Flights</h1>
+    <div class="outer-flights">
+        <div id="splide8" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php
+                    // Establish connection to the database
+                    $servername = "localhost:3307";
+                    $username = "root"; 
+                    $password = "admin";
+                    $database = "sample"; 
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $database);
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // SQL query to fetch all flights
+                    $sql = "SELECT * FROM flights";
+
+                    // Execute the query
+                    $result = $conn->query($sql);
+
+                    // Check if there are any rows returned
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <li class="splide__slide">
+                                <div class="inner-flight">
+                                    <div class="flight-card">
+                                        <img src="<?php echo $row['image_url']; ?>" alt="Flight Image">
+                                    </div>
+                                    <h2 class="flight2">Flight Details</h2>
+                                    <p>Destination: <?php echo $row['destination'];echo '<br> Origin: '.$row['origin'];
+                                    echo '<br> Departure: ' 
+                                    .$row['departure_time']; 
+                                    echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
+                                    echo'Price: ' .$row['price'];?></p>
+                                    <button class="book-flight-btn">Book Now</button>
+                                </div>
+                            </li>
+                    <?php
+                        }
+                    } else {
+                        echo "No flights found";
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
- 
-</div>
-
+<script src="https://unpkg.com/@splidejs/splide@3.0.9/dist/js/splide.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#splide8', {
+            type: 'slide',
+            perPage: 6, // Adjust the number of slides per page as needed
+            perMove: 1,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                640: {
+                    perPage: 2,
+                },
+                480: {
+                    perPage: 1,
+                },
+            },
+        }).mount();
+    });
+</script>
 
 <!----------------------------------------------------------------------------------------------FLGIHTS CONTAINER------------------------------------------------------------------------------------------->
 
