@@ -13,13 +13,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         /* Custom styles */
-        body{
-            overflow: hidden;
-        }
         .sidebar {
             background-color: #343a40;
             color: #fff;
             height: 100vh;
+            overflow: hidden;
         }
         .sidebar-logo {
             padding: 20px;
@@ -43,14 +41,10 @@
         .sidebar-menu li:focus a,
         .sidebar-menu li:active a {
             color: #fff; /* Change text color on hover, focus, and active */
+            background-color: #343a40;
         }
         .sidebar-menu li:hover {
             background-color: #4e555b; /* Change background color on hover */
-        }
-
-        .content{
-            max-height: calc(150vh - 70px);
-            overflow-y: auto;
         }
         /* Avatar */
         .avatar {
@@ -60,7 +54,6 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            z-index: 999; /* Ensure the avatar is above other elements */
         }
         .avatar img {
             width: 40px;
@@ -71,7 +64,6 @@
         .dropdown-menu {
             right: 0;
             left: auto;
-            z-index: 999; /* Ensure the dropdown menu is above other elements */
         }
 
         .drop{
@@ -99,14 +91,6 @@
     </style>
 </head>
 <body>
-    <?php 
-    $conn = mysqli_connect("localhost:3307","root","admin","sample");
-
-    if ($conn-> connect_error) {
-        die("". $conn->connect_error);
-    }
-    
-    ?>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -120,10 +104,50 @@
                     <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
-            
+           
             <!-- Content -->
             <div class="col-md-9 content">
                 <!-- Content goes here -->
+                <div class="dropdown">
+                    <div class="avatar">
+                    <img src="avatar.jpg" alt="Avatar">
+                   
+                    <?php 
+                    
+                    session_start();    
+            
+
+                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+                            if ($conn->connect_error) {
+                                die("connection error". $conn->connect_error);
+                            }
+
+                            echo"";
+
+                        $email=$_SESSION['email'];
+                        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            // Output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                echo $row['user_name'];
+                            }
+                        }
+            
+            ?>
+                    
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+
+                </div>
+                </div>
+
                 <h1>Welcome to Admin Dashboard Packages</h1>
                 <hr>
                 <!-- Table with "Create New" button -->

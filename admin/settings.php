@@ -1,3 +1,34 @@
+<?php
+require_once 'con3.php';
+
+if (isset($_POST['submit'])) {
+    $email = $_SESSION['email']; 
+    $user_name = $_POST['username'];
+    $email_post = $_POST['email']; 
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $sql = "UPDATE registration SET user_name = '$user_name', email = '$email_post', password = '$password' WHERE email = '$email_post'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Success! Data Updated Successfully');</script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error; 
+    }
+}
+
+// Retrieve user details for pre-filling the form
+$email = $_SESSION['email'];
+$sql = "SELECT * FROM registration WHERE email = '$email'";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $User = $row['user_name'];
+        $email = $row['email'];
+        $password = $row['password'];
+        $confirm_password = $row['confirm_password'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,14 +180,14 @@
                 <!-- Content goes here -->
                 <div class="settings-panel">
                     <h2>Admin Settings</h2>
-                    <form>
+                    <form action="settings.php" method="post">
                         <div class="form-group">
                             <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" value="Admin">
+                            <input type="text" id="username" name="username" value="<?php echo $User; ?>">
                         </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="admin@example.com">
+                            <input type="email" id="email" name="email" value="<?php echo $email; ?>">
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
@@ -166,7 +197,7 @@
                             <label for="confirm_password">Confirm Password:</label>
                             <input type="password" id="confirm_password" name="confirm_password">
                         </div>
-                        <button type="submit">Save Changes</button>
+                        <button type="submit" name="submit">Save Changes</button>
                     </form>
                 </div>
             </div>
