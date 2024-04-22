@@ -146,9 +146,9 @@
 // ==============================================================================GET THE INPUTS TO INSERT INTO THE DATABASE=========================================================
     
 $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "admin", $DB_NAME = "for_admin");
-    // Include the PHP script to connect to the database
+    
 
-    // Check if the form is submitted
+   
     if (isset($_POST["submit"])) {
         // Retrieve form data
         $username = $_POST['username'];

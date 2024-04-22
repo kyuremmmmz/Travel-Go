@@ -91,6 +91,14 @@ body{
     top: 0; /* Stick to top when scrolled */
 }
 
+.dropdown-toggle{
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    
+}
 .li, .lis {
     font-weight: 500;
     text-align: center;
