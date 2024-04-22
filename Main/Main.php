@@ -297,7 +297,7 @@
             <li class="lis"><a href="#sec3">Manila</a></li>
             <li class="lis"><a href="#container5">Cebu</a></li>
             <li class="lis"><a href="#container6">Batanes</a></li>
-            <li class="lis"><a href="#container7">Bohol</a></li>
+            <li class="lis"><a href="#">Bohol</a></li>
             <li class="lis"><a href="#">Davao</a></li>
             <li class="lis"><a href="#">Albay</a></li>
         </ul>
@@ -389,7 +389,7 @@
 
  <div id="container5" class="container3">
         <h1 class="featured_properties">
-            Hotel Recommendations in Batanes
+            Hotel Recommendations in Cebu
         </h1>
         <ul class="ul2">
             <li class="lis"><a href="#container3">Manila</a></li>
@@ -408,7 +408,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='batanes'";
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='cebu'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -435,61 +435,59 @@
         </div>
     </div>
 
+    <div id="container6" class="container3">
+        <h1 class="featured_properties">
+            Hotel Recommendations in Batanes
+        </h1>
+        <ul class="ul2">
+            <li class="lis"><a href="#container3">Manila</a></li>
+            <li class="lis"><a href="#sec3">Cebu</a></li>
+            <li class="lis"><a href="#container6">Batanes</a></li>
+            <li class="lis"><a href="#">Bohol</a></li>
+            <li class="lis"><a href="#">Davao</a></li>
+            <li class="lis"><a href="#">Albay</a></li>
+        </ul>
 
-            <div id="container7" class="container3">
-                    <h1 class="featured_properties">
-                        Hotel Recommendations in Bohol
-                    </h1>
-                    <ul class="ul2">
-                        <li class="lis"><a href="#container3">Manila</a></li>
-                        <li class="lis"><a href="#sec3">Cebu</a></li>
-                        <li class="lis"><a href="#container6">Batanes</a></li>
-                        <li class="lis"><a href="#">Bohol</a></li>
-                        <li class="lis"><a href="#">Davao</a></li>
-                        <li class="lis"><a href="#">Albay</a></li>
-                    </ul>
+        <div class="splide" id="splide2">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php 
+                    $conn = new mysqli("localhost:3307", "root", "admin", "sample");
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='cebu'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $prices = number_format($row['price']);
+                            $textdata = $row['hotel'];
+                            echo '<li class="splide__slide">';
+                            echo '<div class="hotels" id="hotels">';
+                            echo '<div class="in">';
+                            echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
+                            echo '</div>';
+                            echo '<h1>'.$textdata.'</h1>';
+                            echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
+                            echo '<a href="/placesbooking.php?choice= '.urlencode($textdata).'" class="book_hotel">Book now</a>';
+                            echo '</div>';
+                            echo '</li>';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    $conn->close();
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <div class="splide" id="splide2">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                <?php 
-                                $conn = new mysqli("localhost:3307", "root", "admin", "sample");
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
-                                $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='bohol'";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
-                                        $prices = number_format($row['price']);
-                                        $textdata = $row['hotel'];
-                                        echo '<li class="splide__slide">';
-                                        echo '<div class="hotels" id="hotels">';
-                                        echo '<div class="in">';
-                                        echo '<img src="/images/'.$row["image"].'" alt="" srcset="">';
-                                        echo '</div>';
-                                        echo '<h1>'.$textdata.'</h1>';
-                                        echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
-                                        echo '<a href="/placesbooking.php?choice= '.urlencode($textdata).'" class="book_hotel">Book now</a>';
-                                        echo '</div>';
-                                        echo '</li>';
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                $conn->close();
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-
-
+</div>
 
 
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {

@@ -155,7 +155,7 @@
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
                 <ul class="list-group">
-                    <li><a href="#packages" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
                     <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
                     <li><a href="booking_list.php" class="list-group-item bg-blue active"><i class="fas fa-list-alt"></i> Booking List</a></li>
                     <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>

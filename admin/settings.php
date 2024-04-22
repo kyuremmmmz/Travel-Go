@@ -8,30 +8,51 @@ if (isset($_POST['submit'])) {
     $email_post = $_POST['email']; 
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    
-    // Check if an image was uploaded
-    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+
+    // Check if an image file was uploaded
+    if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         // Define the directory where the image will be saved
-        $upload_dir = 'details/'; // Change this to your desired directory
+        $upload_dir = 'images/'; // Change this to your desired directory
         
-        // Generate a unique filename for the uploaded image
-        $avatar_name = uniqid('avatar_') . '_' . basename($_FILES['avatar']['name']);
-        
-        // Move the uploaded file to the designated directory
-        $avatar_path = $upload_dir . $avatar_name;
-        move_uploaded_file($_FILES['avatar']['tmp_name'], $avatar_path);
-    } else {
-        // Handle if no image was uploaded
-        $avatar_path = ''; // Set a default avatar path or leave it empty
-    }
+        // Get the uploaded file details
+        $filename = $_FILES['file']['name'];
+        $tempname = $_FILES['file']['tmp_name'];
 
-    // Update user data in the database
-    $sql = "UPDATE registration SET user_name = '$user_name', email = '$email_post', password = '$password', avatar = '$avatar_path' WHERE email = '$email_post'";
+        // Valid image extensions
+        $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
+        $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Success! Data Updated Successfully');</script>";
+        // Check if the image extension is valid
+        if (!in_array($imageExtension, $validImageExtensions)) {
+            echo '<script>alert("Invalid image extension. Please upload jpg, jpeg, png, gif, or webp files.");</script>';
+        } else {
+            // Generate a unique filename for the uploaded image
+            $newImageName = uniqid() . '.' . $imageExtension;
+            $uploadPath = $upload_dir . $newImageName;
+
+            // Move the uploaded file to the designated directory
+            if (move_uploaded_file($tempname, $uploadPath)) {
+                // Update user data in the database including the new image path
+                $sql = "UPDATE registration SET user_name = '$user_name', email = '$email_post', password = '$password', avatar = '$uploadPath' WHERE email = '$email_post'";
+
+                if ($conn->query($sql) === TRUE) {
+                    echo "<script>alert('Success! Data Updated Successfully');</script>";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error; 
+                }
+            } else {
+                echo '<script>alert("Error uploading file.");</script>';
+            }
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error; 
+        // Update user data in the database without changing the image path
+        $sql = "UPDATE registration SET user_name = '$user_name', email = '$email_post', password = '$password' WHERE email = '$email_post'";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('Success! Data Updated Successfully');</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error; 
+        }
     }
 }
 
@@ -188,7 +209,7 @@ if (mysqli_num_rows($result) > 0) {
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
                 <ul class="list-group">
-                    <li><a href="#packages" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
                     <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
                     <li><a href="booking_list.php" class="list-group-item"><i class="fas fa-list-alt"></i> Booking List</a></li>
                     <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>

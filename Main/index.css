@@ -6,7 +6,6 @@
 
 body{
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 .banner {
     position: relative;

@@ -61,10 +61,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle form submission
+// Handle form submission for update
 if (isset($_POST["submit"])) {
     $name = $_POST["price"];
-    
     $hotelsPrices = $_POST["priceHotels"];
     $hotel = $_POST["hotel"];
     $place = $_POST["place"];
@@ -73,101 +72,102 @@ if (isset($_POST["submit"])) {
     $departure = $_POST["departure"];
     $description = $_POST["description"];
     $amenities = $_POST["amenities"];
-    
-    
+
     // Initialize arrays to store uploaded image file names
     $hotelImageNames = [];
     $attractionImageNames = [];
 
     // Check if hotel images are uploaded
-if (!empty($_FILES['file']['name']) && is_array($_FILES['file']['name'])) {
-    // Loop through each uploaded hotel image
-    foreach ($_FILES['file']['name'] as $key => $image) {
-        // Get file details
-        $filename = $_FILES['file']['name'][$key];
-        $filesize = $_FILES['file']['size'][$key];
-        $tempname = $_FILES['file']['tmp_name'][$key];
-        
-        // Valid image extensions
-        $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
-        $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        
-        // Check if the image extension is valid
-        if (!in_array($imageExtension, $validImageExtensions)) {
-            die("Invalid image extension. Please upload jpg, jpeg, png, gif, or webp files.");
-        }
-        
-        // Check file size
-        if ($filesize >= 10000000) { // 10MB
-            die("File size exceeds the limit. Please upload files up to 10MB.");
-        }
-        
-        // Generate a unique name for the image
-        $newImageName = uniqid() . '.' . $imageExtension;
-        $uploadPath = 'details/' . $newImageName;
-        
-        // Move the uploaded file to the specified destination
-        if (move_uploaded_file($tempname, $uploadPath)) {
-            // Store the uploaded image file name
-            $hotelImageNames[] = $newImageName;
-        } else {
-            die("Error uploading file.");
+    if (!empty($_FILES['file']['name']) && is_array($_FILES['file']['name'])) {
+        // Loop through each uploaded hotel image
+        foreach ($_FILES['file']['name'] as $key => $image) {
+            // Get file details
+            $filename = $_FILES['file']['name'][$key];
+            $filesize = $_FILES['file']['size'][$key];
+            $tempname = $_FILES['file']['tmp_name'][$key];
+
+            // Valid image extensions
+            $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
+            $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+            // Check if the image extension is valid
+            if (!in_array($imageExtension, $validImageExtensions)) {
+                die("Invalid image extension. Please upload jpg, jpeg, png, gif, or webp files.");
+            }
+
+            // Check file size
+            if ($filesize >= 10000000) { // 10MB
+                die("File size exceeds the limit. Please upload files up to 10MB.");
+            }
+
+            // Generate a unique name for the image
+            $newImageName = uniqid() . '.' . $imageExtension;
+            $uploadPath = 'details/' . $newImageName;
+
+            // Move the uploaded file to the specified destination
+            if (move_uploaded_file($tempname, $uploadPath)) {
+                // Store the uploaded image file name
+                $hotelImageNames[] = $newImageName;
+            } else {
+                die("Error uploading file.");
+            }
         }
     }
-}
 
-// Check if attraction images are uploaded
-if (!empty($_FILES['file3']['name']) && is_array($_FILES['file3']['name'])) {
-    // Loop through each uploaded attraction image
-    foreach ($_FILES['file3']['name'] as $key => $image) {
-        // Get file details
-        $filename = $_FILES['file3']['name'][$key];
-        $filesize = $_FILES['file3']['size'][$key];
-        $tempname = $_FILES['file3']['tmp_name'][$key];
-        
-        // Valid image extensions
-        $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
-        $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        
-        // Check if the image extension is valid
-        if (!in_array($imageExtension, $validImageExtensions)) {
-            die("Invalid image extension. Please upload jpg, jpeg, png, gif, or webp files.");
-        }
-        
-        // Check file size
-        if ($filesize >= 10000000) { // 10MB
-            die("File size exceeds the limit. Please upload files up to 10MB.");
-        }
-        
-        // Generate a unique name for the image
-        $newImageName = uniqid() . '.' . $imageExtension;
-        $uploadPath = 'details/' . $newImageName;
-        
-        // Move the uploaded file to the specified destination
-        if (move_uploaded_file($tempname, $uploadPath)) {
-            // Store the uploaded image file name
-            $attractionImageNames[] = $newImageName;
-        } else {
-            die("Error uploading file.");
+    // Check if attraction images are uploaded
+    if (!empty($_FILES['file3']['name']) && is_array($_FILES['file3']['name'])) {
+        // Loop through each uploaded attraction image
+        foreach ($_FILES['file3']['name'] as $key => $image) {
+            // Get file details
+            $filename = $_FILES['file3']['name'][$key];
+            $filesize = $_FILES['file3']['size'][$key];
+            $tempname = $_FILES['file3']['tmp_name'][$key];
+
+            // Valid image extensions
+            $validImageExtensions = ['jpg', 'gif', 'jpeg', 'png', 'webp'];
+            $imageExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+            // Check if the image extension is valid
+            if (!in_array($imageExtension, $validImageExtensions)) {
+                die("Invalid image extension. Please upload jpg, jpeg, png, gif, or webp files.");
+            }
+
+            // Check file size
+            if ($filesize >= 10000000) { // 10MB
+                die("File size exceeds the limit. Please upload files up to 10MB.");
+            }
+
+            // Generate a unique name for the image
+            $newImageName = uniqid() . '.' . $imageExtension;
+            $uploadPath = 'details/' . $newImageName;
+
+            // Move the uploaded file to the specified destination
+            if (move_uploaded_file($tempname, $uploadPath)) {
+                // Store the uploaded image file name
+                $attractionImageNames[] = $newImageName;
+            } else {
+                die("Error uploading file.");
+            }
         }
     }
-}
 
-            // Insert data into the database
-        $query = "INSERT INTO `create_see_details.php` (price, price_for_hotel, hotels, image, image3, place, specific_place, description, departure,  amenities, arrival) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $hotelImageNames_ref = implode(',', $hotelImageNames);
-        $attractionImageNames_ref = implode(',', $attractionImageNames);
-        $stmt->bind_param("sssssssssss", $name, $hotelsPrices, $hotel, $hotelImageNames_ref,  $attractionImageNames_ref, $place, $placee, $description, $departure, $amenities, $arrival);
-        if ($stmt->execute()) {
-            // Data inserted successfully, show SweetAlert
-            echo '';
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-        $stmt->close();
-        }
+    // Update data in the database
+    $query = "UPDATE `create_see_details.php` SET price=?, price_for_hotel=?, hotels=?, image=?, image3=?, place=?, specific_place=?, description=?, departure=?,  amenities=?, arrival=? WHERE id=?"; // Assuming you have an 'id' column for each entry
+    $stmt = $conn->prepare($query);
+    $hotelImageNames_ref = implode(',', $hotelImageNames);
+    $attractionImageNames_ref = implode(',', $attractionImageNames);
+    // Assuming you have an 'id' column for each entry
+    $stmt->bind_param("sssssssssssi", $name, $hotelsPrices, $hotel, $hotelImageNames_ref,  $attractionImageNames_ref, $place, $placee, $description, $departure, $amenities, $arrival, $id);
+    if ($stmt->execute()) {
+        // Data updated successfully
+        echo "Data updated successfully";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+    $stmt->close();
+}
 ?>
+
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
@@ -187,7 +187,7 @@ if (!empty($_FILES['file3']['name']) && is_array($_FILES['file3']['name'])) {
             <h1>Welcome to Admin Dashboard</h1>
             <hr>
             <div class="container">
-                <form action="see_details_form.php" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form action="edit.php" method="post" autocomplete="off" enctype="multipart/form-data">
                     <h1 class="mb-4 text-center">Post Details in TravelGoPH</h1>
                     <div class="row">
                         <div class="col-md-6">
