@@ -17,10 +17,19 @@ function generateRandomDate($start_date, $end_date) {
 // Array of Philippine airports
 $airports = array("MNL", "CEB", "CRK", "DVO", "ILO", "KLO", "PPS", "BCD", "ZAM", "TAG", "CGY", "GES", "MPH", "TAC");
 
+// Array of airlines with corresponding image URLs
+$airlines = array(
+    "Philippine Airlines" => "https://s.yimg.com/fz/api/res/1.2/p0jNBS2Z3.y4Vi0jUlHVQw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTEyMDtxPTgwO3c9MTY2/https://s.yimg.com/zb/imgv1/75469d51-a989-3eab-a825-287652f998c7/t_500x300",
+    "Cebu Pacific" => "https://s.yimg.com/fz/api/res/1.2/p0jNBS2Z3.y4Vi0jUlHVQw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTEyMDtxPTgwO3c9MTY2/https://s.yimg.com/zb/imgv1/75469d51-a989-3eab-a825-287652f998c7/t_500x300",
+    "Cebgo" => "https://s.yimg.com/fz/api/res/1.2/p0jNBS2Z3.y4Vi0jUlHVQw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTEyMDtxPTgwO3c9MTY2/https://s.yimg.com/zb/imgv1/75469d51-a989-3eab-a825-287652f998c7/t_500x300",
+    "AirAsia Philippines" => "https://s.yimg.com/fz/api/res/1.2/hJXE_963AC_M6fLpRVsLlw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTEyMDtxPTgwO3c9MTIw/https://s.yimg.com/zb/imgv1/59c5c39b-3f8e-3f2c-8b76-60803ace3bf8/t_500x300",
+    "SkyJet Airlines" => "https://s.yimg.com/fz/api/res/1.2/r0W2Eu3xbNsbkbbdFkzmCA--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTEyMDtxPTgwO3c9MTY2/https://s.yimg.com/zb/imgv1/82953c4a-42b8-3a54-8cdf-8864556300e2/t_500x300"
+);
+
 // Generate and insert 10 random flights
 for ($i = 0; $i < 10; $i++) {
-    $airline_name = "Philippine Airlines"; // Assuming all flights are from Philippine Airlines
-    $flight_number = "PR" . rand(100, 999); // Random flight number in the format "PRXXX"
+    $airline = array_rand($airlines); // Random airline name
+    $flight_number = strtoupper(substr($airline, 0, 2)) . rand(100, 999); // Random flight number using first two letters of airline name
     $origin = $airports[array_rand($airports)]; // Random origin airport
     $destination = $airports[array_rand($airports)]; // Random destination airport
     while ($origin === $destination) {
@@ -31,13 +40,11 @@ for ($i = 0; $i < 10; $i++) {
     $arrival_date = generateRandomDate($departure_date, "2024-12-31"); // Random arrival date after departure date
     $arrival_time = generateRandomTime(); // Random arrival time
     $price = rand(1000, 10000); // Random price between 1000 and 10000
-
-    // Generate image URL (assuming images are stored in a folder named "flight_images")
-    $image_url = "/flight_images/default_flight_image.jpg";
+    $image_url = $airlines[$airline]; // Get image URL for the airline
 
     // Insert flight details into the database
     $sql = "INSERT INTO flights (airline_name, flight_number, origin, destination, departure_date, departure_time, arrival_date, arrival_time, price, image_url) 
-            VALUES ('$airline_name', '$flight_number', '$origin', '$destination', '$departure_date', '$departure_time', '$arrival_date', '$arrival_time', '$price', '$image_url')";
+            VALUES ('$airline', '$flight_number', '$origin', '$destination', '$departure_date', '$departure_time', '$arrival_date', '$arrival_time', '$price', '$image_url')";
 
     if ($conn->query($sql) !== TRUE) {
         echo "Error inserting flight: " . $conn->error;
@@ -48,6 +55,8 @@ echo "10 flights generated and inserted successfully";
 
 $conn->close();
 ?>
+
+
 
 
 <!DOCTYPE html>
