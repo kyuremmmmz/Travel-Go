@@ -1393,7 +1393,7 @@ i{
 
 /* Flight details text */
 .flights p {
-    transform: translateY(-29%);
+    transform: translateY(-20%);
     font-size: 14px;
     display: block; /* Change display to block to ensure each detail appears on a new line */
     margin-bottom: 5px; /* Add some space between each detail */

@@ -298,7 +298,11 @@
                 <img src="<?php echo $row['image_url']; ?>" alt="Flight Image">
             </div>
             <h2 class="flight2">Flight Details</h2>
-            <p>Departure Time: <?php echo $row['departure_time']; echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; echo'Price: ' .$row['price'];?></p>
+            <p>Destination: <?php echo $row['destination'];echo '<br> Origin: '.$row['origin'];
+             echo '<br> Departure: ' 
+            .$row['departure_time']; 
+            echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
+            echo'Price: ' .$row['price'];?></p>
             
            
             <button class="book-flight-btn">Book Now</button>
@@ -311,7 +315,26 @@
 ?>
     </div>
 </div>
-
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#slide8', {
+            type: 'slide',
+            perPage: 6,
+            perMove: 1,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                640: {
+                    perPage: 5,
+                },
+                480: {
+                    perPage: 1,
+                    height: '5rem',
+                },
+            },
+        }).mount();
+    });
+</script>   
 
 <!----------------------------------------------------------------------------------------------FLGIHTS CONTAINER------------------------------------------------------------------------------------------->
 
