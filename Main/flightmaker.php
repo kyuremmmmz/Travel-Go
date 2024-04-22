@@ -1,9 +1,61 @@
+<?php
+include("con2.php"); // Include your database connection file
+
+// Function to generate a random time
+function generateRandomTime() {
+    return sprintf('%02d:%02d:%02d', rand(0, 23), rand(0, 59), rand(0, 59));
+}
+
+// Function to generate a random date within a range
+function generateRandomDate($start_date, $end_date) {
+    $start_timestamp = strtotime($start_date);
+    $end_timestamp = strtotime($end_date);
+    $random_timestamp = mt_rand($start_timestamp, $end_timestamp);
+    return date("Y-m-d", $random_timestamp);
+}
+
+// Array of Philippine airports
+$airports = array("MNL", "CEB", "CRK", "DVO", "ILO", "KLO", "PPS", "BCD", "ZAM", "TAG", "CGY", "GES", "MPH", "TAC");
+
+// Generate and insert 10 random flights
+for ($i = 0; $i < 10; $i++) {
+    $airline_name = "Philippine Airlines"; // Assuming all flights are from Philippine Airlines
+    $flight_number = "PR" . rand(100, 999); // Random flight number in the format "PRXXX"
+    $origin = $airports[array_rand($airports)]; // Random origin airport
+    $destination = $airports[array_rand($airports)]; // Random destination airport
+    while ($origin === $destination) {
+        $destination = $airports[array_rand($airports)]; // Ensure destination is different from origin
+    }
+    $departure_date = generateRandomDate("2024-01-01", "2024-12-31"); // Random departure date within 2024
+    $departure_time = generateRandomTime(); // Random departure time
+    $arrival_date = generateRandomDate($departure_date, "2024-12-31"); // Random arrival date after departure date
+    $arrival_time = generateRandomTime(); // Random arrival time
+    $price = rand(1000, 10000); // Random price between 1000 and 10000
+
+    // Generate image URL (assuming images are stored in a folder named "flight_images")
+    $image_url = "/flight_images/default_flight_image.jpg";
+
+    // Insert flight details into the database
+    $sql = "INSERT INTO flights (airline_name, flight_number, origin, destination, departure_date, departure_time, arrival_date, arrival_time, price, image_url) 
+            VALUES ('$airline_name', '$flight_number', '$origin', '$destination', '$departure_date', '$departure_time', '$arrival_date', '$arrival_time', '$price', '$image_url')";
+
+    if ($conn->query($sql) !== TRUE) {
+        echo "Error inserting flight: " . $conn->error;
+    }
+}
+
+echo "10 flights generated and inserted successfully";
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Flight</title>
+    <title>Flight Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,27 +70,13 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .form-group {
+        h2 {
             margin-bottom: 20px;
         }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        input[type="text"],
-        input[type="date"],
-        select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4caf50;
+        button {
+            background-color: #007bff;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -46,163 +84,34 @@
             cursor: pointer;
             font-size: 16px;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-
-<?php 
-include("con2.php");
-
-
-function generateFlightNumber($length = 6) {
-    // Characters for flight number generation
-    $characters = '0123456789';
-    $airports = array(
-        "MNL",
-        "CEB",
-        "CRK" ,
-        "DVO" ,
-        "ILO",
-        "KLO" ,
-        "PPS" ,
-        "BCD" ,
-        "ZAM" ,
-        "TAG" ,
-        "CGY" ,
-        "GES" ,
-        "MPH",
-        "TAC"
-    ); // PAL, Cebu Pacific, PAL Express, Cebgo
-
-    // Randomly select a prefix
-    $prefix = $airports[array_rand($airports)];
-    $flightNumber = $prefix;
-
- 
-    for ($i = strlen($prefix); $i < $length; $i++) {
-        $flightNumber .= $characters[rand(0, strlen($characters) - 1)];
-    }
-
-    return $flightNumber;
-}
-
-
-
-
-
-?>
 <div class="container">
-    <h2>Create Flight</h2>
-    <form action="process_flight.php" method="POST">
-        <div class="form-group">
-            <label for="flight_number">Flight Number:</label>
-            <input type="text" id="flight_number" name="flight_number" value="<?php echo generateFlightNumber(); ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="departure_airport">Departure Airport:</label>
-            <select id="departure_airport" name="departure_airport" required>
-                <option value="">Departure  <?php
-                // Assuming you have already established a database connection
-
-                // Query to select distinct departure airports from the flights table
-                $sql = "SELECT * FROM flights";
-
-                // Execute the query
-                $result = mysqli_query($conn, $sql);
-
-                // Check if query executed successfully
-                if ($result) {
-                    // Fetch each row from the result set
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // Output an option element for each departure airport
-                        echo "<option value='" . $row['departure_airport_id'] . "'>" . $row['departure_airport_id'] . "</option>";
-                    }
-                } else {
-                    // If query fails, display an error message
-                    echo "<option value=''>Error fetching airports</option>";
-                }
-
-                // Close the database connection
-                
-                ?></option>
-                <!-- Add PHP code here to dynamically populate options with airports -->
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="arrival_airport">Arrival Airport:</label>
-            <select id="arrival_airport" name="arrival_airport" required>
-                <option value="">Select Arrival Airport
-
-                <?php 
-                // Assuming you have already established a database connection
-
-                // Query to select distinct departure airports from the flights table
-                $sql = "SELECT * FROM flights";
-
-                // Execute the query
-                $result = mysqli_query($conn, $sql);
-
-                // Check if query executed successfully
-                if ($result) {
-                    // Fetch each row from the result set
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // Output an option element for each departure airport
-                        echo "<option value='" . $row['arrival_airport_id'] . "'>" . $row['arrival_airport_id'] . "</option>";
-                    }
-                } else {
-                    // If query fails, display an error message
-                    echo "<option value=''>Error fetching airports</option>";
-                }
-                ?>
-                </option>
-                <!-- Add PHP code here to dynamically populate options with airports -->
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="airline">Airline:</label>
-            <select id="airline" name="airline" required>
-                <option value="">Select Airline
-
-                <?php 
-                // Assuming you have already established a database connection
-
-                // Query to select distinct departure airports from the flights table
-                $sql = "SELECT * FROM airlines";
-
-                // Execute the query
-                $result = mysqli_query($conn, $sql);
-
-                // Check if query executed successfully
-                if ($result) {
-                    // Fetch each row from the result set
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // Output an option element for each departure airport
-                        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-                    }
-                } else {
-                    // If query fails, display an error message
-                    echo "<option value=''>Error fetching airports</option>";
-                }
-                ?>
-                </option>
-                <!-- Add PHP code here to dynamically populate options with airlines -->
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="departure_date">Departure Date:</label>
-            <input type="date" id="departure_date" name="departure_date" required>
-        </div>
-        <div class="form-group">
-            <label for="departure_time">Departure Time:</label>
-            <input type="time" id="departure_time" name="departure_time" required>
-        </div>
-        <input type="submit" value="Create Flight" name="submit">
-    </form>
+    <h2>Flight Generator</h2>
+    <button id="generateBtn">Generate Flights</button>
 </div>
+
+<script>
+    // Function to trigger flight generation
+    document.getElementById('generateBtn').addEventListener('click', function() {
+        // Send an AJAX request to the flight generator script
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'flightmaker.php', true);
+        xhr.onload = function() {
+            if (xhr.status == 200) {
+                alert(xhr.responseText); // Display success message
+            } else {
+                alert('Error generating flights'); // Display error message
+            }
+        };
+        xhr.send();
+    });
+</script>
 
 </body>
 </html>
