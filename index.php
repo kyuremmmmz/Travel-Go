@@ -439,7 +439,7 @@ while($row = $result->fetch_assoc()) {
     <div class="outer"><p class="price"> Starting PHP '.$price.'</p></div>
 
     <hr class="solidblack"></hr>
-    <a href="/login_page.php" class="book">Book now</a>
+    <a href="Main/login_page.php" class="book">Book now</a>
     
     <a href="/Main/maps.php?choices='. urlencode($textData),"  ".'"" class="see_details">See Details</a>
 </div>';
@@ -519,7 +519,7 @@ echo "0 results";
 
             <h1 class="h2">Starts from PHP '.$prices.'</h1>
 
-            <a href="/login_page.php" class="book_hotel">Book now</a>
+            <a href="Main/login_page.php" class="book_hotel">Book now</a>
     
            
     </div>'; 
@@ -582,7 +582,7 @@ echo "0 results";
 
             <h1 class="h2">Starts from PHP '.$prices.'</h1>
 
-            <a href="/login_page.php" class="book_hotel">Book now</a>
+            <a href="Main/login_page.php" class="book_hotel">Book now</a>
     
            
     </div>'; 

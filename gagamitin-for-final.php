@@ -160,7 +160,7 @@ $conn = new mysqli($DB_HOST = "localhost:3307", $DB_USER = "root", $DB_PASS = "a
             echo'<script>swal("Wrong password", "Password dont match", "error");</script>
             <div class="login-box">
             <h2>Signup Travel Go</h2>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>
                 <div class="user-box">
                     <input type="text" name="username" id="username" class="username" required>
                     <label for="">Username</label>
