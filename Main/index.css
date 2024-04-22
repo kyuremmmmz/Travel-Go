@@ -1369,7 +1369,7 @@ i{
 /* Flight details text */
 .flights  p {
     font-size: 12px;
-    margin-bottom: 5px;
+    transform: translate();
 }
 
 /* Book flight button */

@@ -114,7 +114,14 @@
                 <!-- Table with "Create New" button -->
                 <div class="d-flex justify-content-between mb-3">
                     <h2>Packages</h2>
-                    <a href="/see_details_form.php" class="btn btn-primary">Create New</a>
+                    <div class="d-flex justify-content-between mb-3">
+                   
+                    <div class="btn-group" role="group" aria-label="Create New">
+                        <a href="/see_details_form.php" class="btn btn-primary">Create New</a>
+                        <a href="posthotelsadmin.php" type="button" class="btn btn-primary">Create hotel</a>
+                        <button type="button" class="btn btn-primary">And Another</button>
+                    </div>
+                </div>
                 </div>
                 <table class="table table-hover">
                     <thead>
