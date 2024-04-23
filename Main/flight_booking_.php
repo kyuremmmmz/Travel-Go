@@ -15,11 +15,13 @@ $departure_date = $_POST['departure_date'] . ' ' . $_POST['departure_time']; // 
 $contact_number = $_POST['contact_number'];
 $flight_number = $_POST['flight_number'];
 $destination = $_POST['destination'];
+$origin = $_POST['origin'];
+$amount = $_POST['amount'];
 $seat_class = $_POST['seat_class'];
 
 // Prepare and execute SQL query to insert data into flight_bookings table
-$sql = "INSERT INTO flight_bookings (full_name, email, arrival_date, departure_date, contact_number, flight_number, destination, seat_class)
-        VALUES ('$full_name', '$email', '$arrival_date', '$departure_date', '$contact_number', '$flight_number', '$destination', '$seat_class')";
+$sql = "INSERT INTO flight_bookings (full_name, email, arrival_date, departure_date, contact_number, flight_number, destination, origin ,amount,seat_class)
+        VALUES ('$full_name', '$email', '$arrival_date', '$departure_date', '$contact_number', '$flight_number', '$destination', '$origin', '$amount' , '$seat_class')";
 
 if ($conn->query($sql) === TRUE) {
     echo "Flight booking submitted successfully.";
@@ -98,17 +100,29 @@ input[type="submit"]:hover {
     
 
     <form action="flight_booking_.php" method="POST">
+    
     <?php
-        if (isset($_GET['destination'], $_GET['price'], $_GET['arrival'], $_GET['departure'])) {
+        if (isset($_GET['destination'], $_GET['price'], $_GET['arrival'], $_GET['departure'], $_GET['arrivaldate'], $_GET['departuredate'], $_GET['flightnum'], $_GET['origin'])) {
             // Decode each parameter value
-            $destination = $_GET['destination'];
-            $price =$_GET['price'];
-            $arrival = $_GET['arrival'];
-            $departure = $_GET['departure'];
+            $destination = urldecode($_GET['destination']);
+            $price = urldecode($_GET['price']);
+            // Kunin ang mga petsa at oras mula sa mga URL parameter at i-decode
+            $arrival = urldecode($_GET['arrival']);
+            $departure = urldecode($_GET['departure']);
+            $arrivaldate = urldecode($_GET['arrivaldate']);
+            $departuredate = urldecode($_GET['departuredate']);
 
-            
+            // I-format ang petsa base sa iyong nais na format
+            $arrival_formatted = date_format(date_create($arrival), 'Y-m-d');
+            $departure_formatted = date_format(date_create($departure), 'Y-m-d');
+            $arrivaldate_formatted = date_format(date_create($arrivaldate), 'Y-m-d');
+            $departuredate_formatted = date_format(date_create($departuredate), 'Y-m-d');
+
+            $flight_number = $_GET['flightnum'];
+            $origin = urldecode($_GET['origin']);
         }
-        ?>
+?>
+
     <label for="full_name">Full Name:</label><br>
     <input type="text" id="full_name" name="full_name" required><br>
     
@@ -119,11 +133,11 @@ input[type="submit"]:hover {
     <input type="number" id="adult" name="adult" min="1" required><br>
     
     <label for="arrival_date">Arrival Date:</label><br>
-    <input type="date" id="arrival_date" name="arrival_date" value="<?php echo $arrival ?>" required>
+    <input type="date" id="arrival_date" name="arrival_date" value="<?php echo $departuredate_formatted ?>" required>
     <input type="time" id="arrival_time" name="arrival_time" required><br>
     
     <label for="departure_date">Departure Date:</label><br>
-    <input type="date" id="departure_date" name="departure_date" required>
+    <input type="date" id="departure_date" name="departure_date" value="<?php echo $arrivaldate_formatted ?>" required>
     <input type="time" id="departure_time" name="departure_time" required><br>
     
     <label for="contact_number">Contact Number:</label><br>
@@ -133,10 +147,16 @@ input[type="submit"]:hover {
     <input type="email" id="email" name="email" required><br>
     
     <label for="flight_number">Flight Number:</label><br>
-    <input type="text" id="flight_number" name="flight_number" required><br>
+    <input type="text" id="flight_number" name="flight_number" value="<?php echo $flight_number ?>"  required><br>
     
     <label for="destination">Destination:</label><br>
-    <input type="text" id="destination" name="destination" required><br>
+    <input type="text" id="destination" name="destination" value="<?php echo $destination ?>" required><br>
+
+    <label for="amount">Amount:</label><br>
+    <input type="text" id="amount" name="amount" value="<?php  echo $price ?>" required><br>
+
+    <label for="origin">Origin:</label><br>
+    <input type="text" id="destination" name="origin" value="<?php echo $origin;?>" required><br>
     
     <label for="seat_class">Seat Class:</label><br>
     <select id="seat_class" name="seat_class" required>
