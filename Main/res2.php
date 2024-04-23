@@ -1,3 +1,7 @@
+<?php 
+require_once 'con4.php';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +32,6 @@
     <title>Travel go ph</title>
 
 </head>
-
 <body>
     <div id="ewan"></div>
    <form action="Main.php" method="post">
@@ -60,57 +63,35 @@
 
                 
 
-                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
-                // Database connection
-                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
-
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-                $email = $_SESSION['email']; 
-               
-
-                $sql = "SELECT user_name FROM registration WHERE email='$email'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                        $User = $row['user_name'];
-                        echo $User;
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    <?php 
+                    if(isset($_SESSION['email'])) {
+                        $email = $_SESSION['email'];
+                        $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT user_name FROM registration WHERE email='$email'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $User = $row['user_name'];
+                                echo $User;
+                            }
+                        }
                     }
-                }
-                
-                
-                
-                
-                ?></button>
-
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
-                        <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
-                        <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
-                    </ul>
-
-            
+                    ?>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                    <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
+                    <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
+                </ul>
                 </li>
 
-               
-
-                
-
-                 
-            
-                
-
-             
             </ul>
-
-
         
             <p class="travel-2" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">WELCOME TO <?php $img2 = isset($_GET["data"]) ? $_GET["data"] : 'No choice selected'; echo strtoupper($img2);?>!</p>
-
-        
-        
 
             </div>
             </form>
@@ -353,7 +334,7 @@
             Hotel Recommendations in Pangasinan
         </h1>
 
-        <div class="splide" id="splide10">
+        <div class="splide">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php 
@@ -370,15 +351,13 @@
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
+                            $imagedata = base64_encode($row['image3']);
                             $prices = number_format($row['price_for_hotel']);
                             $textdata = $row['hotels'];
-                            $images = explode(',', $row['image3']); // Split the list of images into an array
-                            $firstImage = reset($images); // Get the first image from the array
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
-                            
-                            echo '<img src="/details/'.$firstImage.'" alt="'.$textdata.'" srcset="">';
+                            echo '<img src="/details/'.$row["image3"].'" alt="" srcset="">';
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
@@ -411,7 +390,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
-    new Splide('#splide10', {
+    new Splide('.splide', {
     type:Infinity,
     perPage: 4,
     perMove: '1',
