@@ -41,11 +41,16 @@
         echo "<h1>Your Payment has been successful</h1>";
         $insert = $db->query("UPDATE booking_tracker SET status='completed' where email='".$pid."'");
     }
+
+
+    if(isset($_GET['PayerID'])){ 
+        echo "<h1>Your Payment has been successful</h1>";
+        $insert = $db->query("UPDATE flight_booking SET status='completed' where email='".$pid."'");
+    }
     else{
         echo "<h1>Your Payment has failed</h1>";
     }
     ?>
-    <a href="e-ticket.php">Go to travel</a>
-    <a href="flightbooking_e-ticket.php">Go to flight</a>
+    <a href="flightbooking_e-ticket.php">Next</a>
 </body>
 </html>

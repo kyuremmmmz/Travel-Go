@@ -8,7 +8,7 @@ include_once 'con2.php';
 // Check if the request method is POST and if delete_id is set
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
     $delete_id = $_POST['delete_id'];
-    $sql = "DELETE FROM booking_tracker WHERE id = $delete_id";
+    $sql = "DELETE FROM flight_bookings WHERE id = $delete_id";
     if ($conn->query($sql) !== TRUE) {
         echo "Error deleting booking: " . $conn->error;
     }
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
 }
 
 // Fetch booking information from the database
-$sql = "SELECT id, hotel, full_name, departure, arrival FROM booking_tracker WHERE email = '$email'";
+$sql = "SELECT * FROM flight_bookings WHERE email = '$email'";
 $result = $conn->query($sql);
 ?>
 
@@ -137,16 +137,16 @@ $result = $conn->query($sql);
 <body>
     <a href="Main.php" class="Back-btn">Back</a>
     <div class="container">
-
         <h1>Travel Status</h1>
         <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $bookingId = $row['id'];
-                    $place = $row['hotel'];
+                    $place = $row['destination'];
+                    $origin = $row['origin'];
                     $price = $row['full_name'];
-                    $startDate = $row['departure'];
-                    $endDate = $row['arrival'];
+                    $startDate = $row['arrival_date'];
+                    $endDate = $row['departure_date'];
 
                     // Calculate progress bar
                     $currentDate = strtotime('now');
@@ -178,6 +178,7 @@ $result = $conn->query($sql);
                         <?php if ($progress == 100): ?>
                             <button class="arrived-btn" data-id="<?php echo $bookingId; ?>">Arrived</button>
                         <?php endif; ?>
+                       
                     </div>
                 </div>
         <?php
@@ -202,7 +203,7 @@ $result = $conn->query($sql);
             }).then((willCancel) => {
                 if (willCancel.isConfirmed) {
                     $.ajax({
-                        url: "travel.php", 
+                        url: "travel2.php", 
                         type: "POST",
                         data: {delete_id: bookingId},
                         success: function(response) {
@@ -236,7 +237,7 @@ $result = $conn->query($sql);
             }).then((willCancel) => {
                 if (willCancel.isConfirmed) {
                     $.ajax({
-                        url: "travel.php", // Corrected the URL here
+                        url: "travel2.php", // Corrected the URL here
                         type: "POST",
                         data: {delete_id: bookingId},
                         success: function(response) {

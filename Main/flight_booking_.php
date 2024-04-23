@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'C:/xampp/htdocs/Website/PHPMailer/src/Exception.php';
+require 'C:/xampp/htdocs/Website/PHPMailer/src/PHPMailer.php';
+require 'C:/xampp/htdocs/Website/PHPMailer/src/SMTP.php';
 // Establish database connection
 $conn = new mysqli('localhost:3307', 'root', 'admin', 'sample');
 if ($conn->connect_error) {
@@ -18,13 +24,41 @@ $destination = $_POST['destination'];
 $origin = $_POST['origin'];
 $amount = $_POST['amount'];
 $seat_class = $_POST['seat_class'];
+$status = "pending";
 
 // Prepare and execute SQL query to insert data into flight_bookings table
-$sql = "INSERT INTO flight_bookings (full_name, email, arrival_date, departure_date, contact_number, flight_number, destination, origin ,amount,seat_class)
-        VALUES ('$full_name', '$email', '$arrival_date', '$departure_date', '$contact_number', '$flight_number', '$destination', '$origin', '$amount' , '$seat_class')";
+$sql = "INSERT INTO flight_bookings (full_name, email, arrival_date, departure_date, contact_number, flight_number, destination, origin ,amount,seat_class, status)
+        VALUES ('$full_name', '$email', '$arrival_date', '$departure_date', '$contact_number', '$flight_number', '$destination', '$origin', '$amount' , '$seat_class', '$status')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Flight booking submitted successfully.";
+    // Send confirmation email using PHPMailer
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kurosawataki84@gmail.com'; // Your Gmail email address
+        $mail->Password = 'fwbmdkvlhkxivqet'; // Your Gmail password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
+        $mail->Port = 587; // TCP port to connect to
+
+        // Set email recipients and content
+        $mail->setFrom('kurosawataki84@gmail.com', 'Travel Go Ph');
+        $mail->addAddress($email, $full_name); // Recipient email address
+        $mail->isHTML(true);
+        $mail->Subject = 'Your Booking Confirmation and Voucher';
+        $mail->Body = "Dear $full_name,<br><br>Thank you for booking with us. Your reservation details are as follows:<br>Destination: $destination<br>Departure Date: $arrival_date<br>Arrival Date: $departure_date<br>Seat Class: $seat_class<br><br>We look forward to welcoming you.<br><br>Best regards,<br>Travel GO Philippines";
+
+        // Send email
+        $mail->send();
+        echo "<script>alert('Email sent successfully')</script>";
+
+        $url = "payment2.php?choice=" . urlencode($amount);
+        header("Location: $url");
+        exit;
+    } catch (Exception $e) {
+        echo "Error sending email: {$mail->ErrorInfo}";
+    }
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -105,7 +139,7 @@ input[type="submit"]:hover {
         if (isset($_GET['destination'], $_GET['price'], $_GET['arrival'], $_GET['departure'], $_GET['arrivaldate'], $_GET['departuredate'], $_GET['flightnum'], $_GET['origin'])) {
             // Decode each parameter value
             $destination = urldecode($_GET['destination']);
-            $price = urldecode($_GET['price']);
+            $price = isset($_GET['price']) ? urldecode($_GET['price']) : '';    
             // Kunin ang mga petsa at oras mula sa mga URL parameter at i-decode
             $arrival = urldecode($_GET['arrival']);
             $departure = urldecode($_GET['departure']);

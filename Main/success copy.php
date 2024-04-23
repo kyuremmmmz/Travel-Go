@@ -45,7 +45,6 @@
         echo "<h1>Your Payment has failed</h1>";
     }
     ?>
-    <a href="e-ticket.php">Go to travel</a>
-    <a href="flightbooking_e-ticket.php">Go to flight</a>
+    <a href="e-ticket.php">Next</a>
 </body>
 </html>
