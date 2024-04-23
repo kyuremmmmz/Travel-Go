@@ -9,7 +9,7 @@
             echo"";
 
         $email=$_SESSION['email'];
-        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+        $sql = "SELECT * FROM `registration` WHERE email= '$email'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // Output data of each row ?>
@@ -169,11 +169,12 @@
                 <h1>Welcome to Admin Dashboard</h1>
                 <!-- Content goes here -->
              <div class="avatar">
-                    <img src="avatar.jpg" alt="Avatar">
-                    <div class="dropdown">
                     <?php
                             while ($row = $result->fetch_assoc()) {
-                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                $getrow = $row['avatar'];
+                                echo '<img src="'.$getrow.'" alt="Avatar">
+                                <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
                                 echo $row['user_name'];
                             }
                         } ?>

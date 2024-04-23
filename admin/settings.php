@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     // Check if an image file was uploaded
     if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         // Define the directory where the image will be saved
-        $upload_dir = 'images/'; // Change this to your desired directory
+        $upload_dir = ''; // Change this to your desired directory
         
         // Get the uploaded file details
         $filename = $_FILES['file']['name'];
@@ -45,14 +45,8 @@ if (isset($_POST['submit'])) {
             }
         }
     } else {
-        // Update user data in the database without changing the image path
-        $sql = "UPDATE registration SET user_name = '$user_name', email = '$email_post', password = '$password' WHERE email = '$email_post'";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Success! Data Updated Successfully');</script>";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error; 
-        }
+        // Handle other form submissions (without file upload)
+        // ...
     }
 }
 
@@ -69,6 +63,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -221,7 +216,7 @@ if (mysqli_num_rows($result) > 0) {
                 <!-- Content goes here -->
                 <div class="settings-panel">
                     <h2>Admin Settings</h2>
-                    <form action="settings.php" method="post">
+                    <form action="settings.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input type="text" id="username" name="username" value="<?php echo $User; ?>">
@@ -239,8 +234,8 @@ if (mysqli_num_rows($result) > 0) {
                             <input type="password" id="confirm_password" name="confirm_password">
                         </div>
                         <div class="mb-3">
-                                    <label for="file" class="form-label">Upload Image:</label>
-                                    <input type="file" class="form-control" id="file" name="file" accept=".jpg, .jpeg, .gif, .png">
+                            <label for="file" class="form-label">Upload Image:</label>
+                            <input type="file" class="form-control" id="file" name="file" accept=".jpg, .jpeg, .gif, .png">
                         </div>
                         <button type="submit" name="submit">Save Changes</button>
                     </form>
