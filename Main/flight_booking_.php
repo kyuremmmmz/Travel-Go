@@ -10,8 +10,8 @@ if (isset($_POST['submit'])) {
     // Get form data
 $full_name = $_POST['full_name'];
 $email = $_POST['email'];
-$arrival_date = $_POST['arrival_date'] . ' ' . $_POST['arrival_time']; // Combine date and time
-$departure_date = $_POST['departure_date'] . ' ' . $_POST['departure_time']; // Combine date and time
+$arrival_date = $_POST['arrival_date'] ;
+$departure_date = $_POST['departure_date']; // Combine date and time
 $contact_number = $_POST['contact_number'];
 $flight_number = $_POST['flight_number'];
 $destination = $_POST['destination'];
@@ -133,12 +133,11 @@ input[type="submit"]:hover {
     <input type="number" id="adult" name="adult" min="1" required><br>
     
     <label for="arrival_date">Arrival Date:</label><br>
-    <input type="date" id="arrival_date" name="arrival_date" value="<?php echo $departuredate_formatted ?>" required>
-    <input type="time" id="arrival_time" name="arrival_time" required><br>
+    <input type="date" id="arrival_date" name="arrival_date" value="<?php echo $arrivaldate_formatted ?>" required>
+
     
     <label for="departure_date">Departure Date:</label><br>
-    <input type="date" id="departure_date" name="departure_date" value="<?php echo $arrivaldate_formatted ?>" required>
-    <input type="time" id="departure_time" name="departure_time" required><br>
+    <input type="date" id="departure_date" name="departure_date" value="<?php echo $departuredate_formatted ?>" required>
     
     <label for="contact_number">Contact Number:</label><br>
     <input type="tel" id="contact_number" name="contact_number"  required><br>
