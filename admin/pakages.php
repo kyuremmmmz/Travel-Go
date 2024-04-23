@@ -1,3 +1,18 @@
+<?php session_start();    
+            
+
+$conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+if ($conn->connect_error) {
+    die("connection error". $conn->connect_error);
+}
+
+echo"";
+
+$email=$_SESSION['email'];
+$sql = "SELECT * FROM `registration` WHERE email= '$email'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // Output data of each row ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,41 +124,19 @@
             <!-- Content -->
             <div class="col-md-9 content">
                 <!-- Content goes here -->
-                <div class="dropdown">
-                    <?php 
-                    
-                            session_start();    
-            
-
-                            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
-                            if ($conn->connect_error) {
-                                die("connection error". $conn->connect_error);
-                            }
-
-                            echo"";
-
-                        $email=$_SESSION['email'];
-                        $sql = "SELECT * FROM `registration` WHERE email= '$email'";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            // Output data of each row
+                <div class="avatar">
+                    <?php
                             while ($row = $result->fetch_assoc()) {
-                                $get = $row['avatar'];
-                                echo ' <div class="avatar">
-                                        <img src="'.$get.'" alt="Avatar">
+                                $getrow = $row['avatar'];
+                                echo '<img src="'.$getrow.'" alt="Avatar">
+                                <div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
                                 echo $row['user_name'];
                             }
-                        }
-            
-            ?>
-                    
-                    </button>
+                        } ?>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-link"></i> Link 3</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                        <li><a class="dropdown-item" href="settings.php"><i class="fas fa-user"></i> Account</a></li>
                     </ul>
 
                 </div>
