@@ -95,7 +95,20 @@ input[type="submit"]:hover {
 </head>
 <body>
     <h2>Flight Booking Form</h2>
+    
+
     <form action="flight_booking_.php" method="POST">
+    <?php
+        if (isset($_GET['destination'], $_GET['price'], $_GET['arrival'], $_GET['departure'])) {
+            // Decode each parameter value
+            $destination = $_GET['destination'];
+            $price =$_GET['price'];
+            $arrival = $_GET['arrival'];
+            $departure = $_GET['departure'];
+
+            
+        }
+        ?>
     <label for="full_name">Full Name:</label><br>
     <input type="text" id="full_name" name="full_name" required><br>
     
@@ -106,7 +119,7 @@ input[type="submit"]:hover {
     <input type="number" id="adult" name="adult" min="1" required><br>
     
     <label for="arrival_date">Arrival Date:</label><br>
-    <input type="date" id="arrival_date" name="arrival_date" required>
+    <input type="date" id="arrival_date" name="arrival_date" value="<?php echo $arrival ?>" required>
     <input type="time" id="arrival_time" name="arrival_time" required><br>
     
     <label for="departure_date">Departure Date:</label><br>

@@ -353,7 +353,7 @@
             Hotel Recommendations in Pangasinan
         </h1>
 
-        <div class="splide">
+        <div class="splide" id="splide10">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php 
@@ -411,7 +411,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script type="text/javascript">
-    new Splide('.splide', {
+    new Splide('#splide10', {
     type:Infinity,
     perPage: 4,
     perMove: '1',

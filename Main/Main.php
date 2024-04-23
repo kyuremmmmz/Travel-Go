@@ -306,16 +306,25 @@
                                     echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
                                     echo'Price: ' .$row['price'];?></p>
 
-                                    <form method="post" action="flight_booking_.php">
-                                    <button class="book-flight-btn" name="booking">Book Now</button>
+                                            <?php
+                                            if (isset($_POST['booking'])) {
+                                                // Get the values from $row or any other source
+                                                $destination = urlencode($row['destination']);
+                                                $price = urlencode($row['price']);
+                                                $arrival = urlencode($row['arrival_time']);
+                                                $departure = urlencode($row['departure_time']);
+
+                                                // Construct the URL with encoded parameters
+                                                $url = "flight_booking_.php?destination=$destination&price=$price&arrival=$arrival&departure=$departure";
+
+                                                // Redirect the user using JavaScript
+                                                echo "<script>window.location.href = '$url';</script>";
+                                                exit(); // Ensure no further code execution after redirection
+                                            }
+                                            ?>
+                                    <form method="post" action="Main.php">
+                                        <button class="book-flight-btn" name="booking">Book Now</button>
                                     </form>
-                                    <?php
-                                        if (isset($_POST['booking'])) {
-                                            
-                                            echo"<script> window.location.href='flight_booking_.php'</script>";
-                                            
-                                        }
-                                        ?>
                                 </div>
                             </li>
                     <?php
