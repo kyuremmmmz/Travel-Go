@@ -305,7 +305,17 @@
                                     .$row['departure_time']; 
                                     echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
                                     echo'Price: ' .$row['price'];?></p>
-                                    <button class="book-flight-btn">Book Now</button>
+
+                                    <form method="post" action="flight_booking_.php">
+                                    <button class="book-flight-btn" name="booking">Book Now</button>
+                                    </form>
+                                    <?php
+                                        if (isset($_POST['booking'])) {
+                                            
+                                            echo"<script> window.location.href='flight_booking_.php'</script>";
+                                            
+                                        }
+                                        ?>
                                 </div>
                             </li>
                     <?php

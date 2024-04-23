@@ -1,18 +1,18 @@
 <?php session_start();    
             
 
-            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
-            if ($conn->connect_error) {
-                die("connection error". $conn->connect_error);
-            }
+$conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+if ($conn->connect_error) {
+    die("connection error". $conn->connect_error);
+}
 
-            echo"";
+echo"";
 
-        $email=$_SESSION['email'];
-        $sql = "SELECT * FROM `registration` WHERE email= '$email'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // Output data of each row ?>
+$email=$_SESSION['email'];
+$sql = "SELECT * FROM `registration` WHERE email= '$email'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // Output data of each row ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,8 +157,8 @@
                 <ul class="list-group">
                     <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
                     <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking_list.php" class="list-group-item bg-blue active"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="flight_booking_list.php" class="list-group-item "><i class="fas fa-envelope"></i> Flight Booking List</a></li>
+                    <li><a href="booking_list.php" class="list-group-item"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="flight_booking_list.php" class="list-group-item bg-blue active"><i class="fas fa-envelope"></i> Flight Booking List</a></li>
                     <li><a href="settings.php" class="list-group-item "><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
@@ -187,15 +187,15 @@
                 </div>
                 <hr>
                 <div class="container mt-5">
-                    <h2>Booking Tracker</h2>
-                    <!-- Booking Search Form -->
-                    <form action="booking_list.php" method="GET">
+                    <h2>Flight Booking Tracker</h2>
+                    <!-- Flight Booking Search Form -->
+                    <form action="flight_booking_list.php" method="GET">
                         <div class="mb-3">
                             <input type="text" name="search_query" placeholder="Enter name or email">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form>
-                    <!-- Booking Table -->
+                    <!-- Flight Booking Table -->
                     <h3>All Bookings</h3>
                     <table class="table table-hover">
                         <tr>
@@ -206,6 +206,9 @@
                             <th>DEPARTURE</th>
                             <th>CONTACT NUMBER</th>
                             <th>HOTEL</th>
+                            <th>FLIGHT NUMBER</th>
+                            <th>DESTINATION</th>
+                            <th>SEAT CLASS</th>
                             <th>ACTION</th>
                         </tr>
                         <?php
@@ -225,7 +228,7 @@
 
                         if(isset($_GET['search_query'])) {
                             $search_query = $_GET['search_query'];
-                            $query = "SELECT * FROM booking_tracker WHERE full_name LIKE '%$search_query%' OR email LIKE '%$search_query%'";
+                            $query = "SELECT * FROM flight_booking_tracker WHERE full_name LIKE '%$search_query%' OR email LIKE '%$search_query%'";
                             $result = mysqli_query($conn, $query);
                         }
 
@@ -239,6 +242,9 @@
                             echo "<td>".$row['departure']."</td>";
                             echo "<td>".$row['contact_number']."</td>";
                             echo "<td>".$row['hotel']."</td>";
+                            echo "<td>".$row['flight_number']."</td>";
+                            echo "<td>".$row['destination']."</td>";
+                            echo "<td>".$row['seat_class']."</td>";
                             echo "<td>
                             <a href='update_form.php?choice=".urlencode($row['id'])."' class='btn btn-primary update-link'>Update</a>
                             <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
@@ -271,7 +277,7 @@
             }).then((willDelete) => {
                 if (willDelete.isConfirmed) {
                     $.ajax({
-                        url: "booking_list.php",
+                        url: "flight_booking_list.php",
                         type: "POST",
                         data: {delete_id: bookingId},
                         success: function(response) {

@@ -340,7 +340,7 @@
             Hotel Recommendations in Pangasinan
         </h1>
 
-        <div class="splide">
+        <div class="splide" id="splide10">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php 
@@ -396,57 +396,27 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script type="text/javascript">
-    new Splide('.splide', {
-    perPage: 4,
-    perMove: '1',
-    nextPage: true,
-    pagination: true,
-    autoplay: true,
-    start: 4,
-    wheel: true,
-
-
-    breakpoints: {
-        640: {
-            perPage: 5,
-        },
-        480: {
-            perPage: 1,
-            height: '5rem',
-        },
-    },
-    }).mount();
-
-    new Splide('.splide2', {
-    type:Infinity,
-    perPage: 4,
-    perMove: '1',
-    nextPage: true,
-    pagination: true,
-    autoplay: true,
-    start: 4,
-    wheel: true,
-
-
-    breakpoints: {
-        640: {
-            perPage: 5,
-        },
-        480: {
-            perPage: 1,
-            height: '5rem',
-        },
-    },
-    }).mount();
-
-
-    function handleCityClick(city) {
-        // Implement your logic here for handling the click event
-        console.log("Clicked on " + city);
-    }
+<script src="https://unpkg.com/@splidejs/splide@3.0.9/dist/js/splide.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#splide10', {
+            type: 'slide',
+            perPage: 6, // Adjust the number of slides per page as needed
+            perMove: 1,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                640: {
+                    perPage: 2,
+                },
+                480: {
+                    perPage: 1,
+                },
+            },
+        }).mount();
+    });
 </script>
+
 
 
 

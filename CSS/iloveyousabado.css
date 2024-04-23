@@ -187,6 +187,8 @@ body{
     
 }
 
+
+
 /* Book flight button */
 .flights .book-flight-btn {
     background-color: #007bff;
@@ -1290,7 +1292,7 @@ hr{
     margin: 0px 10px;
     border-radius: 10px;
     position: relative;
-    transform: translate(-1%, 20%);
+    transform: translate(20%, 20%);
     overflow: hidden;
     box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
@@ -1313,7 +1315,7 @@ hr{
     color: #000;
     display: block;
     position: absolute;
-    transform: translate(20%, 129%);
+    transform: translate(20%, 39%);
     background: none;
     transition: all 0.3s ease-in-out;
  

@@ -109,9 +109,6 @@
             <div class="col-md-9 content">
                 <!-- Content goes here -->
                 <div class="dropdown">
-                    <div class="avatar">
-                    <img src="avatar.jpg" alt="Avatar">
-                   
                     <?php 
                     
                             session_start();    
@@ -125,12 +122,15 @@
                             echo"";
 
                         $email=$_SESSION['email'];
-                        $sql = "SELECT `user_name` FROM `registration` WHERE email= '$email'";
+                        $sql = "SELECT * FROM `registration` WHERE email= '$email'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             // Output data of each row
                             while ($row = $result->fetch_assoc()) {
-                                echo ' <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                $get = $row['avatar'];
+                                echo ' <div class="avatar">
+                                        <img src="'.$get.'" alt="Avatar">
+                                <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
                                 echo $row['user_name'];
                             }
                         }
