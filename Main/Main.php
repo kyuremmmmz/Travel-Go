@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,13 +82,7 @@
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
-                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
-                // Database connection
-                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
-
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php require_once 'con4.php';
                 $email = $_SESSION['email']; 
                
 
@@ -131,12 +124,11 @@
                 
 
                
-                // Check if the form is submitted
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     // Fetch data from API based on form input
                     $get = $_POST['search'];
                     // Redirect user to another page to display fetched data
-                    header("Location: res2.php?data=" . urlencode($get));
+                    echo '<script>window.location.href = "res2.php?data=' . urlencode($get) . '";</script>';
                     exit();
                 }
                 
