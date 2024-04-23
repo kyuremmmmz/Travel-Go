@@ -102,7 +102,7 @@
                 ?></button>
 
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                        <li><a class="dropdown-item" href="accountsettings.php"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
                         <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
                         <li><a class="dropdown-item" href="travel2.php"><i class="fas fa-plane" style="color: black; transform: translate(-50%);"></i> My Flights</a></li>
                         <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
