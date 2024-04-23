@@ -150,7 +150,7 @@ if ($result->num_rows > 0) {
                     <div class="btn-group" role="group" aria-label="Create New">
                         <a href="/see_details_form.php" class="btn btn-primary">Create New</a>
                         <a href="posthotelsadmin.php" class="btn btn-primary">Create hotel</a>
-                        <a href="" class="btn btn-primary">Create places</a>
+                        <a href="/postplacesadmin.php" class="btn btn-primary">Create places</a>
                     </div>
                 </div>
                 <table class="table table-striped table-striped table-hover">
