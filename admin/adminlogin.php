@@ -69,7 +69,7 @@ if (isset($_POST['login'])) {
         </div>
         <div class="col-md-12"> 
           <div class="form-floating mt-3 mb-3">
-            <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
             <label for="pwd">Password</label>
           </div>
         </div>

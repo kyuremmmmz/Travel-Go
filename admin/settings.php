@@ -207,7 +207,7 @@ if (mysqli_num_rows($result) > 0) {
                     <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
                     <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
                     <li><a href="booking_list.php" class="list-group-item"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries" class="list-group-item "><i class="fas fa-envelope"></i> Inquiries</a></li>
+                    <li><a href="flight_booking_list.php" class="list-group-item"><i class="fas fa-envelope"></i> Flight Booking List</a></li>
                     <li><a href="settings.php" class="list-group-item bg-blue active"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>

@@ -291,7 +291,31 @@
                                     .$row['departure_time']; 
                                     echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
                                     echo'Price: ' .$row['price'];?></p>
-                                    <button class="book-flight-btn">Book Now</button>
+
+                                            <?php
+                                            if (isset($_POST['booking'])) {
+                                                // Get the values from $row or any other source
+                                                $destination = urlencode($row['destination']);
+                                                $price = urlencode($row['price']);
+                                                $arrival = urlencode($row['arrival_time']);
+                                                $departure = urlencode($row['departure_time']);
+                                                $arrivaldate = urlencode($row['arrival_date']);
+                                                $departure_date = urlencode($row['departure_date']);
+                                                $flight_number = isset($row['flight_number']) ? urlencode($row['flight_number']) : ''; // Check if $row['flight_number'] is set before using it
+                                                $origin = urlencode($row['origin']);
+                                            
+                                                // Construct the URL with encoded parameters
+                                                $url = "flight_booking_.php?destination=$destination&price=$price&arrival=$arrival&departure=$departure&arrivaldate=$arrivaldate&departuredate=$departure_date&flightnum=$flight_number&origin=$origin";
+                                            
+                                                // Redirect the user using JavaScript
+                                                echo "<script>window.location.href = '$url';</script>";
+                                                exit(); // Ensure no further code execution after redirection
+                                            }
+                                            
+                                            ?>
+                                    <form method="post" action="Main.php">
+                                        <button class="book-flight-btn" name="booking">Book Now</button>
+                                    </form>
                                 </div>
                             </li>
                     <?php
@@ -299,6 +323,8 @@
                     } else {
                         echo "No flights found";
                     }
+
+                    
                     ?>
                 </ul>
             </div>

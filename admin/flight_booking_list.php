@@ -179,8 +179,8 @@ if ($result->num_rows > 0) {
                             }
                         } ?>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                        <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="settings.php"><i class="fas fa-user"></i> Account</a></li>
                     </ul>
 
                 </div>
@@ -205,7 +205,7 @@ if ($result->num_rows > 0) {
                             <th>ARRIVAL</th>
                             <th>DEPARTURE</th>
                             <th>CONTACT NUMBER</th>
-                            <th>HOTEL</th>
+                            <th>ORIGIN</th>
                             <th>FLIGHT NUMBER</th>
                             <th>DESTINATION</th>
                             <th>SEAT CLASS</th>
@@ -216,19 +216,19 @@ if ($result->num_rows > 0) {
 
                         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
                             $delete_id = $_POST['delete_id'];
-                            $sql = "DELETE FROM booking_tracker WHERE id = $delete_id";
+                            $sql = "DELETE FROM flight_bookings WHERE id = $delete_id";
                             if ($conn->query($sql) !== TRUE) {
                                 echo "Error deleting booking: " . $conn->error;
                             }
                             exit();
                         }
 
-                        $query = "SELECT * FROM booking_tracker";
+                        $query = "SELECT * FROM flight_bookings";
                         $result = mysqli_query($conn, $query);
 
                         if(isset($_GET['search_query'])) {
                             $search_query = $_GET['search_query'];
-                            $query = "SELECT * FROM flight_booking_tracker WHERE full_name LIKE '%$search_query%' OR email LIKE '%$search_query%'";
+                            $query = "SELECT * FROM flight_bookings WHERE full_name LIKE '%$search_query%' OR email LIKE '%$search_query%'";
                             $result = mysqli_query($conn, $query);
                         }
 
@@ -238,15 +238,15 @@ if ($result->num_rows > 0) {
                             echo "<td>".$row['id']."</td>";
                             echo "<td>".$row['full_name']."</td>";
                             echo "<td>".$row['email']."</td>";
-                            echo "<td>".$row['arrival']."</td>";
-                            echo "<td>".$row['departure']."</td>";
+                            echo "<td>".$row['arrival_date']."</td>";
+                            echo "<td>".$row['departure_date']."</td>";
                             echo "<td>".$row['contact_number']."</td>";
-                            echo "<td>".$row['hotel']."</td>";
+                            echo "<td>".$row['origin']."</td>";
                             echo "<td>".$row['flight_number']."</td>";
                             echo "<td>".$row['destination']."</td>";
                             echo "<td>".$row['seat_class']."</td>";
                             echo "<td>
-                            <a href='update_form.php?choice=".urlencode($row['id'])."' class='btn btn-primary update-link'>Update</a>
+                            <a href='flight_update_form.php?choice=".urlencode($row['id'])."' class='btn btn-primary update-link'>Update</a>
                             <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
                               </td>";
                         echo "</tr>";
