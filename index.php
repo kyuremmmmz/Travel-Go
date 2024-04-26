@@ -390,7 +390,7 @@ if (isset($_POST["submit"])) {
         
         
     } catch (Exception $e) {
-        echo "Error sending email: {$mail->ErrorInfo}";
+        echo "No Connection Found";
     }
 }
 ?>
