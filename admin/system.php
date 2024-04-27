@@ -1,18 +1,18 @@
-<?php session_start();    
-            
+<?php
+    session_start();    
+    $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+    if ($conn->connect_error) {
+        die("connection error". $conn->connect_error);
+    }
 
-$conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
-if ($conn->connect_error) {
-    die("connection error". $conn->connect_error);
-}
+    echo"";
 
-echo"";
+    $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+    $sql = "SELECT * FROM `registration` WHERE email= '$email'";
+    $result = $conn->query($sql);
 
-$email=$_SESSION['email'];
-$sql = "SELECT * FROM `registration` WHERE email= '$email'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    // Output data of each row ?>
+    if ($result->num_rows > 0) {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         /* Custom styles */
         .sidebar {
@@ -123,20 +123,20 @@ if ($result->num_rows > 0) {
                 <!-- Content goes here -->
                 <div class="avatar">
                     <?php
-                            while ($row = $result->fetch_assoc()) {
-                                $getrow = $row['avatar'];
-                                echo '<img src="'.$getrow.'" alt="Avatar">
-                                <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
-                                echo $row['user_name'];
-                            }
-                        } ?>
+                    while ($row = $result->fetch_assoc()) {
+                        $getrow = $row['avatar'];
+                        echo '<img src="'.$getrow.'" alt="Avatar">
+                        <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                        echo $row['user_name'];
+                    }
+                    ?>
+                    </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="adminlogin.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
                         <li><a class="dropdown-item" href="settings.php"><i class="fas fa-user"></i> Account</a></li>
                     </ul>
-
-                </div>
+                    </div>
                 </div>
                 
                 <h1>Welcome to Admin Dashboard</h1>
@@ -154,6 +154,7 @@ if ($result->num_rows > 0) {
                             if ($conn->connect_error) {
                                 die("connection error". $conn->connect_error);
                             }
+                        }
 
                             echo"";
 
@@ -178,20 +179,17 @@ if ($result->num_rows > 0) {
                             if ($result_bookings->num_rows > 0) {
                                 $row_bookings = $result_bookings->fetch_assoc();
                                 $total_bookings = $row_bookings['total_bookings'];
-                               
                             }
 
                             if ($result_places->num_rows > 0) {
                                 $row_places = $result_places->fetch_assoc();
                                 $total_places = $row_places['total_places'];
                             }
-                           
-
                             ?>
                             <p>Total Signed-in Users: <?php echo $total_users; ?></p>
                             <p>Total Booked Packages: <?php echo $total_bookings; ?></p>
                             <p>Total Places Packages: <?php echo $total_places; ?></p>
-                            <!-- You can add more statistics here as needed -->
+                            
                         </div>
                     </div>
                 </div>
@@ -200,6 +198,5 @@ if ($result->num_rows > 0) {
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
 </body>
 </html>
