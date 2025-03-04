@@ -1,68 +1,36 @@
-<?php
-// Include database connection file
-include("connection.php");
+<?php session_start();    
+            
 
-// Check if the form is submitted
-if (isset($_POST["submit"])) {
-    // Get form data
-    $id = $_POST["id"];
-    $fullname = $_POST["name"];
-    $children = $_POST["children"];
-    $adult = $_POST["adults"];
-    $arrival = $_POST["adate"];
-    $departure = $_POST["ddate"];
-    $contact_number = $_POST["phone"];
-    $email = $_POST["email"];
-    $hotel = $_POST["hotel"];
+            $conn = new mysqli('localhost:3307', 'root', 'admin', 'for_admin');
+            if ($conn->connect_error) {
+                die("connection error". $conn->connect_error);
+            }
 
-    // Prepare the SQL statement using prepared statements to prevent SQL injection
-    $sql = "UPDATE booking_tracker SET full_name=?, children=?, adult=?, arrival=?, departure=?, contact_number=?, email=?, hotel=? WHERE id=?";
+            echo"";
 
-    // Prepare the statement
-    $stmt = $conn->prepare($sql);
-
-    // Bind parameters
-    $stmt->bind_param("siississi", $fullname, $children, $adult, $arrival, $departure, $contact_number, $email, $hotel, $id);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "<script>sweetAlert('Success', 'Updated Successfully.', 'success')</script>";
-        header("Location: booking_list.php");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close the statement
-    $stmt->close();
-}
-?>
-
-
+        $email=$_SESSION['email'];
+        $sql = "SELECT * FROM `registration` WHERE email= '$email'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // Output data of each row ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
-    
-    <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Bootstrap JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         /* Custom styles */
         .sidebar {
-            background-color: #0080FF;
+            background-color: #343a40;
             color: #fff;
             height: 100vh;
-            overflow-y: auto;
+            overflow: hidden;
         }
         .sidebar-logo {
             padding: 20px;
@@ -80,22 +48,104 @@ if (isset($_POST["submit"])) {
         .sidebar-menu li a {
             color: #fff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s; /* Add transition for smoother color change */
         }
         .sidebar-menu li:hover a,
         .sidebar-menu li:focus a,
         .sidebar-menu li:active a {
-            color: #fff;
+            color: #fff; /* Change text color on hover, focus, and active */
+            background-color: #343a40;
         }
         .sidebar-menu li:hover {
-            background-color: #4e555b;
+            background-color: #4e555b; /* Change background color on hover */
         }
-        .content {
-            max-height: calc(150vh - 70px);
-            overflow-y: auto;
+        /* Avatar */
+        .avatar {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+
+        .drop{
+            border-radius: 50px;
+            height: 25px;
+            justify-content: center;
+            
+        }
+
+        .drop:hover{
+            
+            color: #000;
+        }
+
+        .list-group-item{
             background-color: #343a40;
-            color: aliceblue;
+            color: #fff;
+            border: none;
+            width: 100%;
         }
+
+        .list-group-item:hover{
+            background-color: #0088FF;
+        }
+
+        /* Styles for the settings panel */
+        .settings-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+        .settings-panel h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        
     </style>
 </head>
 <body>
@@ -104,18 +154,37 @@ if (isset($_POST["submit"])) {
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <div class="sidebar-logo">Travel Go Ph Admin</div>
-                <ul class="sidebar-menu">
-                    <li><a href="system.php"><i class="fas fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="pakages.php"><i class="fas fa-box"></i> Packages</a></li>
-                    <li><a href="booking-list.php"><i class="fas fa-list-alt"></i> Booking List</a></li>
-                    <li><a href="#inquiries"><i class="fas fa-envelope"></i> Inquiries</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                <ul class="list-group">
+                    <li><a href="system.php" class="list-group-item "><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+                    <li><a href="/admin/pakages.php" class="list-group-item "><i class="fas fa-box"></i> Packages</a></li>
+                    <li><a href="booking_list.php" class="list-group-item bg-blue active"><i class="fas fa-list-alt"></i> Booking List</a></li>
+                    <li><a href="flight_booking_list.php" class="list-group-item "><i class="fas fa-envelope"></i> Flight Booking List</a></li>
+                    <li><a href="settings.php" class="list-group-item "><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
+    
             <!-- Content -->
             <div class="col-md-9 content">
                 <!-- Content goes here -->
                 <h1>Welcome to Admin Dashboard</h1>
+                <!-- Content goes here -->
+             <div class="avatar">
+                    <?php
+                            while ($row = $result->fetch_assoc()) {
+                                $getrow = $row['avatar'];
+                                echo '<img src="'.$getrow.'" alt="Avatar">
+                                <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle drop d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">';
+                                echo $row['user_name'];
+                            }
+                        } ?>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+
+                </div>
+                </div>
                 <hr>
                 <div class="container mt-5">
                     <h2>Booking Tracker</h2>
@@ -171,12 +240,13 @@ if (isset($_POST["submit"])) {
                             echo "<td>".$row['contact_number']."</td>";
                             echo "<td>".$row['hotel']."</td>";
                             echo "<td>
-                            <button type='button' class='btn btn-primary update-btn' data-bs-toggle='modal' data-bs-target='#myModal".urlencode($row['id'])."'>Update</button>
+                            <a href='update_form.php?choice=".urlencode($row['id'])."' class='btn btn-primary update-link'>Update</a>
                             <button type='button' class='btn btn-danger delete-btn' data-id='".$row['id']."'>Delete</button>
                               </td>";
                         echo "</tr>";
                     }
 
+                    
                        
                         ?>
                     </table>
@@ -185,138 +255,7 @@ if (isset($_POST["submit"])) {
         </div>
     </div>
 
-
-
-
-
- <!-- The Modal -->
- <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Update Booking</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                
-                <form id="updateBookingForm" method="POST">
-                <?php
-                    $query = "SELECT * FROM booking_tracker";
-                    $result = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <div class="mb-3">
-                        <label for="id" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['id']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="hotel" class="form-label">Hotel</label>
-                        <input type="text" class="form-control" id="hotel" name="hotel" value="<?php echo  $row['hotel'] ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone number</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="arrival_date" class="form-label">Arrival Date</label>
-                            <input type="date" class="form-control" id="arrival_date" name="adate" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="departure_date" class="form-label">Departure Date</label>
-                            <input type="date" class="form-control" id="departure_date" name="ddate" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="adults" class="form-label">Number of Adults</label>
-                            <select class="form-select" id="adults" name="adults" required>
-                                <option value="">Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="children" class="form-label">Number of Children</label>
-                            <select class="form-select" id="children" name="children" required>
-                                <option value="">Select</option>
-                                <option value="0">None</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="payment_method" class="form-label">Payment Method</label>
-                        <select class="form-select" id="payment_method" name="payment_method" required>
-                            <option value="">Select</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="debit_card">Debit Card</option>
-                            <option value="paypal">PayPal</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                </form>
-                <?php
-                    }
-                
-                    mysqli_free_result($result);
-                    mysqli_close($conn);
-                    ?>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
     <script>
-        jQuery(document).ready(function($){
-        // Update Button Click Event
-        $(".update-btn").click(function(){
-            // Get the row corresponding to the clicked button
-             // Get the ID from the data-id attribute of the clicked button
-            var id = $(this).data("id");
-            
-            // Log the ID to the console for testing
-            console.log("Clicked ID: " + id);
-             // Set the value of the hidden input field in the modal
-        $("#updateBookingForm input[name='id']").val(id);
-            var row = $(this).closest("tr");
-
-            // Extract values from the row
-            var id = row.find("td:eq(0)").text();
-            var name = row.find("td:eq(1)").text();
-            var email = row.find("td:eq(2)").text();
-            var arrival = row.find("td:eq(3)").text();
-            var departure = row.find("td:eq(4)").text();
-            var contact_number = row.find("td:eq(5)").text();
-            var hotel = row.find("td:eq(6)").text();
-
-            // Set values to the modal form fields
-            $("#id").val(id);
-            $("#name").val(name);
-            $("#email").val(email);
-            $("#arrival_date").val(arrival);
-            $("#departure_date").val(departure);
-            $("#phone").val(contact_number);
-            $("#hotel").val(hotel);
-
-            // Show the modal
-            $("#myModal").modal("show");
-        });
 
         // Delete Button Click Event
         $(".delete-btn").click(function(){
@@ -351,7 +290,7 @@ if (isset($_POST["submit"])) {
                 }
             });
         });
-    });
+
 </script>
 </body>
 </html>

@@ -18,6 +18,8 @@ body{
     overflow: hidden;
 
 }
+
+
 .background{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
@@ -553,6 +555,7 @@ body{
     display: block;
     background-color: rgb(255, 255, 255);
     height: 250px;
+    width: 300px;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -565,6 +568,7 @@ body{
     display: inline-block;
     background-color: rgb(255, 255, 255);
     height: 360px; 
+    width: 300px;
     border-radius: 30px; 
     margin-right: 40px;
     text-align: center;
@@ -577,6 +581,13 @@ body{
     box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.5);
     grid-template-columns: repeat(auto-fill);
     }
+
+
+.inner-box .solidblack{
+    display: block;
+    transform: translateY(-50%);
+    color: #000000;
+}
 
 .container ul{
     
@@ -591,7 +602,7 @@ body{
 .container4 .inner-box .box img {
     display: block;
     height: 250px;
-    width: 300px;
+    width: 100%;
     right: 50%;
     bottom: 50%;
     transform: translate(0%, 0%);
@@ -725,7 +736,7 @@ body{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 230%);
+    transform: translate(-50%, 330%);
     width: 20%;
     height: 50px;
     border: none;
@@ -1398,3 +1409,22 @@ i{
     color: aliceblue;
     background-color: #161616;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*==================================================================================================END===============================================================================================*/
+
+

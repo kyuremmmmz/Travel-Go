@@ -54,7 +54,7 @@
             echo '<div class="container mt-5">
                     <div class="card">
                         <div class="card-header text-center">
-                            <h1>Travel Go Hotel E-Ticket</h1>
+                            <h1>Travel Go E-Ticket</h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -62,8 +62,8 @@
                                     <h3>Hotel Booking Information</h3>
                                     <p><strong>Hotel:</strong> '.$specific_place.'</p>
                                     <p><strong>Hotel ID:</strong> '.$voucherCode.'</p>
-                                    <p><strong>Departure Date:</strong> '.$departure.'</p>
-                                    <p><strong>Arrival Date:</strong> '.$arrival.'</p>
+                                    <p><strong>Check in:</strong> '.$departure.'</p>
+                                    <p><strong>Checkout:</strong> '.$arrival.'</p>
                                     <p><strong>Adult No:</strong> '.$adult.'</p>
                                     <p><strong>Children No:</strong> '.$children.'</p>
                                 </div>
@@ -71,7 +71,7 @@
                                     <h3>Passenger Information</h3>
                                     <p><strong>Name:</strong> '.$fullname.'</p>
                                     <p><strong>Email:</strong> '.$email.'</p>
-                                    <p><strong>Phone:</strong> '.$phone.'</p>
+                                    <p><strong>Phone:</strong> +63'.$phone.'</p>
                                     <div class="barcode">
                                         <p><strong>Your Bar code</strong> </p>
                                         <img src="data:image/png;base64,'.base64_encode($barcodeImage).'" alt="Barcode">

@@ -39,7 +39,17 @@
           
             <ul class="myul">
            
-                
+                <li class="lis"><img src="/2024-03-29-removebg-preview.png" class="travel" alt="" srcset=""></li>
+
+                <li class="lis">
+                <div class="autocomplete">
+                    <input type="search" id="search" name="search" placeholder="Search for places" required>
+                    <button class="search" name="submit"><i class="fas fa-search"></i></button>
+                    <ul id="my-box"></ul>
+                </div>
+                </li>
+
+
                 
                 <li class="li"><a href="#ewan" class="active" id="a">Home</a> </li>
           
@@ -49,28 +59,65 @@
 
                 <li class="lis"><a href="#flights"class="" id="a">Flights</a></li>
 
-                
+                <li class="lis"> <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"><?php session_start(); 
+                // Database connection
+                $conn = new mysqli("localhost:3307", "root", "admin", "for_admin");
 
-                <div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-      More
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Link 1</a></li>
-      <li><a class="dropdown-item" href="#">Link 2</a></li>
-      <li><a class="dropdown-item" href="travel.php">My Bookings</a></li>
-      <li class="list"><button class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">Signout</button></li>
-    </ul>
-  </div>
-</div>
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $email = $_SESSION['email']; 
+               
+
+                $sql = "SELECT user_name FROM registration WHERE email='$email'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $User = $row['user_name'];
+                        echo $User;
+                    }
+                }
+                
+                
+                
+                
+                ?></button>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog" style="color: black; transform: translate(-50%);"></i> Account Settings</a></li>
+                        <li><a class="dropdown-item" href="travel.php"><i class="fas fa-book" style="color: black; transform: translate(-50%);"></i> My Bookings</a></li>
+                        <li class="list"><a href="login_page.php" class="dropdown-item" name="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out"><i class="fas fa-sign-out-alt" style="color: black; transform: translate(-50%);"></i> Signout</a></li>
+                    </ul>
+
+            
+                </li>
 
                
 
                 
-
-                 
             
+                </li><?php
                 
+                
+                if (isset($_POST["button"])) {
+                    header("Location: /login_page.php");
+                }
+                
+
+               
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                    // Fetch data from API based on form input
+                    $get = $_POST['search'];
+                    // Redirect user to another page to display fetched data
+                    header("Location: res2.php?data=" . urlencode($get));
+                    exit();
+                }
+                
+                ?>
+
+
 
              
             </ul>
@@ -88,13 +135,12 @@
 
         
         </div>
-
+           
 
     </nav>
-   
+    
    
 </header>
-
 
 
     
@@ -131,16 +177,26 @@
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
-            // Display the image
             $imageData = base64_encode($row['image']);
             $price = number_format($row['price']);
+            $price2 = $row['price'];
             $textData = $row['specific_place'];
             $text = $row['place'];
             $amenities = isset($row['amenities']) ? $row['amenities'] : '';
             $rating = $row['rating'];
-
+    
             echo '<div class="inner-box">';
-            echo '<div class="box"><img src="/details/' . $row["image"] . '" alt="Image" /></div>';
+            echo '<div class="box">'; // Open .box
+    
+            // Display only the first image
+            $images = explode(',', $row['image']);
+            $firstImage = reset($images); // Get the first image from the array
+    
+            echo '<img src="/details/' . $firstImage . '" class="d-block w-100" alt="Image">';
+    
+            echo '</div>'; // Close .box
+    
+            // Output other information
             echo '<div class="data">';
             echo '<p class="text2">Budget Places in ' . $text . '</p>';
             echo '<h3 class="textdata">' . $textData . '</h3>';
@@ -153,31 +209,28 @@
                     echo '<span class="fa fa-star"></span>';
                 }
             }
-
             echo '</div>';
-
             echo '<div class="outer"><p class="price"> Price: PHP ' . $price . ' / day</p></div>';
-            echo '<a href="/placesbooking.php?choice='.urlencode($textData).' & " class="book" >Book now</a>';
-            echo '<a href="see_details.php?details='.urlencode($textData).'" class="book">See Details</a>';
-     
-
-            echo '</div>
-
-            <hr>';
-
-
+            echo '<a href="placesbooking.php?choice=' . urlencode($textData) . '&price=' . urlencode($price2) . '" class="book" >Book now</a>';
+            echo '<a href="see_details.php?details=' . urlencode($textData) . '" class="book">See Details</a>';
+    
+            echo '</div>'; // Close .inner-box
+    
+            echo '<hr>';
         }
     } else {
         echo "0 results";
     }
-
-    $conn->close();
+    
+   
     ?>
     <div id="map-container">
         <h1>View on Maps</h1>
         <div id="map"></div>
     </div>
 </div>
+
+
 
 <script>
     var map;
@@ -193,20 +246,112 @@
 </script>
 <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js" async defer></script>
 
- 
+</section>
 
 <!---------------------------------------------------------------------------------------------FLIGHTS CONTAINER------------------------------------------------------------------------------------>
 <div class="flights" id="flights">
-<h1>Flights</h1>
-<div class="outer-flights">
-<div class="inner-flight">
-    <img src="/images/65f9dbbe20835.jpg" alt="" srcset="">
+    <h1>All Flights</h1>
+    <div class="outer-flights">
+        <div id="splide8" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php
+                    // Establish connection to the database
+                    $servername = "localhost:3307";
+                    $username = "root"; 
+                    $password = "admin";
+                    $database = "sample"; 
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $database);
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // SQL query to fetch all flights
+                    $sql = "SELECT * FROM flights";
+
+                    // Execute the query
+                    $result = $conn->query($sql);
+
+                    // Check if there are any rows returned
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <li class="splide__slide">
+                                <div class="inner-flight">
+                                    <div class="flight-card">
+                                        <img src="<?php echo $row['image_url']; ?>" alt="Flight Image">
+                                    </div>
+                                    <h2 class="flight2">Flight Details</h2>
+                                    <p>Destination: <?php echo $row['destination'];echo '<br> Origin: '.$row['origin'];
+                                    echo '<br> Departure: ' 
+                                    .$row['departure_time']; 
+                                    echo'<br> Arrival time: '.$row['arrival_time'].'</br>'; 
+                                    echo'Price: ' .$row['price'];?></p>
+
+                                            <?php
+                                            if (isset($_POST['booking'])) {
+                                                // Get the values from $row or any other source
+                                                $destination = urlencode($row['destination']);
+                                                $price = urlencode($row['price']);
+                                                $arrival = urlencode($row['arrival_time']);
+                                                $departure = urlencode($row['departure_time']);
+                                                $arrivaldate = urlencode($row['arrival_date']);
+                                                $departure_date = urlencode($row['departure_date']);
+                                                $flight_number = isset($row['flight_number']) ? urlencode($row['flight_number']) : ''; // Check if $row['flight_number'] is set before using it
+                                                $origin = urlencode($row['origin']);
+                                            
+                                                // Construct the URL with encoded parameters
+                                                $url = "flight_booking_.php?destination=$destination&price=$price&arrival=$arrival&departure=$departure&arrivaldate=$arrivaldate&departuredate=$departure_date&flightnum=$flight_number&origin=$origin";
+                                            
+                                                // Redirect the user using JavaScript
+                                                echo "<script>window.location.href = '$url';</script>";
+                                                exit(); // Ensure no further code execution after redirection
+                                            }
+                                            
+                                            ?>
+                                    <form method="post" action="Main.php">
+                                        <button class="book-flight-btn" name="booking">Book Now</button>
+                                    </form>
+                                </div>
+                            </li>
+                    <?php
+                        }
+                    } else {
+                        echo "No flights found";
+                    }
+
+                    
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
- 
-</div>
-
+<script src="https://unpkg.com/@splidejs/splide@3.0.9/dist/js/splide.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#splide8', {
+            type: 'slide',
+            perPage: 6, // Adjust the number of slides per page as needed
+            perMove: 1,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                640: {
+                    perPage: 2,
+                },
+                480: {
+                    perPage: 1,
+                },
+            },
+        }).mount();
+    });
+</script>
 
 <!----------------------------------------------------------------------------------------------FLGIHTS CONTAINER------------------------------------------------------------------------------------------->
 
@@ -221,7 +366,7 @@
             Hotel Recommendations in Pangasinan
         </h1>
 
-        <div class="splide">
+        <div class="splide" id="splide10">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php 
@@ -231,18 +376,22 @@
                     }
                     $img = isset($_GET["choice"])? $_GET["choice"] : 'No choice selected';
                     $sql = "SELECT hotels, price_for_hotel, image3 FROM `create_see_details.php` WHERE place ='$img'";
-                    $sql = "SELECT hotel, price, image FROM for_creating_a_hotel WHERE place ='Manila'";
+                    
                     $result = $conn->query($sql);
+
+                    
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            $imagedata = base64_encode($row['image3']);
                             $prices = number_format($row['price_for_hotel']);
                             $textdata = $row['hotels'];
+                            $images = explode(',', $row['image3']); // Split the list of images into an array
+                            $firstImage = reset($images); // Get the first image from the array
                             echo '<li class="splide__slide">';
                             echo '<div class="hotels" id="hotels">';
                             echo '<div class="in">';
-                            echo '<img src="/details/'.$row["image3"].'" alt="" srcset="">';
+                            
+                            echo '<img src="/details/'.$firstImage.'" alt="'.$textdata.'" srcset="">';
                             echo '</div>';
                             echo '<h1>'.$textdata.'</h1>';
                             echo '<h1 class="h2">Starts from PHP '.$prices.'</h1>';
@@ -273,58 +422,27 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script type="text/javascript">
-    new Splide('.splide', {
-    type:Infinity,
-    perPage: 4,
-    perMove: '1',
-    nextPage: true,
-    pagination: true,
-    autoplay: true,
-    start: 4,
-    wheel: true,
-
-
-    breakpoints: {
-        640: {
-            perPage: 5,
-        },
-        480: {
-            perPage: 1,
-            height: '5rem',
-        },
-    },
-    }).mount();
-
-    new Splide('.splide2', {
-    type:Infinity,
-    perPage: 4,
-    perMove: '1',
-    nextPage: true,
-    pagination: true,
-    autoplay: true,
-    start: 4,
-    wheel: true,
-
-
-    breakpoints: {
-        640: {
-            perPage: 5,
-        },
-        480: {
-            perPage: 1,
-            height: '5rem',
-        },
-    },
-    }).mount();
-
-
-    function handleCityClick(city) {
-        // Implement your logic here for handling the click event
-        console.log("Clicked on " + city);
-    }
+<script src="https://unpkg.com/@splidejs/splide@3.0.9/dist/js/splide.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#splide10', {
+            type: 'slide',
+            perPage: 6, // Adjust the number of slides per page as needed
+            perMove: 1,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                640: {
+                    perPage: 2,
+                },
+                480: {
+                    perPage: 1,
+                },
+            },
+        }).mount();
+    });
 </script>
+
 
 
 
@@ -380,7 +498,7 @@
         
        
     
-</section>
+
 
  
 

@@ -21,7 +21,20 @@ body{
 
 }
 
+.dropdown-toggle{
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    
+}
 
+.travel {
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+}
 
 
 .header {
@@ -47,7 +60,152 @@ body{
    
 }
 
+/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
+
+.flights {
+    display: block ;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(14, 37, 70);
+    color: #fff;
+    min-height: 100vh;
+}
+
+
+.flights .outer-flights {
+    display: inline;
+    width: 100%;
+    max-width: 800px; 
+    margin-top: 20px;
+}
+
+.flights .inner-flight {
+    background-color: #ffffff;
+    display: inline-block;
+    width: 270px;
+    height: 350px;
+    margin: 0px 10px;
+    color: #000;
+    border-radius: 10px;
+    position: relative;
+    transform: translate(1%, 20%);
+    overflow: hidden;
+    box-shadow: 5px 5px 5px 0px #000;
+    cursor: pointer;
+    grid-template-columns: repeat(auto-fill);
+}
+
+/* Text "Travel" */
+.travel {
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+}
+
+/* Flight card container */
+.flights .flight-card {
+    border: 1px solid #ccc;
+    overflow: hidden;
+    width: 100%;
+    height: 210px; /* Adjust the height as needed */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Flight image */
+.flights .flight-card img {
+    width: 100%;
+    height: 100%; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: all ease-in-out  0.4s;
+}
+
+/* Hover effect on flight image */
+.flights .flight-card img:hover {
+    transform: scale(1.2);
+}
+
+/* Flight details */
+.flights .flight-details {
+    padding: 20px;
+}
+.flights .splide__track{
+    height: 500px;
+}
+
+.flights .splide{
+    transform: translate(1%,20%);
+    width: 1840px;
+
+}
+
+.flights .splide__list{
+    transform: translateX(-20%);
+}
+
+.flights .splide__arrow--prev {
+    transform: translateX(-170%);
+  }
+  
+  /* Select the right arrow */
+ .flights .splide__arrow--next {
+    transform: translateX(130%);
+  }
+
+.flights .splide__track{
+    height: 500px;
+}
+
+/* Flight details heading */
+.flights .flight2 {
+    margin-top: 10px;
+    transform: translateY(-50%);
+    font-size: 20px; /* Adjust the font size here */
+    color: #000;
+}
+
+/* Flight details text */
+.flights p {
+    transform: translateY(-20%);
+    font-size: 14px;
+    display: block; /* Change display to block to ensure each detail appears on a new line */
+    margin-bottom: 5px; /* Add some space between each detail */
+}
+
+/* Adjust the position */
+
+
+.flights h1{
+        text-align: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        font-size: 65px;
+        color: #fff;
+    
+}
+
+
+
+/* Book flight button */
+.flights .book-flight-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translate(140%, -130%);
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect on book flight button */
+.flights .book-flight-btn:hover {
+    background-color: #0056b3;
+}
 
 .nav2 .fas.fa-calendar{
     color: #ffffff;
@@ -99,13 +257,13 @@ body{
     list-style: none;
     display: inline-block;
     transition: text-decoration-color, 0.7s;
-    transform: translate(10%);
+    transform: translate(50%);
     margin: 0 20px;
 }
 
 .lis {
     margin: 0 20px;
-    transform: translateX(  0%);
+    transform: translateX(40%);
 }
 
 #a {
@@ -153,6 +311,52 @@ body{
     display: inline-block;
     margin: 1%;
 }
+
+
+
+
+
+.navigation .list .button {
+   transform: translateX(550%);
+}
+
+.input .forgot-pass {
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.input .parag {
+    color: #fdfdfd;
+    margin-top: 10px;
+}
+
+.travel{
+    color: #fff;
+    transform: translateX(-150%);
+    font-size: 30px;
+    
+}
+
+
+.divko{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Start with a lower z-index */
+    transition: 0.7s all ease-in-out;
+    display: static; /* Initially hidden */
+}
+
+.divko.visible{
+    z-index: 9999; /* Ensure it's above other content */
+    display: none; /* Show when it has the visible class */
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+
+}
+
+
 
 
 
@@ -572,29 +776,101 @@ hr{
 }
 
 
- #map {
-    height: 632px; /* Adjust the height as needed */
-    width: 100%; /* Ensure the map takes the full width of its container */
-    transform: translateX(2%);
+.sec2 {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.container #map-container {
-    position: absolute; /* Position the map container relative to the page */
-    height: 700px;
+#map-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 750px; 
+    height: 72%;
     overflow: hidden;
-    width: 700px; /* Set the width of the map */
-    transform: translate(126%, -100%);
     text-align: center;
     border-left: 1px solid black;
-    
-
 }
 
-.container #map-container h1 {
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+ #map-container h1 {
     margin-bottom: 20px;
 
 }
 
+
+.autocomplete {
+    position: relative;
+    transform: translate(-110%);
+    
+    
+}
+
+
+
+.autocomplete input{
+    
+    outline: none;
+    border: none;
+    width: 300px;
+    height: 40px;
+    font-size: auto;
+}
+
+.autocomplete button{
+    outline: none;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: auto;
+}
+
+#my-box {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1000;
+    width: 60%;
+    max-height: 200px;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+    display: none;
+}
+#my-box li {
+    padding: 10px;
+    cursor: pointer;
+}
+#my-box li:hover {
+    background-color: #ddd;
+}
+
+
+.search {
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    /* Adjust padding to position the icon */
+    padding-left: 10px;
+}
+/* Adjust icon position */
+.search i {
+    transform: translateX(-12%);
+    color: #ffffff;
+    font-size: large;
+
+}
 
 .container .inner-box {
     display: block;
@@ -1016,7 +1292,7 @@ hr{
     margin: 0px 10px;
     border-radius: 10px;
     position: relative;
-    transform: translate(-1%, 20%);
+    transform: translate(20%, 20%);
     overflow: hidden;
     box-shadow: 5px 5px 5px 0px #000;
     cursor: pointer;
@@ -1039,7 +1315,7 @@ hr{
     color: #000;
     display: block;
     position: absolute;
-    transform: translate(20%, 129%);
+    transform: translate(20%, 39%);
     background: none;
     transition: all 0.3s ease-in-out;
  
@@ -1061,69 +1337,7 @@ hr{
 
 /*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
-.flights{
-    position: relative;
-    padding: 20px;
-    max-height: 100vh;
-    height: 100vh;
-    max-width: 100%;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    justify-content: center;
-    align-self: center;
-    overflow: auto;
-    background-color: rgb(14, 37, 70);
-}
 
-
- .outer-flights{
-    background-color: #ffffff;
-    display: inline-block;
-    width: 270px;
-    height: 350px;
-    margin: 0px 30px;
-    border-radius: 30px;
-    position: relative;
-    transform: translate(15%, 20%);
-    overflow: hidden;
-    cursor: pointer;
-    grid-template-columns: repeat(auto-fill);
-}
-
-
-.inner-flight{
-    display: inline-block;
-    background-color: #000000;
-    height: 200px;
-    max-height: fit-content; 
-    max-width: fit-content;
-    transform: translate(-12%,-18%);
-    cursor: pointer;
-    overflow: hidden;
-    margin: 30px;
-    transition: all 0.4s ease-in-out;
-}
-
-.flights a{
-    text-decoration: none;
-    color: white;
-    
-}
-
-.inner-flight img{
-    height: 100%;
-    transition: all 0.3s ease-in-out;
-}
-
-
- .inner-flight img:hover{
-    transform: scale(1.1);
-    
-}
-.flights h1{
-    text-align: center;
-}
 
 
 
@@ -1226,82 +1440,6 @@ i{
 
 
 
-
-/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
-
-.flights{
-    position: relative;
-    padding: 20px;
-    max-height: 100vh;
-    height: 100vh;
-    max-width: 100%;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    justify-content: center;
-    align-self: center;
-    overflow: auto;
-    background-color: rgb(14, 37, 70);
-}
-
-
- .outer-flights{
-    background-color: #ffffff;
-    display: inline-block;
-    width: 270px;
-    height: 350px;
-    margin: 0px 30px;
-    border-radius: 30px;
-    position: relative;
-    transform: translate(15%, 20%);
-    overflow: hidden;
-    cursor: pointer;
-    grid-template-columns: repeat(auto-fill);
-}
-
-
-.inner-flight{
-    display: inline-block;
-    background-color: #000000;
-    height: 200px;
-    max-height: fit-content; 
-    max-width: fit-content;
-    transform: translate(-12%,-18%);
-    cursor: pointer;
-    overflow: hidden;
-    margin: 30px;
-    transition: all 0.4s ease-in-out;
-}
-
-.flights a{
-    text-decoration: none;
-    color: white;
-    
-}
-
-.inner-flight img{
-    height: 100%;
-    transition: all 0.3s ease-in-out;
-}
-
-
- .inner-flight img:hover{
-    transform: scale(1.1);
-    
-}
-.flights h1{
-    text-align: center;
-}
-
-
-
-
-
-
-
-
-
-/*----------------------------------------------------------------------------------------------------FLIGHTS PAGE----------------------------------------------------------------------------------*/
 
 
   .contacts{
