@@ -67,7 +67,7 @@ if(isset($_POST['searchValue'])) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: booking-com.p.rapidapi.com",
-            "X-RapidAPI-Key: 0619543772msh81be927ff53aafcp142370jsne69313bfd2c6"
+            "X-RapidAPI-Key: fab4483496msh4513353915e775bp1d0c54jsna375bdb8381d"
         ],
     ]);
 
